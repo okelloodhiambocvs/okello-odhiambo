@@ -1,5 +1,10 @@
 import { PortfolioItem, ServiceItem, TestimonialItem, BlogItem } from "./types";
 
+import systemNodesDiagram from "./assets/images/system_nodes_diagram_1780137856057.png";
+import executiveCvMockup from "./assets/images/executive_cv_mockup_1780137789479.png";
+import brandProspectusMockup from "./assets/images/brand_prospectus_mockup_1780137812098.png";
+import grantProposalMockup from "./assets/images/grant_proposal_mockup_1780137835205.png";
+
 export const SERVICES: ServiceItem[] = [
   // Tech services
   {
@@ -133,7 +138,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Contractor rating & job dispatch management dashboard"
     ],
     longDescription: "Engineered in TypeScript and Node.js, Kasify bridges the trust gap between Kenyan homeowners/developers and skilled trade professionals. Includes automated credentials check and instant mobile money escrow verification.",
-    image: "/src/assets/images/system_nodes_diagram_1780137856057.png"
+    image: systemNodesDiagram
   },
   {
     id: "port_tech_go_rest",
@@ -150,7 +155,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Automated migration execution in Docker Compose"
     ],
     longDescription: "A bulletproof modular backend structure built strictly with Golang at Zone01. Implemented secure routing, database connection pools, optimized table queries, and customized token verification engines.",
-    image: "/src/assets/images/system_nodes_diagram_1780137856057.png"
+    image: systemNodesDiagram
   },
   {
     id: "port_tech_ats_engine",
@@ -167,7 +172,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Actionable diagnostic optimization advice"
     ],
     longDescription: "A modern full-stack web application combining AI text processing with intuitive UI controls. Analyzes resume content against industry job keywords and outputs detailed formatting recommendations.",
-    image: "/src/assets/images/executive_cv_mockup_1780137789479.png"
+    image: executiveCvMockup
   },
   {
     id: "port_cv_kewota",
@@ -183,7 +188,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Bespoke cover letters for international grant boards"
     ],
     longDescription: "Re-engineered standard resumes into high-impact, narrative-driven leadership assets for directors. Optimized career metrics focused on regional developmental impact, project delivery totals, and legislative advocacy achievements.",
-    image: "/src/assets/images/executive_cv_mockup_1780137789479.png"
+    image: executiveCvMockup
   },
   {
     id: "port_prof_drip",
@@ -199,7 +204,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Slogan creation and value positioning"
     ],
     longDescription: "Structured an immersive luxury corporate prospectus. Refined deep customer personas and formatted financial and luxury lifestyle metrics cleanly to construct a high-converting corporate asset.",
-    image: "/src/assets/images/brand_prospectus_mockup_1780137812098.png"
+    image: brandProspectusMockup
   },
   {
     id: "port_prop_enacoach",
@@ -215,7 +220,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Sponsor value matrix modeling"
     ],
     longDescription: "Synthesized direct socioeconomic arguments focusing on transit accessibility and technology education in western Kenya. Formatted precise allocation grids and outcomes mapping with ironclad structural integrity.",
-    image: "/src/assets/images/grant_proposal_mockup_1780137835205.png"
+    image: grantProposalMockup
   }
 ];
 
