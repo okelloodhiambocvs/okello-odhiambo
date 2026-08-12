@@ -9,6 +9,9 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
+  // Security Hardening: Hide server footprint
+  app.disable("x-powered-by");
+
   // Global Middleware
   app.use(express.json({ limit: "15mb" }));
   app.use(express.urlencoded({ extended: true, limit: "15mb" }));
