@@ -1,4 +1,23 @@
 import { PortfolioItem, ServiceItem, TestimonialItem, BlogItem } from "./types";
+import kasifyImage from "./assets/images/kasify_app_mockup_1786530066973.jpg";
+import shambaloopImage from "./assets/images/shambaloop_agri_marketplace_1786537578591.jpg";
+import ahzuriahImage from "./assets/images/ahzuriah_construction_website_1786537590301.jpg";
+import hueriEnvironmentalImage from "./assets/images/hueri_environmental_website_1786537603372.jpg";
+import niaraImage from "./assets/images/niara_construction_website_1786537629236.jpg";
+import shecycleImage from "./assets/images/shecycle_artisan_website_1786537643453.jpg";
+import wamaeImage from "./assets/images/wamae_legal_executive_cv_1786537660974.jpg";
+import kewotaCvImage from "./assets/images/kewota_executive_cv_1786530107984.jpg";
+import atsTransformationsImage from "./assets/images/ats_resume_transformations_1786537673063.jpg";
+import kewotaCompanyImage from "./assets/images/kewota_company_profile_1786537685205.jpg";
+import hueriCompanyImage from "./assets/images/hueri_company_profile_1786537697612.jpg";
+import amorValuersImage from "./assets/images/amor_valuers_profile_1786537712798.jpg";
+import constructionsImage from "./assets/images/constructions_company_profile_1786537725660.jpg";
+import dripLoungeImage from "./assets/images/drip_lounge_prospectus_1786530119903.jpg";
+import enacoachImage from "./assets/images/enacoach_grant_proposal_1786530134121.jpg";
+import echofiberImage from "./assets/images/echofiber_wifi_proposal_1786537741357.jpg";
+import kulanImage from "./assets/images/kulan_marketing_proposal_1786537754878.jpg";
+import kewotaHousingImage from "./assets/images/kewota_housing_proposal_1786537767653.jpg";
+import cocktailLabImage from "./assets/images/cocktaillab_berlin_proposal_1786537782813.jpg";
 
 export const SERVICES: ServiceItem[] = [
   // 1. Web & Technology Systems
@@ -250,7 +269,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Integrated M-Pesa mobile money escrow"
     ],
     longDescription: "Presently in active engineering, Kazify is a Kenya-first marketplace platform connecting customers with verified trade professionals (plumbers, electricians, carpenters, builders) for on-demand services. Features background verification, real-time job bookings, secure M-Pesa escrow payments, and trusted artisan matching.",
-    image: "/src/assets/images/kasify_app_mockup_1786530066973.jpg"
+    image: kasifyImage
   },
   {
     id: "port_tech_shambaloop",
@@ -267,7 +286,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Secure escrow transaction & contract verification"
     ],
     longDescription: "Presently in active engineering, ShambaLoop is Kenya's trusted ecosystem trust marketplace for agricultural assets. The platform connects landowners, farmers, and ag-investors by matching verified arable land lease listings, livestock co-investment partnerships, and seasonal crop production opportunities with transparent digital contracts.",
-    image: "/src/assets/images/shambaloop_agri_marketplace_1786537578591.jpg"
+    image: shambaloopImage
   },
   {
     id: "port_tech_ahzuriah",
@@ -284,7 +303,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Mobile-optimized responsive marketing layout"
     ],
     longDescription: "Designed and developed a sleek, fast-loading static marketing website for Ahzuriah Constructions. Showcases civil infrastructure projects, heavy machinery capabilities, and corporate contact options for commercial tender bids.",
-    image: "/src/assets/images/ahzuriah_construction_website_1786537590301.jpg"
+    image: ahzuriahImage
   },
   {
     id: "port_tech_hueri",
@@ -301,7 +320,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Direct consultation inquiry form"
     ],
     longDescription: "Built the official static marketing website for HUERI (Hope Urban Environmental and Research Investment Limited) based in Kisumu, Kenya. Highlights core consultancy offerings in environmental impact assessments (EIA), social sustainability studies, and urban research.",
-    image: "/src/assets/images/hueri_environmental_website_1786537603372.jpg"
+    image: hueriEnvironmentalImage
   },
   {
     id: "port_tech_amor",
@@ -335,7 +354,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Client quote request & contact section"
     ],
     longDescription: "Developed an engaging static marketing website for Niara Constructions highlighting their modern, eco-friendly, and cost-effective residential and commercial construction capabilities across Kenya.",
-    image: "/src/assets/images/niara_construction_website_1786537629236.jpg"
+    image: niaraImage
   },
   {
     id: "port_tech_shecycle",
@@ -352,7 +371,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Direct WhatsApp order & inquiry integration"
     ],
     longDescription: "Designed a vibrant static marketing website for SheCycle Innovation Enterprise in Kisumu, Kenya. Celebrates African creativity and environmental sustainability by presenting upcycled artisan products and direct order channels.",
-    image: "/src/assets/images/shecycle_artisan_website_1786537643453.jpg"
+    image: shecycleImage
   },
   {
     id: "port_cv_wamae",
@@ -368,7 +387,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Tailored executive cover letter & judicial application briefs"
     ],
     longDescription: "Re-engineered executive resumes for managing partners and legal associates at Wamae and Allen Advocates. Optimized career metrics focused on commercial litigation victories, regulatory compliance leadership, and corporate governance.",
-    image: "/src/assets/images/wamae_legal_executive_cv_1786537660974.jpg"
+    image: wamaeImage
   },
   {
     id: "port_cv_kewota",
@@ -384,7 +403,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Bespoke cover letters for international grant & education boards"
     ],
     longDescription: "Re-engineered standard resumes into high-impact, narrative-driven leadership assets for KEWOTA executives and teachers. Optimized career metrics focused on regional educational impact, project delivery totals, and legislative advocacy achievements.",
-    image: "/src/assets/images/kewota_executive_cv_1786530107984.jpg"
+    image: kewotaCvImage
   },
   {
     id: "port_cv_1000",
@@ -400,7 +419,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Editable Word & PDF formats with LinkedIn bio alignment"
     ],
     longDescription: "Delivered high-yielding resume transformations for over 1,000 individual professionals spanning software engineering, project management, healthcare, finance, and corporate management. Each CV is engineered to pass digital ATS algorithms and capture human recruiter attention.",
-    image: "/src/assets/images/ats_resume_transformations_1786537673063.jpg"
+    image: atsTransformationsImage
   },
   {
     id: "port_prof_kewota",
@@ -416,7 +435,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "High-resolution print & digital prospectus layouts"
     ],
     longDescription: "Structured an institutional corporate profile and strategic prospectus for KEWOTA (Kenya Women Teachers Association). Clearly outlines organization mission, member welfare initiatives, technology literacy drives, and strategic partnership frameworks.",
-    image: "/src/assets/images/kewota_company_profile_1786537685205.jpg"
+    image: kewotaCompanyImage
   },
   {
     id: "port_prof_hueri",
@@ -432,7 +451,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Professional layout formatted for donor & tender submissions"
     ],
     longDescription: "Designed the corporate profile for HUERI Limited, based in Kisumu, Kenya. Highlights core capabilities in environmental audits, social impact studies, urban planning research, and sustainable development consultancies.",
-    image: "/src/assets/images/hueri_company_profile_1786537697612.jpg"
+    image: hueriCompanyImage
   },
   {
     id: "port_prof_amor",
@@ -448,7 +467,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Corporate layout for financial institution proposals"
     ],
     longDescription: "Authored and formatted the official corporate profile for Amor Valuers Limited. Highlights professional registration credentials, valuation methodologies across commercial, residential, and agricultural assets, and client advisory services.",
-    image: "/src/assets/images/amor_valuers_profile_1786537712798.jpg"
+    image: amorValuersImage
   },
   {
     id: "port_prof_constructions",
@@ -464,7 +483,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Print-ready PDF & digital tender profile"
     ],
     longDescription: "Developed corporate profiles for major construction clients including Ahzuriah Constructions and Niara Constructions, showcasing civil infrastructure capabilities, modern sustainable building technologies, and equipment fleets.",
-    image: "/src/assets/images/constructions_company_profile_1786537725660.jpg"
+    image: constructionsImage
   },
   {
     id: "port_prof_drip",
@@ -480,7 +499,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Slogan creation and value positioning"
     ],
     longDescription: "Structured an immersive luxury corporate prospectus. Refined deep customer personas and formatted financial and luxury lifestyle metrics cleanly to construct a high-converting corporate asset.",
-    image: "/src/assets/images/drip_lounge_prospectus_1786530119903.jpg"
+    image: dripLoungeImage
   },
   {
     id: "port_prop_enacoach",
@@ -496,7 +515,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "CSR partner value alignment matrix"
     ],
     longDescription: "Authored the comprehensive concept note and CSR grant proposal for ENA Coach Foundation. Synthesized direct socioeconomic arguments focusing on transit accessibility and technology education in western Kenya, formatting precise allocation grids and outcomes mapping with ironclad structural integrity.",
-    image: "/src/assets/images/enacoach_grant_proposal_1786530134121.jpg"
+    image: enacoachImage
   },
   {
     id: "port_prop_echofiber",
@@ -512,7 +531,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Bandwidth distribution & access control architecture"
     ],
     longDescription: "Engineered a comprehensive technical proposal for EchoFiber Networking targeting Sony Sugar Company. Outlined end-to-end estate Wi-Fi connectivity, fiber-backhaul integration, equipment specifications, and commercial SLA terms across the Sony Sugar residential and administrative estate.",
-    image: "/src/assets/images/echofiber_wifi_proposal_1786537741357.jpg"
+    image: echofiberImage
   },
   {
     id: "port_prop_kulan",
@@ -528,7 +547,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Campaign budget & conversion tracking framework"
     ],
     longDescription: "Developed a growth-oriented marketing proposal for Kulan Innovation Training Institute. Structured targeted campaign funnels, local community outreach initiatives, and digital ad strategies to boost institutional awareness and TVET course enrollment.",
-    image: "/src/assets/images/kulan_marketing_proposal_1786537754878.jpg"
+    image: kulanImage
   },
   {
     id: "port_prop_kewota_housing",
@@ -544,7 +563,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Land acquisition & project delivery roadmap"
     ],
     longDescription: "Authored a major public-private partnership (PPP) proposal for the Kenya Women Teachers Association (KEWOTA) presented to the Government of Kenya. Formatted financial models, land allocation plans, and low-interest mortgage structures for female teachers nationwide.",
-    image: "/src/assets/images/kewota_housing_proposal_1786537767653.jpg"
+    image: kewotaHousingImage
   },
   {
     id: "port_prop_cocktaillab",
@@ -560,7 +579,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Go-to-market budget & PR campaign timeline"
     ],
     longDescription: "Created an international marketing proposal for Cocktail Lab's flagship European debut in Berlin. Crafted experiential nightlife marketing concepts, luxury beverage positioning, and influencer media strategies targeting Berlin's vibrant hospitality scene.",
-    image: "/src/assets/images/cocktaillab_berlin_proposal_1786537782813.jpg"
+    image: cocktailLabImage
   }
 ];
 
