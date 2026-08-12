@@ -15,7 +15,7 @@ export interface PortfolioItem {
 export interface ServiceItem {
   id: string;
   title: string;
-  category: "consultancy" | "tech";
+  category: "consultancy" | "tech" | "design";
   description: string;
   price: string;
   features: string[];

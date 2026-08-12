@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { useRenderDiagnostics } from "./hooks/useRenderDiagnostics";
 import BrandHeader from "./components/BrandHeader";
 import Hero from "./components/Hero";
@@ -10,22 +11,55 @@ import Testimonials from "./components/Testimonials";
 import ContactForm from "./components/ContactForm";
 import BrandFooter from "./components/BrandFooter";
 
+export type PageId = "about" | "services" | "portfolio" | "ats-scanner" | "contact";
+
 export default function App() {
   // Simple diagnostic hook to monitor and log App component re-render performance
   useRenderDiagnostics("App");
 
-  const navigateToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const topOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - topOffset;
+  const [currentPage, setCurrentPage] = useState<PageId>("about");
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+  const navigateToPage = (pageId: string) => {
+    const validPages: PageId[] = ["about", "services", "portfolio", "ats-scanner", "contact"];
+    if (validPages.includes(pageId as PageId)) {
+      setCurrentPage(pageId as PageId);
+    } else {
+      setCurrentPage("about");
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      y: 16,
+      scale: 0.995,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.35,
+        ease: [0.22, 1, 0.36, 1], // Custom smooth ease-out
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -12,
+      scale: 0.995,
+      transition: {
+        duration: 0.22,
+        ease: [0.4, 0, 1, 1],
+      },
+    },
   };
 
   return (
@@ -52,31 +86,90 @@ export default function App() {
       </a>
 
       {/* Header operations bar */}
-      <BrandHeader />
+      <BrandHeader currentPage={currentPage} onNavigate={navigateToPage} />
 
-      {/* Hero section screen */}
-      <Hero onNavigate={navigateToSection} />
+      {/* Main 5-Page View Controller with Framer Motion Page Transitions */}
+      <main className="pt-20 min-h-[calc(100vh-80px)]">
+        <AnimatePresence mode="wait">
+          {/* PAGE 1: About & Engineering */}
+          {currentPage === "about" && (
+            <motion.div
+              key="about"
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full"
+            >
+              <Hero onNavigate={navigateToPage} />
+              <div id="about-story">
+                <About />
+              </div>
+              <Testimonials />
+            </motion.div>
+          )}
 
-      {/* Executive About Story */}
-      <About />
+          {/* PAGE 2: Core Offerings */}
+          {currentPage === "services" && (
+            <motion.div
+              key="services"
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full"
+            >
+              <Services />
+            </motion.div>
+          )}
 
-      {/* Core Catalog list Services */}
-      <Services />
+          {/* PAGE 3: Portfolio & Case Studies */}
+          {currentPage === "portfolio" && (
+            <motion.div
+              key="portfolio"
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full"
+            >
+              <Portfolio />
+            </motion.div>
+          )}
 
-      {/* Portfolio deliverables grids */}
-      <Portfolio />
+          {/* PAGE 4: AI CV Grader */}
+          {currentPage === "ats-scanner" && (
+            <motion.div
+              key="ats-scanner"
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full"
+            >
+              <AtsBuilder />
+            </motion.div>
+          )}
 
-      {/* ATS Optimizer module */}
-      <AtsBuilder />
-
-      {/* Testimonials endorsement panel */}
-      <Testimonials />
-
-      {/* Inquiry contact section */}
-      <ContactForm />
+          {/* PAGE 5: Contact Inquiry */}
+          {currentPage === "contact" && (
+            <motion.div
+              key="contact"
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full"
+            >
+              <ContactForm />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </main>
 
       {/* System Footer brand signature */}
-      <BrandFooter />
+      <BrandFooter onNavigate={navigateToPage} />
     </div>
   );
 }
+
