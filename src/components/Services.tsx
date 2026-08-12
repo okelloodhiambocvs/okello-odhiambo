@@ -5,7 +5,7 @@ import { MessageSquare, Coffee, ShieldAlert } from "lucide-react";
 import ServiceCard from "./ServiceCard";
 
 export default function Services() {
-  const [activeTab, setActiveTab] = useState<"all" | "consultancy" | "tech">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "tech" | "consultancy" | "design">("all");
 
   const filteredServices = SERVICES.filter(srv => {
     if (activeTab === "all") return true;
@@ -22,46 +22,56 @@ export default function Services() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="font-mono text-xs tracking-[0.25em] text-[#f80d05] uppercase inline-block mb-3 font-bold">
-            Premium Custom Offerings
+            Executive &amp; Technical Services
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0C1E36] tracking-tight">
-            Consultancy &amp; Construction Frameworks
+            Core Professional Offerings
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-4 max-w-2xl mx-auto leading-relaxed font-normal">
-            Choose from professional strategic document copywriting or modern compiled backend software systems. All deliveries are direct, high-yielding, and client-approved.
+            From custom website development and grant proposals to executive PowerPoint pitch decks and logo identity packages. All deliveries are direct, high-yielding, and client-approved.
           </p>
 
           {/* Filtering Categories Tabs */}
-          <div className="inline-flex p-1.5 rounded-lg bg-white border border-slate-200 mt-10 shadow-sm">
+          <div className="inline-flex flex-wrap justify-center gap-1 p-1.5 rounded-xl bg-white border border-slate-200 mt-10 shadow-sm">
             <button
               onClick={() => setActiveTab("all")}
-              className={`px-5 py-2.5 rounded text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
+              className={`px-4 py-2.5 rounded-lg text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
                 activeTab === "all"
-                  ? "bg-[#0C1E36] text-white font-bold"
+                  ? "bg-[#0C1E36] text-white font-bold shadow-sm"
                   : "text-slate-600 hover:text-[#0C1E36] hover:bg-slate-50"
               }`}
             >
-              All Services ({SERVICES.length})
-            </button>
-            <button
-              onClick={() => setActiveTab("consultancy")}
-              className={`px-5 py-2.5 rounded text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
-                activeTab === "consultancy"
-                  ? "bg-[#0C1E36] text-white font-bold"
-                  : "text-slate-600 hover:text-[#0C1E36] hover:bg-slate-50"
-              }`}
-            >
-              Strategic Writing
+              All Offerings ({SERVICES.length})
             </button>
             <button
               onClick={() => setActiveTab("tech")}
-              className={`px-5 py-2.5 rounded text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
+              className={`px-4 py-2.5 rounded-lg text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
                 activeTab === "tech"
-                  ? "bg-[#0C1E36] text-white font-bold"
+                  ? "bg-[#0C1E36] text-white font-bold shadow-sm"
                   : "text-slate-600 hover:text-[#0C1E36] hover:bg-slate-50"
               }`}
             >
-              Backend &amp; Tech Systems
+              Web &amp; Software Dev
+            </button>
+            <button
+              onClick={() => setActiveTab("consultancy")}
+              className={`px-4 py-2.5 rounded-lg text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
+                activeTab === "consultancy"
+                  ? "bg-[#0C1E36] text-white font-bold shadow-sm"
+                  : "text-slate-600 hover:text-[#0C1E36] hover:bg-slate-50"
+              }`}
+            >
+              Proposals &amp; Writing
+            </button>
+            <button
+              onClick={() => setActiveTab("design")}
+              className={`px-4 py-2.5 rounded-lg text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
+                activeTab === "design"
+                  ? "bg-[#0C1E36] text-white font-bold shadow-sm"
+                  : "text-slate-600 hover:text-[#0C1E36] hover:bg-slate-50"
+              }`}
+            >
+              Graphics &amp; PowerPoint
             </button>
           </div>
         </div>

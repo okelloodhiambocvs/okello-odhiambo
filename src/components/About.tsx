@@ -1,7 +1,5 @@
 import React from "react";
 import { User, ShieldCheck, Mail, Globe, BrainCircuit, Code, Terminal, Clock, Award, Linkedin, Github, Twitter } from "lucide-react";
-import developerPortrait from "../assets/images/okello_dev_portrait_1780137295134.png";
-import executivePortrait from "../assets/images/okello_portrait_1780137026187.png";
 
 export default function About() {
   const corporateAchievements = [
@@ -49,7 +47,7 @@ export default function About() {
               <div className="relative shrink-0 select-none">
                 <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-200 shadow-md">
                   <img
-                    src={developerPortrait}
+                    src="/src/assets/images/okello_dev_portrait_1780137295134.png"
                     alt="Okello Odhiambo - Full-Stack Software Engineer at Zone01"
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
@@ -133,7 +131,7 @@ export default function About() {
               <div className="relative shrink-0 select-none">
                 <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-100 shadow-md">
                   <img
-                    src={executivePortrait}
+                    src="/src/assets/images/okello_portrait_1780137026187.png"
                     alt="Okello Odhiambo - Executive Brand Consultant"
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"

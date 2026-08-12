@@ -1,6 +1,5 @@
 import React from "react";
 import { MessageSquare, Briefcase, ChevronDown, CheckCircle2, Terminal } from "lucide-react";
-import brandBackground from "../assets/images/okello_brand_bg_1780136809302.png";
 
 interface HeroProps {
   onNavigate: (sectionId: string) => void;
@@ -15,7 +14,7 @@ export default function Hero({ onNavigate }: HeroProps) {
       {/* High-Quality Sharp Brand Photo Collage of Okello Odhiambo */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none opacity-[0.38] sm:opacity-[0.48] transition-opacity duration-1000 overflow-hidden">
         <img
-          src={brandBackground}
+          src="/src/assets/images/okello_brand_bg_1780136809302.png"
           alt="Okello Odhiambo - Executive Consultant & Engineer Collage"
           className="w-full h-full object-cover object-center scale-[1.01]"
           referrerPolicy="no-referrer"

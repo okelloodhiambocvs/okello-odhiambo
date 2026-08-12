@@ -88,6 +88,17 @@ export default function ServiceCard({ service }: ServiceCardProps) {
 
       {/* Card Content Header (Z-index 10 for interaction and correct depth layered stack) */}
       <div className="z-10 relative">
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+            service.category === "tech"
+              ? "bg-blue-50 text-blue-700 border-blue-200"
+              : service.category === "design"
+              ? "bg-purple-50 text-purple-700 border-purple-200"
+              : "bg-amber-50 text-amber-800 border-amber-200"
+          }`}>
+            {service.category === "tech" ? "Web & Software" : service.category === "design" ? "Graphics & Design" : "Proposals & Writing"}
+          </span>
+        </div>
         <h3 className="font-serif text-xl font-bold text-[#0C1E36] mb-3 mt-1 group-hover:text-[#f80d05] transition-colors">
           {service.title}
         </h3>

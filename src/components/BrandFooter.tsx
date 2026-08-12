@@ -5,9 +5,21 @@ import { generateCvPdf } from "../utils/generateCvPdf";
 import LegalModals from "./LegalModals";
 import FaqModal from "./FaqModal";
 
-export default function BrandFooter() {
+interface BrandFooterProps {
+  onNavigate?: (pageId: string) => void;
+}
+
+export default function BrandFooter({ onNavigate }: BrandFooterProps) {
   const [legalModal, setLegalModal] = useState<"terms" | "privacy" | null>(null);
   const [faqModalOpen, setFaqModalOpen] = useState<boolean>(false);
+
+  const handleNav = (id: string) => {
+    if (onNavigate) {
+      onNavigate(id);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   const scrollUp = () => {
     window.scrollTo({
@@ -41,11 +53,11 @@ export default function BrandFooter() {
             System Operations Navigation
           </h4>
           <div className="grid grid-cols-2 gap-2 text-xs font-sans font-semibold">
-            <a href="#about" className="text-slate-200 hover:text-red-400 hover:underline transition-colors">About &amp; Developer Bio</a>
-            <a href="#services" className="text-slate-200 hover:text-red-400 hover:underline transition-colors">Core Services</a>
-            <a href="#portfolio" className="text-slate-200 hover:text-red-400 hover:underline transition-colors">Software &amp; Case Studies</a>
-            <a href="#ats-scanner" className="text-slate-200 hover:text-red-400 hover:underline transition-colors">AI ATS Grader</a>
-            <a href="#contact" className="text-slate-200 hover:text-red-400 hover:underline transition-colors">Inquiry Port</a>
+            <button onClick={() => handleNav("about")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">About &amp; Developer Bio</button>
+            <button onClick={() => handleNav("services")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">Core Services</button>
+            <button onClick={() => handleNav("portfolio")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">Software &amp; Case Studies</button>
+            <button onClick={() => handleNav("ats-scanner")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">AI ATS Grader</button>
+            <button onClick={() => handleNav("contact")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">Inquiry Port</button>
           </div>
         </div>
 
@@ -54,6 +66,12 @@ export default function BrandFooter() {
           <h4 className="font-mono text-[9px] uppercase tracking-[0.2em] text-red-400 font-bold">
             Direct Core Endpoints
           </h4>
+          <p className="text-xs text-slate-200 font-mono">
+            Postal Address: <span className="text-slate-300 font-sans font-medium">1178-40100 Kisumu Kenya</span>
+          </p>
+          <p className="text-xs text-slate-200 font-mono">
+            Location: <span className="text-slate-300 font-sans font-medium">Varsity Plaza, Business Incubation Centre, Bank Street</span>
+          </p>
           <p className="text-xs text-slate-200 font-mono">
             WhatsApp: <a href="https://wa.me/254728606684" target="_blank" rel="noopener noreferrer" className="text-red-400 font-bold hover:underline">+254 728 606 684</a>
           </p>
