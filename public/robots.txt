@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/contact/submissions
+Disallow: /api/admin/
+
+Sitemap: https://okelloodhiambo.com/sitemap.xml
