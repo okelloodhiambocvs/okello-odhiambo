@@ -1148,5 +1148,3 @@ The application has been locally validated through:
 * Clean Git working tree
 * GitHub repository replacement
 * Remote commit verification
-
-The repository's `main` branch now represents the new portfolio implementation rather than the previous project.
