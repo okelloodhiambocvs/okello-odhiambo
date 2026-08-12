@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Send, MapPin, Mail, CheckCircle, AlertTriangle, RefreshCw, PhoneCall } from "lucide-react";
+import { Send, MapPin, Mail, CheckCircle, AlertTriangle, RefreshCw, PhoneCall, Building2 } from "lucide-react";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -196,10 +196,21 @@ export default function ContactForm() {
                   Direct channels for executive consultations, custom software contracts, ATS profile rewrites, and corporate proposals.
                 </p>
 
-                <div className="space-y-5 text-xs text-slate-700 font-sans leading-relaxed font-semibold">
-                  <div className="flex gap-3 items-center p-3 rounded-xl bg-slate-50 border border-slate-100">
-                    <MapPin className="w-5 h-5 text-[#f80d05] shrink-0" />
-                    <span>Kisumu &amp; Nairobi Cities, Kenya (East Africa Zone)</span>
+                <div className="space-y-4 text-xs text-slate-700 font-sans leading-relaxed font-semibold">
+                  <div className="flex gap-3 items-start p-3 rounded-xl bg-slate-50 border border-slate-100">
+                    <MapPin className="w-5 h-5 text-[#f80d05] shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-mono text-[10px] uppercase text-[#f80d05] font-bold">Physical Location</div>
+                      <div className="text-slate-800">Varsity Plaza, Business Incubation Centre, Bank Street</div>
+                      <div className="text-slate-500 text-[11px]">Kisumu, Kenya</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start p-3 rounded-xl bg-slate-50 border border-slate-100">
+                    <Building2 className="w-5 h-5 text-[#f80d05] shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-mono text-[10px] uppercase text-[#f80d05] font-bold">Postal Address</div>
+                      <div className="text-slate-800">P.O. Box 1178-40100 Kisumu Kenya</div>
+                    </div>
                   </div>
                   <div className="flex gap-3 items-center p-3 rounded-xl bg-slate-50 border border-slate-100">
                     <Mail className="w-5 h-5 text-[#f80d05] shrink-0" />
