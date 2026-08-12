@@ -48,7 +48,7 @@ Founder & Lead Strategist | House Ventures Consultancy (2024 - Present)
     const prompt = `Extract all text content from this resume document accurately and cleanly. Preserve all names, dates, job titles, technical skills, companies, bullet points, and education details. Output plain text without commentary.`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.6-flash",
       contents: [
         {
           role: "user",
@@ -118,7 +118,7 @@ Return a strictly valid JSON object conforming exactly to this structure (no mar
 }`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.6-flash",
       contents: [{ role: "user", parts: [{ text: prompt }] }],
       config: {
         responseMimeType: "application/json"
