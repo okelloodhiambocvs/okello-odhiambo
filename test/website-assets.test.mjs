@@ -8,6 +8,7 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const galleryManifest = readFileSync(join(root, "src", "userImages.ts"), "utf8");
 const aboutComponent = readFileSync(join(root, "src", "components", "About.tsx"), "utf8");
 const heroComponent = readFileSync(join(root, "src", "components", "Hero.tsx"), "utf8");
+const portfolioData = readFileSync(join(root, "src", "data.ts"), "utf8");
 const galleryFiles = [...galleryManifest.matchAll(/filename: "([^"]+)"/g)].map((match) => match[1]);
 const galleryAssetImports = [...galleryManifest.matchAll(/from "\.\/assets\/images\/user\/([^"]+)"/g)].map((match) => match[1]);
 
@@ -57,4 +58,11 @@ test("the landing page uses the supplied softly blurred couch photo", () => {
   assert.match(heroComponent, /hero-consultant-couch\.jpg/);
   assert.match(heroComponent, /blur-\[1\.5px\]/);
   assert.ok(existsSync(join(root, "src", "assets", "images", "user", "hero-consultant-couch.jpg")));
+});
+
+test("the portfolio names Ni-Wera and includes the active Ujuzi360 LMS project", () => {
+  assert.match(portfolioData, /title: "Ni-Wera — Kenya Skilled Trades Marketplace"/);
+  assert.match(portfolioData, /title: "Ujuzi360 — Learning Management System"/);
+  assert.match(portfolioData, /"Spring Boot", "Java", "React"/);
+  assert.match(portfolioData, /Project Manager, leading a team of eight developers/);
 });

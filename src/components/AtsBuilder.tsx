@@ -68,7 +68,7 @@ CORE COMPETENCIES
 PROFESSIONAL EXPERIENCE
 Junior Full-Stack Developer | Zone01 Kisumu (March 2026 – Present)
 • Developing scalable full-stack web applications using Go (Golang), JavaScript, TypeScript, React, Node.js, and relational databases (MySQL/PostgreSQL) with Git version control.
-• Building Kasify, a Kenyan service marketplace connecting certified plumbers, electricians, and builders with real-time M-Pesa escrow verification.
+• Building Ni-Wera, a Kenyan service marketplace connecting certified plumbers, electricians, and builders with real-time M-Pesa escrow verification.
 • Leading an 8-member multidisciplinary team as Project Manager for the Ujuzi360 Learning Management System, coordinating Agile delivery and sprint milestones.
 • Solving daily Go progress tasks, internal projects, and checkpoints at Zone01 Kisumu to master language concurrency and microservices.
 

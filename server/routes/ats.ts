@@ -35,7 +35,7 @@ Tools: Git, GitHub, Docker, Linux, Postman, Figma, CI/CD pipelines
 PROFESSIONAL EXPERIENCE:
 Junior Full-Stack Developer | Zone01 Kisumu (March 2026 - Present)
 - Architecting microservices and web apps in Go, JavaScript, TypeScript, and React.
-- Engineered Kasify service marketplace with M-Pesa escrow verification.
+- Engineered Ni-Wera service marketplace with M-Pesa escrow verification.
 - Leading 8-member multidisciplinary team as Project Manager for Ujuzi360 LMS.
 
 Founder & Lead Strategist | House Ventures Consultancy (2024 - Present)

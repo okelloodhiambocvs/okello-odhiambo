@@ -14,7 +14,8 @@ export default function About() {
 
   const devHighlights = [
     { title: "Zone01 Go & Full-Stack Labs", detail: "Solving daily Go progress tasks, internal projects & checkpoints" },
-    { title: "Kasify Web App Project", detail: "Connecting certified plumbers, electricians & builders in Kenya via M-Pesa" },
+    { title: "Ni-Wera Web App Project", detail: "Connecting certified plumbers, electricians & builders in Kenya via M-Pesa" },
+    { title: "Ujuzi360 LMS Project Management", detail: "Leading an 8-developer team building a Spring Boot and React learning platform" },
     { title: "TypeScript & Node.js Stack", detail: "Building secure, real-time verified web systems and APIs" }
   ];
 
@@ -94,10 +95,10 @@ export default function About() {
                 At Zone01, we are given several internal software projects and Go language challenges that enable us to solve basic daily progress milestones. We undergo rigorous checkpoints that allow instructors and peers to evaluate our language mastery and trajectory as software engineers.
               </p>
               <p>
-                On personal projects, we are currently building <strong className="text-[#0C1E36]">Kasify</strong>—a high-impact web application designed to connect formally certified plumbers, electricians, and builders across Kenya. Kasify is securely backed with real-time M-Pesa verification and engineered using <strong className="text-[#f80d05]">TypeScript and Node.js</strong> in the JavaScript ecosystem.
+                On personal projects, we are currently building <strong className="text-[#0C1E36]">Ni-Wera</strong>—a high-impact web application designed to connect formally certified plumbers, electricians, and builders across Kenya. Ni-Wera is securely backed with real-time M-Pesa verification and engineered using <strong className="text-[#f80d05]">TypeScript and Node.js</strong> in the JavaScript ecosystem.
               </p>
               <p className="border-l-2 border-[#f80d05] pl-4 py-1 italic bg-red-50 text-slate-750 font-mono text-[11px] leading-tight">
-                $ go run main.go --zone01-checkpoints --project=Kasify-TypeScript-MPesa
+                $ go run main.go --zone01-checkpoints --project=Ni-Wera-TypeScript-MPesa
               </p>
               <p>
                 Besides that, this immersive environment exposes me directly to real-world experience of how a software developer works every day: practicing agile sprints, Git-based collaboration, strict code reviews, and practical engineering problem solving.

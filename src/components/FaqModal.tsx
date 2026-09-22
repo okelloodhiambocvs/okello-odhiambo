@@ -47,8 +47,8 @@ const FAQ_DATA: FaqItem[] = [
   {
     id: "faq_6",
     category: "Software Engineering",
-    question: "What are Kasify and Ujuzi360?",
-    answer: "Kasify is an innovative Kenyan service marketplace web app connecting verified artisans, plumbers, and builders with clients featuring automated M-Pesa escrow verification. Ujuzi360 is a comprehensive learning management platform developed at Zone01 Kisumu, led by Okello Odhiambo as Project Manager with an 8-member engineering team."
+    question: "What are Ni-Wera and Ujuzi360?",
+    answer: "Ni-Wera is an innovative Kenyan service marketplace web app connecting verified artisans, plumbers, and builders with clients featuring automated M-Pesa escrow verification. Ujuzi360 is an in-progress Learning Management System built with Spring Boot and React. It supports online course management, student progress tracking, payments, assignments, grading, reports, role-based dashboards, and automated workflows; Okello serves as Project Manager for its eight-developer team."
   },
   {
     id: "faq_7",

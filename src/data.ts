@@ -1,5 +1,6 @@
 import { PortfolioItem, ServiceItem, TestimonialItem, BlogItem } from "./types";
-import kasifyImage from "./assets/images/kasify_app_mockup_1786530066973.jpg";
+import niWeraImage from "./assets/images/kasify_app_mockup_1786530066973.jpg";
+import ujuzi360Image from "./assets/images/system_nodes_diagram_1780137856057.png";
 import shambaloopImage from "./assets/images/shambaloop_agri_marketplace_1786537578591.jpg";
 import ahzuriahImage from "./assets/images/ahzuriah_construction_website_1786537590301.jpg";
 import hueriEnvironmentalImage from "./assets/images/hueri_environmental_website_1786537603372.jpg";
@@ -255,10 +256,10 @@ export const SERVICES: ServiceItem[] = [
 
 export const PORTFOLIO: PortfolioItem[] = [
   {
-    id: "port_tech_kazify",
-    title: "Kazify — Kenya Skilled Trades Marketplace",
+    id: "port_tech_ni_wera",
+    title: "Ni-Wera — Kenya Skilled Trades Marketplace",
     category: "Tech Projects",
-    client: "Kazify Kenya (Active Project)",
+    client: "Ni-Wera Kenya (Active Project)",
     year: "2026",
     description: "A Kenya-first skilled trades marketplace connecting customers with verified fundis for on-demand services, real-time bookings, secure payments, and trusted job matching.",
     metrics: "Presently In Active Development — Real-time fundi bookings, M-Pesa escrow payments & verified artisan matching.",
@@ -268,8 +269,25 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Real-time booking & job status tracking",
       "Integrated M-Pesa mobile money escrow"
     ],
-    longDescription: "Presently in active engineering, Kazify is a Kenya-first marketplace platform connecting customers with verified trade professionals (plumbers, electricians, carpenters, builders) for on-demand services. Features background verification, real-time job bookings, secure M-Pesa escrow payments, and trusted artisan matching.",
-    image: kasifyImage
+    longDescription: "Presently in active engineering, Ni-Wera is a Kenya-first marketplace platform connecting customers with verified trade professionals (plumbers, electricians, carpenters, builders) for on-demand services. Features background verification, real-time job bookings, secure M-Pesa escrow payments, and trusted artisan matching.",
+    image: niWeraImage
+  },
+  {
+    id: "port_tech_ujuzi360",
+    title: "Ujuzi360 — Learning Management System",
+    category: "Tech Projects",
+    client: "Internal Project (Active Development)",
+    year: "2026",
+    description: "An in-progress Learning Management System that helps schools, teachers, and students manage courses, learning activities, progress, assignments, payments, and reporting online.",
+    metrics: "In active development — Project Manager leading an 8-developer team through delivery planning and implementation.",
+    techStack: ["Spring Boot", "Java", "React", "PostgreSQL", "REST APIs", "Role-Based Access"],
+    deliverables: [
+      "Course, lesson, and learning activity management",
+      "Student progress tracking, assignments, and grading",
+      "Payments, role-based dashboards, reports, and automated workflows"
+    ],
+    longDescription: "Ujuzi360 is an internal Learning Management System currently under development. Built with Spring Boot and React, it enables schools, teachers, and students to manage learning activities online. The platform supports course management, student-progress tracking, payments, assignment submission and grading, reports, role-based dashboards, and automated workflows. Okello serves as Project Manager, leading a team of eight developers through planning, coordination, and delivery.",
+    image: ujuzi360Image
   },
   {
     id: "port_tech_shambaloop",

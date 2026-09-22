@@ -135,7 +135,7 @@ export function generateCvPdf(): void {
 
   const job1Bullets = [
     "Developing full-stack web applications and microservices using Go (Golang), TypeScript, React, Node.js, and relational databases (MySQL/PostgreSQL).",
-    "Architecting Kazify, a Kenyan skilled trades marketplace app connecting certified plumbers, electricians, and builders with real-time M-Pesa escrow verification.",
+    "Architecting Ni-Wera, a Kenyan skilled trades marketplace app connecting certified plumbers, electricians, and builders with real-time M-Pesa escrow verification.",
     "Engineering ShambaLoop, an agricultural ecosystem trust marketplace for land leasing, livestock co-investment, and crop contracts.",
     "Serving as Project Manager for the Ujuzi360 Learning Management System, leading an 8-member engineering team through Agile sprint planning and delivery."
   ];
@@ -199,7 +199,7 @@ export function generateCvPdf(): void {
 
   const techProjects = [
     {
-      title: "Kazify — Certified Artisans & Builders Platform (Active Web App)",
+      title: "Ni-Wera — Certified Artisans & Builders Platform (Active Web App)",
       stack: "TypeScript, React, Node.js, Express, M-Pesa Escrow API",
       desc: "Connects certified plumbers, electricians, and builders across Kenya with real-time job dispatch and M-Pesa mobile money escrow verification."
     },
