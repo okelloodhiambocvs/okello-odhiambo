@@ -1,7 +1,7 @@
 import React from "react";
 import { User, ShieldCheck, Mail, Globe, BrainCircuit, Code, Terminal, Clock, Award, Linkedin, Github, Twitter } from "lucide-react";
-import devPortrait from "../assets/images/okello_dev_portrait_1780137295134.png";
-import okelloPortrait from "../assets/images/okello_portrait_1780137026187.png";
+import communicationPortrait from "../assets/images/user/profile-communication.png";
+import technologyPortrait from "../assets/images/user/profile-technology.png";
 import FounderGallery, { SafeImage } from "./FounderGallery";
 
 export default function About() {
@@ -47,8 +47,8 @@ export default function About() {
               <div className="relative shrink-0 select-none">
                 <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-200 shadow-md bg-white flex items-center justify-center">
                   <SafeImage
-                    primarySrc="/images/user/332104654_1341326833333209_1155535297741357910_n-removebg-preview.png"
-                    fallbackSrc={devPortrait}
+                    primarySrc={technologyPortrait}
+                    fallbackSrc={technologyPortrait}
                     alt="Okello Odhiambo - Full-Stack Software Engineer at Zone01"
                     className="w-full h-full object-cover object-top"
                   />
@@ -128,8 +128,8 @@ export default function About() {
               <div className="relative shrink-0 select-none">
                 <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-100 shadow-md bg-white flex items-center justify-center">
                   <SafeImage
-                    primarySrc="/images/user/GITS-28-removebg-preview.png"
-                    fallbackSrc={okelloPortrait}
+                    primarySrc={communicationPortrait}
+                    fallbackSrc={communicationPortrait}
                     alt="Okello Odhiambo - Executive Brand Consultant"
                     className="w-full h-full object-cover object-top"
                   />

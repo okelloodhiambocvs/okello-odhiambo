@@ -1,7 +1,6 @@
 import React from "react";
 import { MessageSquare, Briefcase, ChevronDown, CheckCircle2, Terminal, Sparkles } from "lucide-react";
-import brandBackground from "../assets/images/okello_brand_bg_1780136809302.png";
-import devPortrait from "../assets/images/okello_dev_portrait_1780137295134.png";
+import heroConsultantCouch from "../assets/images/user/hero-consultant-couch.jpg";
 import { SafeImage } from "./FounderGallery";
 
 interface HeroProps {
@@ -14,13 +13,13 @@ export default function Hero({ onNavigate }: HeroProps) {
       {/* Background Animated Gradient Layer */}
       <div className="absolute inset-0 z-0 bg-slate-50/40" />
 
-      {/* High-Quality Sharp Brand Photo Collage of Okello Odhiambo */}
+      {/* Subtly softened personal photo, kept recognizable behind the hero content */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none opacity-[0.38] sm:opacity-[0.48] transition-opacity duration-1000 overflow-hidden">
         <SafeImage
-          primarySrc="/images/user/670356360_914681931562215_3529270803198657421_n.jpg"
-          fallbackSrc={brandBackground}
-          alt="Okello Odhiambo - Executive Consultant & Engineer Collage"
-          className="w-full h-full object-cover object-center scale-[1.01]"
+          primarySrc={heroConsultantCouch}
+          fallbackSrc={heroConsultantCouch}
+          alt="Okello Odhiambo seated in a consulting setting"
+          className="w-full h-full object-cover object-center scale-[1.03] blur-[1.5px]"
         />
         {/* Soft elegant gradient overlays to blend beautifully with the slate-50 background */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50/20 via-slate-50/60 to-slate-50" />

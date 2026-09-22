@@ -107,7 +107,7 @@ export default function FounderGallery() {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="space-y-1">
               <h4 className="font-serif font-bold text-base text-[#0C1E36] flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#f80d05]" /> Sync Your 7 Authentic Photos to Website Storage
+                <ShieldCheck className="w-4 h-4 text-[#f80d05]" /> Synced Authentic Photos to Website Storage
               </h4>
               <p className="text-xs text-slate-600 max-w-2xl">
                 Upload or drop your attached files (<code className="bg-red-50 text-[#f80d05] px-1 py-0.5 rounded font-mono text-[11px]">.jpg</code>, <code className="bg-red-50 text-[#f80d05] px-1 py-0.5 rounded font-mono text-[11px]">.png</code>) to store them permanently into <code className="bg-slate-100 text-slate-700 px-1 py-0.5 rounded font-mono text-[11px]">/public/images/user/</code>.

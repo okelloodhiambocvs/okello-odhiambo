@@ -9,6 +9,9 @@ import userImagesRouter from "./server/routes/userImages";
 async function startServer() {
   const app = express();
   const PORT = 3000;
+  // `npm start` runs the bundled dist/server.cjs file. Treat that entrypoint as
+  // production even when NODE_ENV was not supplied by the host environment.
+  const isProduction = process.env.NODE_ENV === "production" || path.basename(process.argv[1] || "") === "server.cjs";
 
   // Security Hardening: Hide server footprint
   app.disable("x-powered-by");
@@ -39,7 +42,7 @@ async function startServer() {
   app.use("/api/user-images", userImagesRouter);
 
   // Serve Frontend with Vite (Dev) or Static Assets (Prod)
-  if (process.env.NODE_ENV !== "production") {
+  if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
