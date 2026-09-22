@@ -2,6 +2,7 @@ import React from "react";
 import { User, ShieldCheck, Mail, Globe, BrainCircuit, Code, Terminal, Clock, Award, Linkedin, Github, Twitter } from "lucide-react";
 import devPortrait from "../assets/images/okello_dev_portrait_1780137295134.png";
 import okelloPortrait from "../assets/images/okello_portrait_1780137026187.png";
+import FounderGallery, { SafeImage } from "./FounderGallery";
 
 export default function About() {
   const corporateAchievements = [
@@ -28,9 +29,6 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="mb-16 max-w-3xl">
-          <span className="font-mono text-xs tracking-[0.25em] text-[#f80d05] block uppercase mb-3 font-bold">
-            Core Dual Identity
-          </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0C1E36] tracking-tight leading-tight">
             The Intersection of Elite Copywriting &amp; Software Systems
           </h2>
@@ -47,12 +45,12 @@ export default function About() {
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 pb-6 border-b border-slate-100">
               <div className="relative shrink-0 select-none">
-                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-200 shadow-md">
-                  <img
-                    src={devPortrait}
+                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-200 shadow-md bg-white flex items-center justify-center">
+                  <SafeImage
+                    primarySrc="/images/user/332104654_1341326833333209_1155535297741357910_n-removebg-preview.png"
+                    fallbackSrc={devPortrait}
                     alt="Okello Odhiambo - Full-Stack Software Engineer at Zone01"
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
                 <div className="absolute -bottom-1 -right-1 p-1 bg-[#f80d05] rounded-lg text-white border border-white shadow-xs">
@@ -60,9 +58,6 @@ export default function About() {
                 </div>
               </div>
               <div>
-                <span className="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-red-100 text-red-800 border border-red-200 font-bold mb-1">
-                  Primary Capability
-                </span>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#0C1E36] leading-tight">
                   Full-Stack Software Engineer
                 </h3>
@@ -131,12 +126,12 @@ export default function About() {
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 pb-6 border-b border-slate-100">
               <div className="relative shrink-0 select-none">
-                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-100 shadow-md">
-                  <img
-                    src={okelloPortrait}
+                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-100 shadow-md bg-white flex items-center justify-center">
+                  <SafeImage
+                    primarySrc="/images/user/GITS-28-removebg-preview.png"
+                    fallbackSrc={okelloPortrait}
                     alt="Okello Odhiambo - Executive Brand Consultant"
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
                 <div className="absolute -bottom-1 -right-1 p-1 bg-[#f80d05] rounded-lg text-white border border-white shadow-xs">
@@ -144,9 +139,6 @@ export default function About() {
                 </div>
               </div>
               <div>
-                <span className="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-slate-100 text-slate-700 border border-slate-200 font-bold mb-1">
-                  Strategic Consulting
-                </span>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#0C1E36] leading-tight">
                   Executive Branding Consultant
                 </h3>
@@ -214,9 +206,6 @@ export default function About() {
                 21
               </span>
               <div>
-                <span className="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-red-50 text-[#f80d05] border border-red-200 mb-1 font-bold">
-                  Foundation Year
-                </span>
                 <span className="block text-sm font-bold text-[#0C1E36]">Launched House Ventures Consultancy</span>
                 <p className="text-xs text-slate-500 mt-1">
                   Began structuring highly competitive, custom-engineered executive portfolios for corporate directors and mid-tier managers striving for international roles.
@@ -230,9 +219,6 @@ export default function About() {
                 23
               </span>
               <div>
-                <span className="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-rose-50 text-rose-700 border border-rose-250 mb-1 font-bold">
-                  C-Suite Alignment
-                </span>
                 <span className="block text-sm font-bold text-[#0C1E36]">Strategic Partnerships (KEWOTA &amp; ENA Coach)</span>
                 <p className="text-xs text-slate-500 mt-1">
                   Retained to restructure key grant proposals and modern board-room CV databases, securing regional educational assets and boosting organizational visibility.
@@ -246,9 +232,6 @@ export default function About() {
                 25
               </span>
               <div>
-                <span className="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-emerald-50 text-emerald-700 border border-emerald-250 mb-1 font-bold">
-                  Digital Integration
-                </span>
                 <span className="block text-sm font-bold text-[#0C1E36]">Full-Stack Integration Labs at Zone01 Kisumu</span>
                 <p className="text-xs text-slate-500 mt-1">
                   Began full-stack software development tracking, using Golang core backend models to merge technical application logic with elite copywriting.
@@ -258,7 +241,8 @@ export default function About() {
           </div>
         </div>
 
-
+        {/* Authentic Moments & Field Leadership Gallery */}
+        <FounderGallery />
       </div>
     </section>
   );

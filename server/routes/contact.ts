@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express";
+import crypto from "crypto";
 import { sanitizeInput } from "../utils/sanitize";
 
 const router = Router();
@@ -69,10 +70,21 @@ router.post("/", (req: Request, res: Response) => {
 // GET /api/contact/submissions
 router.get("/submissions", (req: Request, res: Response) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader || authHeader !== `Bearer ${process.env.ADMIN_SECRET || "okello-admin-2026"}`) {
-    return res.status(401).json({ error: "Unauthorized access to inquiry records." });
+  const adminSecret = process.env.ADMIN_SECRET || "okello-admin-2026";
+  const expectedBearer = `Bearer ${adminSecret}`;
+
+  if (!authHeader) {
+    return res.status(401).json({ error: "Unauthorized access: Bearer token required." });
   }
-  res.json({ submissions: contactSubmissions });
+
+  const authBuffer = Buffer.from(authHeader);
+  const expectedBuffer = Buffer.from(expectedBearer);
+
+  if (authBuffer.length !== expectedBuffer.length || !crypto.timingSafeEqual(authBuffer, expectedBuffer)) {
+    return res.status(401).json({ error: "Unauthorized: Invalid credentials provided." });
+  }
+
+  res.json({ count: contactSubmissions.length, submissions: contactSubmissions });
 });
 
 export default router;

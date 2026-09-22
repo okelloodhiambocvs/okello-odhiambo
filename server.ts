@@ -4,6 +4,7 @@ import { createServer as createViteServer } from "vite";
 import { setSecurityHeaders, rateLimiter } from "./server/middleware/security";
 import atsRouter from "./server/routes/ats";
 import contactRouter from "./server/routes/contact";
+import userImagesRouter from "./server/routes/userImages";
 
 async function startServer() {
   const app = express();
@@ -13,10 +14,14 @@ async function startServer() {
   app.disable("x-powered-by");
 
   // Global Middleware
-  app.use(express.json({ limit: "15mb" }));
-  app.use(express.urlencoded({ extended: true, limit: "15mb" }));
+  app.use(express.json({ limit: "25mb" }));
+  app.use(express.urlencoded({ extended: true, limit: "25mb" }));
   app.use(setSecurityHeaders);
   app.use(rateLimiter);
+
+  // Serve user images directory statically
+  const publicUserImages = path.join(process.cwd(), "public", "images");
+  app.use("/images", express.static(publicUserImages));
 
   // Health check endpoint
   app.get("/api/health", (req: Request, res: Response) => {
@@ -31,6 +36,7 @@ async function startServer() {
   // Mount API Sub-routers
   app.use("/api/ats", atsRouter);
   app.use("/api/contact", contactRouter);
+  app.use("/api/user-images", userImagesRouter);
 
   // Serve Frontend with Vite (Dev) or Static Assets (Prod)
   if (process.env.NODE_ENV !== "production") {

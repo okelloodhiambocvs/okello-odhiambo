@@ -32,9 +32,6 @@ export default function Insights() {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
-            <span className="font-mono text-xs tracking-[0.25em] text-red-400 block uppercase mb-3 font-bold">
-              Strategic Insights
-            </span>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
               The Tech-Executive Field Log
             </h2>

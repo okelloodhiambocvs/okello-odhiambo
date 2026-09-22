@@ -31,9 +31,6 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="font-mono text-xs tracking-[0.25em] text-[#f80d05] block uppercase mb-3 font-bold">
-            Social Proof &amp; Credentials
-          </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0C1E36] tracking-tight">
             Corporate &amp; Academic Endorsements
           </h2>

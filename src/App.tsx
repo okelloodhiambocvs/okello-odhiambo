@@ -133,7 +133,7 @@ export default function App() {
               exit="exit"
               className="w-full"
             >
-              <Portfolio />
+              <Portfolio onNavigate={navigateToPage} />
             </motion.div>
           )}
 

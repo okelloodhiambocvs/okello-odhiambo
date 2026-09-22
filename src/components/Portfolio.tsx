@@ -1,11 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PORTFOLIO } from "../data";
 import { PortfolioItem } from "../types";
-import { Layers, FileSpreadsheet, Eye, X, BookOpen, ExternalLink, Calendar, Users, Cpu, FileCheck } from "lucide-react";
+import { Layers, FileSpreadsheet, Eye, X, BookOpen, ExternalLink, Calendar, Users, Cpu, FileCheck, ArrowLeft, ArrowUpRight } from "lucide-react";
 
-export default function Portfolio() {
+interface PortfolioProps {
+  onNavigate?: (pageId: string) => void;
+}
+
+export default function Portfolio({ onNavigate }: PortfolioProps) {
   const [filter, setFilter] = useState<"all" | "CVs" | "Proposals" | "Company Profiles" | "Tech Projects">("all");
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
+
+  // Close modal when pressing Escape and lock body scroll
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedItem(null);
+      }
+    };
+
+    if (selectedItem) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedItem]);
 
   const categories: Array<"all" | "CVs" | "Proposals" | "Company Profiles" | "Tech Projects"> = [
     "all", "CVs", "Proposals", "Company Profiles", "Tech Projects"
@@ -22,12 +47,43 @@ export default function Portfolio() {
       <div className="absolute top-[40%] right-[10%] w-[25rem] h-[25rem] bg-red-50/50 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
+        {/* Navigation Breadcrumbs / Return Button */}
+        {onNavigate && (
+          <div className="mb-8 flex items-center justify-between">
+            <button
+              onClick={() => onNavigate("about")}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 hover:bg-[#0C1E36] text-slate-700 hover:text-white font-mono text-xs font-bold transition-all cursor-pointer shadow-xs group"
+            >
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to About &amp; Home
+            </button>
+            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-slate-500">
+              <button 
+                onClick={() => onNavigate("services")}
+                className="hover:text-[#f80d05] cursor-pointer transition-colors"
+              >
+                Services
+              </button>
+              <span>•</span>
+              <button 
+                onClick={() => onNavigate("ats-scanner")}
+                className="hover:text-[#f80d05] cursor-pointer transition-colors"
+              >
+                AI CV Grader
+              </button>
+              <span>•</span>
+              <button 
+                onClick={() => onNavigate("contact")}
+                className="hover:text-[#f80d05] cursor-pointer transition-colors"
+              >
+                Contact
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
-            <span className="font-mono text-xs tracking-[0.25em] text-[#f80d05] block uppercase mb-3 font-bold">
-              Elite Showcase
-            </span>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0C1E36] tracking-tight">
               Selected High-Stakes Deliverables
             </h2>
@@ -141,23 +197,38 @@ export default function Portfolio() {
 
         {/* Case Study Detailed Modal Popup */}
         {selectedItem && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300">
-            <div className="w-full max-w-2xl bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-200">
+          <div 
+            onClick={() => setSelectedItem(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-slate-900/70 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto"
+          >
+            <div 
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-2xl bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-150 my-auto max-h-[92vh] flex flex-col"
+            >
               
               {/* Modal Gradient Header bar */}
-              <div className="h-1.5 w-full bg-gradient-to-r from-[#f80d05] to-[#0C1E36]" />
+              <div className="h-1.5 w-full bg-gradient-to-r from-[#f80d05] to-[#0C1E36] shrink-0" />
 
-              {/* Close Button Pin */}
-              <button
-                onClick={() => setSelectedItem(null)}
-                className="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 border border-slate-100 text-slate-500 hover:text-[#0C1E36] transition-all cursor-pointer"
-                aria-label="Close case study details"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              {/* Sticky Top Bar with Close and Back Controls */}
+              <div className="flex items-center justify-between px-6 py-3 border-b border-slate-100 bg-white/95 backdrop-blur-xs shrink-0">
+                <button
+                  onClick={() => setSelectedItem(null)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#0C1E36] hover:text-white text-slate-700 font-bold text-xs font-mono transition-all cursor-pointer"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" /> Back to Portfolio
+                </button>
+                <button
+                  onClick={() => setSelectedItem(null)}
+                  className="p-1.5 rounded-full hover:bg-slate-100 text-slate-500 hover:text-[#0C1E36] transition-all cursor-pointer"
+                  aria-label="Close case study details"
+                  title="Close (Esc)"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
-              {/* Modal Content */}
-              <div className="p-8">
+              {/* Scrollable Modal Content */}
+              <div className="p-6 sm:p-8 overflow-y-auto">
                 {/* Meta details */}
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                   <span className="text-[10px] font-mono uppercase tracking-widest font-bold text-[#f80d05] px-3 py-1 bg-red-50 rounded border border-red-100">
@@ -252,9 +323,9 @@ export default function Portfolio() {
                   <div className="flex gap-3 w-full sm:w-auto">
                     <button
                       onClick={() => setSelectedItem(null)}
-                      className="w-full sm:w-auto px-5 py-2.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-650 font-bold hover:text-slate-900 text-xs font-mono transition-all uppercase tracking-wider cursor-pointer"
+                      className="w-full sm:w-auto px-5 py-2.5 rounded bg-slate-100 hover:bg-[#0C1E36] hover:text-white text-slate-700 font-bold text-xs font-mono transition-all uppercase tracking-wider cursor-pointer flex items-center justify-center gap-1.5"
                     >
-                      Close Window
+                      <ArrowLeft className="w-3.5 h-3.5" /> Back to Portfolio
                     </button>
                     <a
                       href={`https://wa.me/254728606684?text=${encodeURIComponent(`Hi Okello, I saw your case study "${selectedItem.title}" on your website and would like to discuss a similar project.`)}`}

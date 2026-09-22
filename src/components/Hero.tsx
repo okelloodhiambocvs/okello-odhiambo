@@ -1,6 +1,9 @@
 import React from "react";
-import { MessageSquare, Briefcase, ChevronDown, CheckCircle2, Terminal } from "lucide-react";
+import { MessageSquare, Briefcase, ChevronDown, CheckCircle2, Terminal, Sparkles } from "lucide-react";
 import brandBackground from "../assets/images/okello_brand_bg_1780136809302.png";
+import devPortrait from "../assets/images/okello_dev_portrait_1780137295134.png";
+import { SafeImage } from "./FounderGallery";
+
 interface HeroProps {
   onNavigate: (sectionId: string) => void;
 }
@@ -13,11 +16,11 @@ export default function Hero({ onNavigate }: HeroProps) {
 
       {/* High-Quality Sharp Brand Photo Collage of Okello Odhiambo */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none opacity-[0.38] sm:opacity-[0.48] transition-opacity duration-1000 overflow-hidden">
-        <img
-          src={brandBackground}
+        <SafeImage
+          primarySrc="/images/user/670356360_914681931562215_3529270803198657421_n.jpg"
+          fallbackSrc={brandBackground}
           alt="Okello Odhiambo - Executive Consultant & Engineer Collage"
           className="w-full h-full object-cover object-center scale-[1.01]"
-          referrerPolicy="no-referrer"
         />
         {/* Soft elegant gradient overlays to blend beautifully with the slate-50 background */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50/20 via-slate-50/60 to-slate-50" />
