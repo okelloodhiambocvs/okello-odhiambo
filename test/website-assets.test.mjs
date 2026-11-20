@@ -123,3 +123,29 @@ test("brand red #f80d05, body font scaling, and working ATS keyword integration 
   assert.match(atsInputPanel, /Priority Target Keywords/);
 });
 
+test("portfolio grid removes card shapes, conversion impact box, and tech pills while expanding into ProjectDetailPage with interactive fade motion", () => {
+  const appComponent = readFileSync(join(root, "src", "App.tsx"), "utf8");
+  const projectDetail = readFileSync(join(root, "src", "components", "ProjectDetailPage.tsx"), "utf8");
+  const motionPrimitives = readFileSync(join(root, "src", "components", "MotionPrimitives.tsx"), "utf8");
+  const pageHero = readFileSync(join(root, "src", "components", "PageHero.tsx"), "utf8");
+
+  assert.doesNotMatch(portfolioComponent, /Conversion Impact Accomplished/);
+  assert.doesNotMatch(portfolioComponent, /Core Code Implementation Stack/);
+  assert.doesNotMatch(portfolioComponent, /item\.techStack\.slice/);
+  assert.match(portfolioComponent, /bg-transparent border-0 p-0/);
+  assert.match(portfolioComponent, /onSelectProject\?\.\(item\.id\)/);
+  assert.match(portfolioComponent, /Review Details/);
+
+  assert.match(appComponent, /ProjectDetailPage/);
+  assert.match(appComponent, /selectedProjectId/);
+  assert.match(projectDetail, /Project Blueprint &amp; Detailed Overview/);
+  assert.match(projectDetail, /More From Our Portfolio/);
+
+  assert.match(motionPrimitives, /export function AnimatedWords/);
+  assert.match(motionPrimitives, /export function FadeInWriting/);
+  assert.match(heroComponent, /AnimatedWords/);
+  assert.match(pageHero, /AnimatedWords/);
+  assert.match(portfolioComponent, /AnimatedWords/);
+});
+
+

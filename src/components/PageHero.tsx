@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
+import { AnimatedWords, FadeInWriting } from "./MotionPrimitives";
 
 interface PageHeroProps {
   kicker: string;
@@ -30,6 +31,8 @@ export default function PageHero({
     }
   };
 
+  const highlightTokens = titleHighlight.trim().split(/\s+/).filter(Boolean);
+
   return (
     <section className="relative bg-[#0C1E36] text-white overflow-hidden">
       <div
@@ -46,17 +49,30 @@ export default function PageHero({
           {/* LEFT COLUMN */}
           <div className={`${visual ? "lg:col-span-7" : "lg:col-span-12"} flex flex-col justify-between`}>
             <div>
-              <p className="text-slate-200 text-lg sm:text-xl md:text-2xl font-sans font-normal tracking-normal mb-2">
-                {kicker}
-              </p>
+              <FadeInWriting mode="mount" delay={0.04}>
+                <p className="text-slate-200 text-lg sm:text-xl md:text-2xl font-sans font-normal tracking-normal mb-2">
+                  {kicker}
+                </p>
+              </FadeInWriting>
               <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-[3.75rem] font-extrabold uppercase tracking-tight leading-[1.03] text-white mb-6 max-w-4xl text-balance">
-                {titlePrefix}{" "}
-                <span className="text-[#f80d05]">{titleHighlight}</span>
+                <AnimatedWords
+                  text={`${titlePrefix} ${titleHighlight}`}
+                  highlightWords={highlightTokens}
+                  mode="mount"
+                  delayOffset={0.1}
+                  stagger={0.05}
+                />
               </h1>
-              <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] tracking-wide font-sans font-normal leading-relaxed">
-                {description}
-              </p>
-              {children && <div className="mt-8">{children}</div>}
+              <FadeInWriting mode="mount" delay={0.22}>
+                <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] tracking-wide font-sans font-normal leading-relaxed">
+                  {description}
+                </p>
+              </FadeInWriting>
+              {children && (
+                <FadeInWriting mode="mount" delay={0.3} className="mt-8">
+                  {children}
+                </FadeInWriting>
+              )}
             </div>
 
             {scrollTargetId && (
@@ -75,9 +91,9 @@ export default function PageHero({
 
           {/* RIGHT COLUMN: Backgroundless Creative Icon Illustration */}
           {visual && (
-            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <FadeInWriting mode="mount" delay={0.16} className="lg:col-span-5 flex justify-center lg:justify-end">
               {visual}
-            </div>
+            </FadeInWriting>
           )}
         </div>
       </div>

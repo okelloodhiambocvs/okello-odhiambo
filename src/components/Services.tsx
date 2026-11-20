@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { SERVICES } from "../data";
 import { ServiceItem } from "../types";
 import { MessageSquare, Coffee, ShieldAlert } from "lucide-react";
 import ServiceCard from "./ServiceCard";
 import PageHero from "./PageHero";
 import { ServicesHeroVisual } from "./HeroEmblems";
+import { FadeInWriting } from "./MotionPrimitives";
 
 export default function Services() {
   const [activeTab, setActiveTab] = useState<"all" | "tech" | "consultancy" | "design">("all");
@@ -81,14 +83,31 @@ export default function Services() {
         <div className="max-w-7xl mx-auto px-6">
 
         {/* Services Cards Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredServices.map((service) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {filteredServices.map((service, idx) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ duration: 0.4, delay: Math.min((idx % 3) * 0.08, 0.24), ease: [0.22, 1, 0.36, 1] }}
+              >
+                <ServiceCard service={service} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Global Consultation Alert */}
-        <div className="mt-16 p-8 rounded-2xl bg-white border border-slate-200 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+        <FadeInWriting mode="view" delay={0.1} className="mt-16 p-8 rounded-2xl bg-white border border-slate-200 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="absolute top-0 right-0 p-4 opacity-[0.04]">
             <Coffee className="w-48 h-48 stroke-[1] text-[#0C1E36]" />
           </div>
@@ -110,7 +129,7 @@ export default function Services() {
           >
             Direct WhatsApp Chat <MessageSquare className="w-4 h-4" />
           </a>
-        </div>
+        </FadeInWriting>
         </div>
       </section>
     </div>

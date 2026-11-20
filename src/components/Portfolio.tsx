@@ -1,46 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { PORTFOLIO } from "../data";
-import { PortfolioItem } from "../types";
-import { Eye, X, ExternalLink, Calendar, Users, ArrowLeft, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown, Sparkles, Maximize2 } from "lucide-react";
 import { SafeImage } from "./FounderGallery";
+import { AnimatedWords, FadeInWriting } from "./MotionPrimitives";
 
 const PORTFOLIO_HERO_PORTRAIT_SRC =
   "/assets/aistudio/Thoughtful_Professional_Portrait-removebg-preview_b0c510da.png";
 
 interface PortfolioProps {
   onNavigate?: (pageId: string) => void;
+  onSelectProject?: (projectId: string) => void;
 }
 
-export default function Portfolio({ onNavigate }: PortfolioProps) {
+export default function Portfolio({ onNavigate, onSelectProject }: PortfolioProps) {
   const [filter, setFilter] = useState<"all" | "CVs" | "Proposals" | "Company Profiles" | "Tech Projects">("all");
-  const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
-
-  // Close modal when pressing Escape and lock body scroll
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setSelectedItem(null);
-      }
-    };
-
-    if (selectedItem) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "unset";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedItem]);
 
   const categories: Array<"all" | "CVs" | "Proposals" | "Company Profiles" | "Tech Projects"> = [
     "all", "CVs", "Proposals", "Company Profiles", "Tech Projects"
   ];
 
-  const filteredPortfolio = PORTFOLIO.filter(item => {
+  const filteredPortfolio = PORTFOLIO.filter((item) => {
     if (filter === "all") return true;
     return item.category === filter;
   });
@@ -70,25 +50,34 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
             {/* LEFT COLUMN: Editorial Headline, Subheadline, CTAs, Circular Scroll Down */}
             <div className="lg:col-span-7 pb-10 lg:pb-16 flex flex-col justify-between">
               <div>
-                <p className="text-slate-200 text-lg sm:text-xl md:text-2xl font-sans font-normal tracking-normal mb-2">
-                  Proven Systems &amp;
-                </p>
+                <FadeInWriting mode="mount" delay={0.05}>
+                  <p className="text-slate-200 text-lg sm:text-xl md:text-2xl font-sans font-normal tracking-normal mb-2">
+                    Proven Systems &amp;
+                  </p>
+                </FadeInWriting>
 
                 <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-[3.75rem] font-extrabold uppercase tracking-tight leading-[1.03] text-white mb-6 text-balance">
-                  Selected <span className="whitespace-nowrap">High-Stakes</span>{" "}
-                  <span className="text-[#f80d05]">Deliverables</span>
+                  <AnimatedWords
+                    text="Selected High-Stakes Deliverables"
+                    highlightWords={["Deliverables"]}
+                    mode="mount"
+                    delayOffset={0.1}
+                    stagger={0.05}
+                  />
                 </h1>
 
-                <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] tracking-wide font-sans font-normal leading-relaxed mb-8">
-                  Production Golang and TypeScript platforms, corporate profiles, grant proposals, and executive career transformations delivered across East Africa via{" "}
-                  <span className="text-white font-semibold border-b-2 border-[#f80d05] pb-0.5">
-                    Zone01 &amp; House Ventures Consultancy
-                  </span>
-                  .
-                </p>
+                <FadeInWriting mode="mount" delay={0.25}>
+                  <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] tracking-wide font-sans font-normal leading-relaxed mb-8">
+                    Production Golang and TypeScript platforms, corporate profiles, grant proposals, and executive career transformations delivered across East Africa via{" "}
+                    <span className="text-white font-semibold border-b-2 border-[#f80d05] pb-0.5">
+                      Zone01 &amp; House Ventures Consultancy
+                    </span>
+                    .
+                  </p>
+                </FadeInWriting>
 
                 {/* Primary Hero Actions matching landing page */}
-                <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 mb-10">
+                <FadeInWriting mode="mount" delay={0.34} className="flex flex-wrap sm:flex-nowrap items-center gap-3 mb-10">
                   <button
                     type="button"
                     onClick={() => (onNavigate ? onNavigate("contact") : scrollToDeliverables())}
@@ -116,7 +105,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                       <ArrowLeft className="w-3.5 h-3.5" /> About Us
                     </button>
                   )}
-                </div>
+                </FadeInWriting>
               </div>
 
               {/* Circular Down Scroll Control */}
@@ -133,7 +122,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
             </div>
 
             {/* RIGHT COLUMN: Attached Transparent Cutout Portrait of Okello Odhiambo */}
-            <div className="lg:col-span-5 relative flex justify-center lg:justify-end self-end">
+            <FadeInWriting mode="mount" delay={0.18} className="lg:col-span-5 relative flex justify-center lg:justify-end self-end">
               <div className="relative w-full max-w-[440px] lg:max-w-[510px] h-[400px] sm:h-[480px] lg:h-[560px] flex items-end justify-center">
                 <SafeImage
                   primarySrc={PORTFOLIO_HERO_PORTRAIT_SRC}
@@ -142,7 +131,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                   className="h-full w-auto max-w-full object-contain object-bottom [mask-image:linear-gradient(to_top,transparent_0%,black_12%,black_100%)]"
                 />
               </div>
-            </div>
+            </FadeInWriting>
           </div>
         </div>
       </section>
@@ -150,7 +139,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
       {/* Full-Width Portfolio Proof Bar matching About Us landing page */}
       <section className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+          <FadeInWriting mode="view" delay={0.05} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-200">
             <div className="pt-2 md:pt-0 md:pr-6">
               <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
                 {PORTFOLIO.length}+
@@ -183,20 +172,18 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                 Institutional Grants &amp; CVs
               </span>
             </div>
-          </div>
+          </FadeInWriting>
         </div>
       </section>
 
+      {/* Plain White Background Portfolio Deliverables — Writings Sit Directly on Plain White (like Okello in Action) */}
       <section id="portfolio-deliverables" className="py-16 sm:py-20 relative bg-white">
-        {/* Decorative gradient effects */}
-        <div className="absolute top-[40%] right-[10%] w-[25rem] h-[25rem] bg-[#f80d05]/[0.04] rounded-full blur-[100px] pointer-events-none" />
-
         <div className="max-w-7xl mx-auto px-6">
           {/* Editorial Section Header & Category Filter Controls */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <FadeInWriting mode="view" className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
             <div>
               <h2 className="font-sans text-3xl sm:text-4xl font-extrabold text-[#0C1E36] tracking-tight mb-4">
-                Verified Work &amp; Case Studies
+                <AnimatedWords text="Verified Work & Case Studies" mode="view" stagger={0.04} />
               </h2>
               <div className="w-16 h-1 bg-[#f80d05]" />
             </div>
@@ -217,242 +204,88 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                 </button>
               ))}
             </div>
-          </div>
+          </FadeInWriting>
 
-        {/* Portfolio Content Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {filteredPortfolio.map((item) => {
-            const isTech = item.category === "Tech Projects";
-
-            return (
-              <div
-                key={item.id}
-                onClick={() => setSelectedItem(item)}
-                className="rounded-2xl bg-white border border-slate-200 p-6 flex flex-col justify-between hover:border-[#f80d05] hover:bg-slate-50/50 cursor-pointer group transition-all duration-300 shadow-sm hover:shadow"
-              >
-                <div>
-                  {/* Aspect Ratio Balanced Image Cover */}
+          {/* Clean Borderless Writings Directly on Plain White Background */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={filter}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
+            >
+              {filteredPortfolio.map((item, idx) => (
+                <motion.button
+                  type="button"
+                  key={item.id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.1 }}
+                  transition={{
+                    duration: 0.42,
+                    delay: Math.min((idx % 3) * 0.08, 0.24),
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  onClick={() => onSelectProject?.(item.id)}
+                  className="group relative text-left flex flex-col w-full bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f80d05]"
+                >
+                  {/* Clean Full-Bleed Image Cover */}
                   {item.image && (
-                    <div className="w-full h-48 rounded-xl overflow-hidden mb-5 border border-slate-200 relative select-none">
+                    <div className="relative h-56 w-full overflow-hidden">
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
+                        className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
                         referrerPolicy="no-referrer"
                       />
-                    </div>
-                  )}
-
-                  {/* Category Pin and Year */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[11px] uppercase tracking-widest font-mono font-bold text-[#f80d05] px-2.5 py-1 rounded bg-[#f80d05]/10 border border-[#f80d05]/25 whitespace-nowrap">
-                      {item.category}
-                    </span>
-                    <span className="text-xs font-mono text-slate-500">
-                      {item.year}
-                    </span>
-                  </div>
-
-                  {/* Narrative Details */}
-                  <div className="mb-6">
-                    <h3 className="font-serif text-slate-900 group-hover:text-[#f80d05] text-xl sm:text-2xl font-bold transition-colors mb-2">
-                      {item.title}
-                    </h3>
-                    <span className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">
-                      Client: {item.client}
-                    </span>
-                    <p className="text-slate-600 text-sm sm:text-base tracking-wide leading-relaxed line-clamp-3 font-normal">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  {/* Direct High Impact Metrics Block */}
-                  {item.metrics && (
-                    <div className="p-4 rounded-xl bg-[#f80d05]/[0.05] border border-[#f80d05]/20 mb-6">
-                      <span className="block text-[9px] tracking-[0.2em] font-mono text-[#f80d05] uppercase mb-1 font-bold">
-                        Conversion Impact Accomplished
-                      </span>
-                      <span className="font-sans font-semibold text-[#0C1E36] text-sm block leading-relaxed">
-                        {item.metrics}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Interactive Card Action Call */}
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <div className="flex gap-1.5 flex-wrap">
-                      {isTech && item.techStack
-                        ? item.techStack.slice(0, 3).map((stack, idx) => (
-                            <span key={idx} className="text-[10px] font-mono text-[#0C1E36] font-bold px-2 py-0.5 rounded bg-slate-100 border border-slate-200">
-                              {stack}
-                            </span>
-                          ))
-                        : item.deliverables?.slice(0, 2).map((del, idx) => (
-                            <span key={idx} className="text-[10px] font-mono text-[#f80d05] font-bold px-2 py-0.5 rounded bg-[#f80d05]/10 border border-[#f80d05]/20">
-                              {del}
-                            </span>
-                          ))}
-                    </div>
-
-                    <span className="flex items-center gap-1 text-slate-500 group-hover:text-[#f80d05] text-xs font-mono font-bold transition-colors">
-                      Review Details <Eye className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Case Study Detailed Modal Popup */}
-        {selectedItem && (
-          <div 
-            onClick={() => setSelectedItem(null)}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-slate-900/70 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto"
-          >
-            <div 
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-150 my-auto max-h-[92vh] flex flex-col"
-            >
-              
-              {/* Modal Gradient Header bar */}
-              <div className="h-1.5 w-full bg-gradient-to-r from-[#f80d05] to-[#0C1E36] shrink-0" />
-
-              {/* Sticky Top Bar with Close and Back Controls */}
-              <div className="flex items-center justify-between px-6 py-3 border-b border-slate-100 bg-white/95 backdrop-blur-xs shrink-0">
-                <button
-                  onClick={() => setSelectedItem(null)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#0C1E36] hover:text-white text-slate-700 font-bold text-xs font-mono transition-all cursor-pointer"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5" /> Back to Portfolio
-                </button>
-                <button
-                  onClick={() => setSelectedItem(null)}
-                  className="p-1.5 rounded-full hover:bg-slate-100 text-slate-500 hover:text-[#0C1E36] transition-all cursor-pointer"
-                  aria-label="Close case study details"
-                  title="Close (Esc)"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Scrollable Modal Content */}
-              <div className="p-6 sm:p-8 overflow-y-auto">
-                {/* Meta details */}
-                <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="text-[11px] font-mono uppercase tracking-widest font-bold text-[#f80d05] px-3 py-1 bg-[#f80d05]/10 rounded border border-[#f80d05]/25">
-                    {selectedItem.category}
-                  </span>
-                  <span className="text-slate-500 text-xs font-mono flex items-center gap-1 font-semibold">
-                    <Calendar className="w-3 h-3" /> Year {selectedItem.year}
-                  </span>
-                  <span className="text-slate-500 text-xs font-mono flex items-center gap-1 font-semibold">
-                    <Users className="w-3.5 h-3.5" /> {selectedItem.client}
-                  </span>
-                </div>
-
-                {/* Cinematic Title */}
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0C1E36] mb-6">
-                  {selectedItem.title}
-                </h3>
-
-                {selectedItem.image && (
-                  <div className="w-full h-56 rounded-xl overflow-hidden mb-6 border border-slate-200 select-none shadow-sm">
-                    <img
-                      src={selectedItem.image}
-                      alt={selectedItem.title}
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                )}
-
-                {/* Long Description Narrative */}
-                <div className="space-y-4 mb-8 text-slate-600 font-sans text-sm sm:text-base leading-relaxed max-h-[18rem] overflow-y-auto pr-2">
-                  <p className="font-bold text-[#0C1E36]">Project Blueprint Overview:</p>
-                  <p>{selectedItem.longDescription || selectedItem.description}</p>
-
-                  {/* Quantitative success callout panel */}
-                  {selectedItem.metrics && (
-                    <div className="p-4 rounded-xl border border-[#f80d05]/25 bg-[#f80d05]/[0.05] shadow-sm">
-                      <span className="block text-[10px] font-mono tracking-widest text-[#f80d05] uppercase font-bold mb-1">
-                        Quantified Success Metric
-                      </span>
-                      <p className="text-sm text-[#0C1E36] font-bold italic">
-                        &ldquo;{selectedItem.metrics}&rdquo;
-                      </p>
-                    </div>
-                  )}
-
-                  {/* Complete deliverables checklist */}
-                  {selectedItem.deliverables && (
-                    <div className="space-y-2 mt-4 pt-4 border-t border-slate-100">
-                      <p className="text-xs font-mono tracking-widest text-slate-500 uppercase font-bold">
-                        Strategic Assets Delivered:
-                      </p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {selectedItem.deliverables.map((del, idx) => (
-                          <div key={idx} className="flex items-center gap-2 text-sm text-slate-600 font-medium">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#f80d05]" />
-                            <span>{del}</span>
-                          </div>
-                        ))}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span className="text-white text-xs font-mono flex items-center gap-1.5 font-bold">
+                          <Maximize2 className="w-3.5 h-3.5" /> Read Full Case Study
+                        </span>
                       </div>
                     </div>
                   )}
 
-                  {/* Stacks details (if tech of choice) */}
-                  {selectedItem.techStack && (
-                    <div className="space-y-2 mt-4 pt-4 border-t border-slate-100">
-                      <p className="text-xs font-mono tracking-widest text-slate-500 uppercase font-bold">
-                        Core Code Implementation Stack:
-                      </p>
-                      <div className="flex gap-2 flex-wrap">
-                        {selectedItem.techStack.map((tech, idx) => (
-                          <span key={idx} className="text-xs font-mono px-2.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-[#0C1E36] font-bold">
-                            {tech}
-                          </span>
-                        ))}
+                  {/* Typography Directly on Plain White Background */}
+                  <div className="pt-4 flex-1 flex flex-col justify-between w-full">
+                    <div>
+                      <div className="flex items-center justify-between gap-3 mb-2">
+                        <span className="text-xs font-mono uppercase tracking-wider font-bold text-[#f80d05]">
+                          {item.category}
+                        </span>
+                        <span className="text-xs font-mono text-slate-500 font-semibold">
+                          {item.year}
+                        </span>
                       </div>
+
+                      <h3 className="font-serif font-bold text-xl text-[#0C1E36] group-hover:text-[#f80d05] transition-colors leading-snug mb-1.5">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-sm text-slate-500 font-mono mb-2.5 line-clamp-1">
+                        {item.client}
+                      </p>
+
+                      <p className="text-base text-slate-600 font-sans line-clamp-3 leading-relaxed">
+                        {item.description}
+                      </p>
                     </div>
-                  )}
-                </div>
 
-                {/* Footer Action buttons */}
-                <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div>
-                    <span className="block text-[8px] font-mono tracking-wider text-slate-400 uppercase">
-                      Direct Consult Resource Link
-                    </span>
-                    <span className="text-[11px] font-mono uppercase text-slate-600 font-bold">
-                      House Ventures Consultancy
-                    </span>
+                    <div className="mt-5 pt-3 border-t border-slate-200 flex items-center justify-between text-xs font-mono">
+                      <span className="text-slate-500 font-semibold">
+                        Expand Overview
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-[#f80d05] group-hover:translate-x-0.5 transition-transform font-bold">
+                        Review Details <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
                   </div>
-
-                  <div className="flex gap-3 w-full sm:w-auto">
-                    <button
-                      onClick={() => setSelectedItem(null)}
-                      className="w-full sm:w-auto px-5 py-2.5 rounded bg-slate-100 hover:bg-[#0C1E36] hover:text-white text-slate-700 font-bold text-xs font-mono transition-all uppercase tracking-wider cursor-pointer flex items-center justify-center gap-1.5"
-                    >
-                      <ArrowLeft className="w-3.5 h-3.5" /> Back to Portfolio
-                    </button>
-                    <a
-                      href={`https://wa.me/254728606684?text=${encodeURIComponent(`Hi Okello, I saw your case study "${selectedItem.title}" on your website and would like to discuss a similar project.`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full sm:w-auto px-5 py-2.5 bg-[#f80d05] hover:bg-[#d40b04] text-white text-xs font-mono font-bold tracking-wider transition-all uppercase flex items-center justify-center gap-1.5 shadow-sm cursor-pointer rounded"
-                    >
-                      Discuss This Scope <ExternalLink className="w-3.5 h-3.5 text-white" />
-                    </a>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        )}
+                </motion.button>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
     </div>

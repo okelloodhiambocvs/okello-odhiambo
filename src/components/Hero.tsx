@@ -1,6 +1,7 @@
 import React from "react";
 import { MessageSquare, Briefcase, ChevronDown } from "lucide-react";
 import { SafeImage } from "./FounderGallery";
+import { AnimatedWords, FadeInWriting } from "./MotionPrimitives";
 
 const HERO_PORTRAIT_SRC =
   "/assets/aistudio/WhatsApp_Image_2026-11-09_at_12.59.17_AM-removebg-preview_df34d606.png";
@@ -37,26 +38,36 @@ export default function Hero({ onNavigate }: HeroProps) {
             <div className="lg:col-span-7 pb-10 lg:pb-16 flex flex-col justify-between">
               <div>
                 {/* Intro Kicker */}
-                <p className="text-slate-200 text-lg sm:text-xl md:text-2xl font-sans font-normal tracking-normal mb-2">
-                  Engineering Scalable Software &amp;
-                </p>
+                <FadeInWriting mode="mount" delay={0.05}>
+                  <p className="text-slate-200 text-lg sm:text-xl md:text-2xl font-sans font-normal tracking-normal mb-2">
+                    Engineering Scalable Software &amp;
+                  </p>
+                </FadeInWriting>
 
-                {/* Primary Display Headline */}
+                {/* Primary Display Headline with interactive word fade-in / fade-out */}
                 <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-[3.75rem] font-extrabold uppercase tracking-tight leading-[1.03] text-white mb-6 text-balance">
-                  Strategic <span className="text-[#f80d05]">Communication</span>
+                  <AnimatedWords
+                    text="Strategic Communication"
+                    highlightWords={["Communication"]}
+                    mode="mount"
+                    delayOffset={0.1}
+                    stagger={0.07}
+                  />
                 </h1>
 
                 {/* Dynamic Descriptive Subheadline */}
-                <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] tracking-wide font-sans font-normal leading-relaxed mb-8">
-                  Full-Stack Software Developer | Golang &amp; React Architect | Executive Communication Strategist | Founder of{" "}
-                  <span className="text-white font-semibold border-b-2 border-[#f80d05] pb-0.5">
-                    House Ventures Consultancy
-                  </span>
-                  . Building high-performance backend microservices, modern web applications, and C-Suite career assets.
-                </p>
+                <FadeInWriting mode="mount" delay={0.24}>
+                  <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] tracking-wide font-sans font-normal leading-relaxed mb-8">
+                    Full-Stack Software Developer | Golang &amp; React Architect | Executive Communication Strategist | Founder of{" "}
+                    <span className="text-white font-semibold border-b-2 border-[#f80d05] pb-0.5">
+                      House Ventures Consultancy
+                    </span>
+                    . Building high-performance backend microservices, modern web applications, and C-Suite career assets.
+                  </p>
+                </FadeInWriting>
 
                 {/* Action Blocks & Call To Actions */}
-                <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 mb-10">
+                <FadeInWriting mode="mount" delay={0.34} className="flex flex-wrap sm:flex-nowrap items-center gap-3 mb-10">
                   <button
                     type="button"
                     onClick={() => onNavigate("contact")}
@@ -81,7 +92,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                   >
                     <MessageSquare className="w-4 h-4 text-[#f80d05] group-hover:text-white" /> WhatsApp Chat
                   </a>
-                </div>
+                </FadeInWriting>
               </div>
 
               {/* Circular Down Scroll Control */}
@@ -98,7 +109,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             </div>
 
             {/* RIGHT COLUMN: Transparent Cutout Portrait of Okello Odhiambo */}
-            <div className="lg:col-span-5 relative flex justify-center lg:justify-end self-end">
+            <FadeInWriting mode="mount" delay={0.18} className="lg:col-span-5 relative flex justify-center lg:justify-end self-end">
               <div className="relative w-full max-w-[440px] lg:max-w-[520px] h-[420px] sm:h-[500px] lg:h-[600px] flex items-end justify-center">
                 <SafeImage
                   primarySrc={HERO_PORTRAIT_SRC}
@@ -107,7 +118,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                   className="h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_18px_36px_rgba(0,0,0,0.45)] [mask-image:linear-gradient(to_top,transparent_0%,black_10%,black_100%)]"
                 />
               </div>
-            </div>
+            </FadeInWriting>
           </div>
         </div>
       </section>

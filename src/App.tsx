@@ -12,7 +12,9 @@ import Testimonials from "./components/Testimonials";
 import ContactForm from "./components/ContactForm";
 import BrandFooter from "./components/BrandFooter";
 import ActionDetailPage from "./components/ActionDetailPage";
+import ProjectDetailPage from "./components/ProjectDetailPage";
 import { USER_ATTACHED_IMAGES } from "./userImages";
+import { PORTFOLIO } from "./data";
 
 export type PageId = "about" | "services" | "portfolio" | "ats-scanner" | "contact";
 
@@ -22,9 +24,11 @@ export default function App() {
 
   const [currentPage, setCurrentPage] = useState<PageId>("about");
   const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
   const navigateToPage = (pageId: string) => {
     setSelectedActionId(null);
+    setSelectedProjectId(null);
     const validPages: PageId[] = ["about", "services", "portfolio", "ats-scanner", "contact"];
     if (validPages.includes(pageId as PageId)) {
       setCurrentPage(pageId as PageId);
@@ -38,6 +42,7 @@ export default function App() {
   };
 
   const openActionDetail = (actionId: string) => {
+    setSelectedProjectId(null);
     setCurrentPage("about");
     setSelectedActionId(actionId);
     window.scrollTo({
@@ -46,35 +51,46 @@ export default function App() {
     });
   };
 
+  const openProjectDetail = (projectId: string) => {
+    setSelectedActionId(null);
+    setCurrentPage("portfolio");
+    setSelectedProjectId(projectId);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentPage, selectedActionId]);
+  }, [currentPage, selectedActionId, selectedProjectId]);
 
   const selectedActionItem = selectedActionId
     ? USER_ATTACHED_IMAGES.find((item) => item.id === selectedActionId) || null
     : null;
 
+  const selectedProjectItem = selectedProjectId
+    ? PORTFOLIO.find((item) => item.id === selectedProjectId) || null
+    : null;
+
   const pageVariants = {
     initial: {
       opacity: 0,
-      y: 16,
-      scale: 0.995,
+      y: 18,
     },
     animate: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        duration: 0.35,
-        ease: [0.22, 1, 0.36, 1], // Custom smooth ease-out
+        duration: 0.42,
+        ease: [0.22, 1, 0.36, 1],
       },
     },
     exit: {
       opacity: 0,
-      y: -12,
-      scale: 0.995,
+      y: -14,
       transition: {
-        duration: 0.22,
+        duration: 0.28,
         ease: [0.4, 0, 1, 1],
       },
     },
@@ -160,8 +176,26 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* PAGE 3: Portfolio & Case Studies */}
-          {currentPage === "portfolio" && (
+          {/* PAGE 3: Portfolio & Expanded Case Study Page */}
+          {currentPage === "portfolio" && selectedProjectItem && (
+            <motion.div
+              key={`project-${selectedProjectItem.id}`}
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full"
+            >
+              <ProjectDetailPage
+                item={selectedProjectItem}
+                onBack={() => setSelectedProjectId(null)}
+                onSelectProject={openProjectDetail}
+                onNavigate={navigateToPage}
+              />
+            </motion.div>
+          )}
+
+          {currentPage === "portfolio" && !selectedProjectItem && (
             <motion.div
               key="portfolio"
               variants={pageVariants}
@@ -170,7 +204,7 @@ export default function App() {
               exit="exit"
               className="w-full"
             >
-              <Portfolio onNavigate={navigateToPage} />
+              <Portfolio onNavigate={navigateToPage} onSelectProject={openProjectDetail} />
             </motion.div>
           )}
 

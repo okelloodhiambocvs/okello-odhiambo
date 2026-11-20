@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { CheckCircle2, Maximize2, Upload, RefreshCw, ShieldCheck } from "lucide-react";
 import { USER_ATTACHED_IMAGES, AttachedUserImage } from "../userImages";
+import { AnimatedWords, FadeInWriting } from "./MotionPrimitives";
 
 interface FounderGalleryProps {
   onSelectAction?: (actionId: string) => void;
@@ -90,10 +92,10 @@ export default function FounderGallery({ onSelectAction }: FounderGalleryProps) 
       />
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+        <FadeInWriting mode="view" className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
           <div>
             <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">
-              Okello Odhiambo in Action
+              <AnimatedWords text="Okello Odhiambo in Action" mode="view" stagger={0.04} />
             </h3>
             <div className="h-1 w-16 bg-[#f80d05] mt-3 mb-3" />
             <p className="text-slate-300 text-base max-w-2xl font-sans leading-relaxed">
@@ -112,7 +114,7 @@ export default function FounderGallery({ onSelectAction }: FounderGalleryProps) 
               {showUploader ? "Hide Photo Sync" : "Sync Attached Photos"}
             </button>
           </div>
-        </div>
+        </FadeInWriting>
 
         {/* Interactive Photo Sync Panel */}
         {showUploader && (
@@ -204,15 +206,31 @@ export default function FounderGallery({ onSelectAction }: FounderGalleryProps) 
         </div>
 
         {/* Grid of Authentic Photos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredImages.map((item) => (
-            <ImageCard
-              key={item.id}
-              item={item}
-              onExpand={() => onSelectAction?.(item.id)}
-            />
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filteredImages.map((item, idx) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ duration: 0.4, delay: Math.min((idx % 3) * 0.08, 0.24), ease: [0.22, 1, 0.36, 1] }}
+              >
+                <ImageCard
+                  item={item}
+                  onExpand={() => onSelectAction?.(item.id)}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

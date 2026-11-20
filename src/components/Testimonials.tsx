@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { TESTIMONIALS } from "../data";
 import { Star, Quote, ChevronLeft, ChevronRight, Bookmark, Building, ShieldCheck } from "lucide-react";
+import { AnimatedWords, FadeInWriting } from "./MotionPrimitives";
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,15 +32,15 @@ export default function Testimonials() {
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <FadeInWriting mode="view" className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0C1E36] tracking-tight">
-            Corporate &amp; Academic Endorsements
+            <AnimatedWords text="Corporate & Academic Endorsements" mode="view" stagger={0.04} />
           </h2>
           <div className="h-1 w-16 bg-[#f80d05] mx-auto mt-6" />
-        </div>
+        </FadeInWriting>
 
         {/* Testimonial Active Display Slide block */}
-        <div className="max-w-4xl mx-auto mb-20">
+        <FadeInWriting mode="view" delay={0.08} className="max-w-4xl mx-auto mb-20">
           <div className="rounded-2xl bg-white border border-slate-200 p-8 sm:p-12 relative overflow-hidden flex flex-col justify-between min-h-[22rem] shadow-sm">
             {/* Massive watermark Quote icon */}
             <div className="absolute top-6 right-8 text-[#f80d05]/10 pointer-events-none">
@@ -46,18 +48,26 @@ export default function Testimonials() {
             </div>
 
             {/* Testimonials narrative text content */}
-            <div>
-              {/* Star review scale indicator */}
-              <div className="flex gap-1 mb-6">
-                {[...Array(current.rating)].map((_, i) => (
-                  <Star key={i} className="w-4.5 h-4.5 text-[#f80d05] fill-[#f80d05]" />
-                ))}
-              </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {/* Star review scale indicator */}
+                <div className="flex gap-1 mb-6">
+                  {[...Array(current.rating)].map((_, i) => (
+                    <Star key={i} className="w-4.5 h-4.5 text-[#f80d05] fill-[#f80d05]" />
+                  ))}
+                </div>
 
-              <blockquote className="text-slate-600 text-base sm:text-[1.15rem] md:text-[1.3rem] tracking-wide leading-relaxed font-sans mb-8">
-                "{current.content}"
-              </blockquote>
-            </div>
+                <blockquote className="text-slate-600 text-base sm:text-[1.15rem] md:text-[1.3rem] tracking-wide leading-relaxed font-sans mb-8">
+                  "{current.content}"
+                </blockquote>
+              </motion.div>
+            </AnimatePresence>
 
             {/* Testimonials user details & sliding arrows controls */}
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-6 border-t border-slate-100">
@@ -98,7 +108,7 @@ export default function Testimonials() {
               </div>
             </div>
           </div>
-        </div>
+        </FadeInWriting>
 
         {/* Corporate Trust Badges / Partner Grid Display */}
         <div className="pt-12 border-t border-slate-100">

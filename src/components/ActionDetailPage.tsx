@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, MapPin, Calendar, Briefcase } from "lucide-react";
 import { AttachedUserImage, USER_ATTACHED_IMAGES } from "../userImages";
 import { SafeImage } from "./FounderGallery";
+import { AnimatedWords, FadeInWriting } from "./MotionPrimitives";
 
 interface ActionDetailPageProps {
   item: AttachedUserImage;
@@ -44,17 +45,21 @@ export default function ActionDetailPage({
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             <div className="lg:col-span-7">
-              <p className="text-slate-200 text-base sm:text-lg font-sans font-normal tracking-normal mb-2">
-                {item.category} <span aria-hidden="true">·</span> {item.timeframe}
-              </p>
+              <FadeInWriting mode="mount" delay={0.05}>
+                <p className="text-slate-200 text-base sm:text-lg font-sans font-normal tracking-normal mb-2">
+                  {item.category} <span aria-hidden="true">·</span> {item.timeframe}
+                </p>
+              </FadeInWriting>
 
               <h1 className="font-sans text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold uppercase tracking-tight leading-[1.05] text-white mb-5 text-balance">
-                {item.title}
+                <AnimatedWords text={item.title} mode="mount" delayOffset={0.1} stagger={0.045} />
               </h1>
 
-              <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] font-sans leading-relaxed mb-6">
-                {item.description}
-              </p>
+              <FadeInWriting mode="mount" delay={0.22}>
+                <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] font-sans leading-relaxed mb-6">
+                  {item.description}
+                </p>
+              </FadeInWriting>
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-mono text-slate-300 mb-8">
                 <span className="inline-flex items-center gap-1.5">
@@ -112,7 +117,11 @@ export default function ActionDetailPage({
 
                 <div className="space-y-5 text-slate-700 font-sans text-base sm:text-[1.15rem] leading-relaxed">
                   {item.overviewParagraphs.map((paragraph, idx) => (
-                    <p key={idx}>{paragraph}</p>
+                    <React.Fragment key={idx}>
+                      <FadeInWriting mode="view" delay={0.06 * (idx + 1)}>
+                        <p>{paragraph}</p>
+                      </FadeInWriting>
+                    </React.Fragment>
                   ))}
                 </div>
               </div>

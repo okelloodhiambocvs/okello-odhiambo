@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Send, MapPin, Mail, CheckCircle, AlertTriangle, RefreshCw, PhoneCall, Building2 } from "lucide-react";
 import PageHero from "./PageHero";
 import { ContactHeroVisual } from "./HeroEmblems";
+import { FadeInWriting } from "./MotionPrimitives";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -81,7 +82,7 @@ export default function ContactForm() {
         {/* Contact Split layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch mb-20">
           {/* LEFT COLUMN: INTERACTIVE FORM CHANNEL */}
-          <div className="lg:col-span-7 p-8 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
+          <FadeInWriting mode="view" delay={0.05} className="lg:col-span-7 p-8 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
             <form onSubmit={handleSendMessage} className="space-y-6">
               <h3 className="font-serif text-xl font-bold text-[#0C1E36] mb-4">
                 Structured Inquiry Proposal
@@ -183,10 +184,10 @@ export default function ContactForm() {
                 )}
               </button>
             </form>
-          </div>
+          </FadeInWriting>
 
           {/* RIGHT COLUMN: CORPORATE HEADQUARTERS & DIRECT CHANNELS */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-8">
+          <FadeInWriting mode="view" delay={0.14} className="lg:col-span-5 flex flex-col justify-between gap-8">
             <div className="p-8 rounded-2xl bg-white border border-slate-200 shadow-sm relative h-full flex flex-col justify-between">
               <div>
                 <span className="font-mono text-[11px] uppercase tracking-widest text-[#f80d05] font-bold block mb-2">
@@ -235,7 +236,7 @@ export default function ContactForm() {
                 <span>Active communication channel for priority software &amp; brand consultations.</span>
               </div>
             </div>
-          </div>
+          </FadeInWriting>
         </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import React from "react";
 import { User, ShieldCheck, Mail, Globe, BrainCircuit, Code, Terminal, Clock, Award, Linkedin, Github, Twitter } from "lucide-react";
 import FounderGallery, { SafeImage } from "./FounderGallery";
+import { AnimatedWords, FadeInWriting } from "./MotionPrimitives";
 
 const technologyPortrait = "/assets/aistudio/c08lP_2a24af41.jpg";
 const communicationPortrait = "/assets/aistudio/Thoughtful_Professional_Portrait_84cd5f48.png";
@@ -33,17 +34,21 @@ export default function About({ onSelectAction }: AboutProps) {
 
         <div className="max-w-7xl mx-auto px-6">
           {/* Section Header */}
-          <div className="mb-16 max-w-3xl">
+          <FadeInWriting mode="view" className="mb-16 max-w-3xl">
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0C1E36] tracking-tight leading-tight">
-              The Intersection of Elite Copywriting &amp; Software Systems
+              <AnimatedWords
+                text="The Intersection of Elite Copywriting & Software Systems"
+                mode="view"
+                stagger={0.04}
+              />
             </h2>
             <div className="h-1 w-20 bg-[#f80d05] mt-6" />
-          </div>
+          </FadeInWriting>
 
           {/* Narrative Split Layout: Developer Zone01 FIRST, Executive Consultant SECOND */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
             {/* LEFT / FIRST: SOFTWARE ENGINEER (ZONE01) */}
-            <div className="lg:col-span-6 p-8 rounded-2xl glass-panel relative group hover:border-[#f80d05]/30 transition-all duration-300 border border-slate-200 shadow-sm bg-gradient-to-b from-white to-[#f80d05]/[0.03] flex flex-col justify-between">
+            <FadeInWriting mode="view" delay={0.05} className="lg:col-span-6 p-8 rounded-2xl glass-panel relative group hover:border-[#f80d05]/30 transition-all duration-300 border border-slate-200 shadow-sm bg-gradient-to-b from-white to-[#f80d05]/[0.03] flex flex-col justify-between">
               <div>
                 <div className="absolute top-4 right-4 text-[#f80d05]/25 group-hover:text-[#f80d05]/50 transition-colors">
                   <Terminal className="w-16 h-16 stroke-[1]" />
@@ -114,10 +119,10 @@ export default function About({ onSelectAction }: AboutProps) {
                   </div>
                 ))}
               </div>
-            </div>
+            </FadeInWriting>
 
             {/* RIGHT / SECOND: EXECUTIVE BRAND CONSULTANT */}
-            <div className="lg:col-span-6 p-8 rounded-2xl glass-panel relative group hover:border-[#f80d05]/30 transition-all duration-300 border border-slate-200 shadow-sm flex flex-col justify-between">
+            <FadeInWriting mode="view" delay={0.14} className="lg:col-span-6 p-8 rounded-2xl glass-panel relative group hover:border-[#f80d05]/30 transition-all duration-300 border border-slate-200 shadow-sm flex flex-col justify-between">
               <div>
                 <div className="absolute top-4 right-4 text-[#f80d05]/25 group-hover:text-[#f80d05]/50 transition-colors">
                   <Award className="w-16 h-16 stroke-[1]" />
@@ -188,7 +193,7 @@ export default function About({ onSelectAction }: AboutProps) {
                   </div>
                 ))}
               </div>
-            </div>
+            </FadeInWriting>
           </div>
         </div>
       </section>
