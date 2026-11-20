@@ -3,6 +3,7 @@ import { SERVICES } from "../data";
 import { ServiceItem } from "../types";
 import { MessageSquare, Coffee, ShieldAlert } from "lucide-react";
 import ServiceCard from "./ServiceCard";
+import PageHero from "./PageHero";
 
 export default function Services() {
   const [activeTab, setActiveTab] = useState<"all" | "tech" | "consultancy" | "design">("all");
@@ -13,65 +14,67 @@ export default function Services() {
   });
 
   return (
-    <section id="services" className="py-24 relative bg-slate-50">
-      {/* Decorative radial gradients */}
-      <div className="absolute top-[30%] left-[5%] w-[25rem] h-[25rem] bg-red-100/30 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute top-[60%] right-[5%] w-[30rem] h-[30rem] bg-rose-105/30 rounded-full blur-[120px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0C1E36] tracking-tight">
-            Core Professional Offerings
-          </h2>
-          <p className="text-slate-600 text-sm sm:text-base mt-4 max-w-2xl mx-auto leading-relaxed font-normal">
-            From custom website development and grant proposals to executive PowerPoint pitch decks and logo identity packages. All deliveries are direct, high-yielding, and client-approved.
-          </p>
-
-          {/* Filtering Categories Tabs */}
-          <div className="inline-flex flex-wrap justify-center gap-1 p-1.5 rounded-xl bg-white border border-slate-200 mt-10 shadow-sm">
-            <button
-              onClick={() => setActiveTab("all")}
-              className={`px-4 py-2.5 rounded-lg text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
-                activeTab === "all"
-                  ? "bg-[#0C1E36] text-white font-bold shadow-sm"
-                  : "text-slate-600 hover:text-[#0C1E36] hover:bg-slate-50"
-              }`}
-            >
-              All Offerings ({SERVICES.length})
-            </button>
-            <button
-              onClick={() => setActiveTab("tech")}
-              className={`px-4 py-2.5 rounded-lg text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
-                activeTab === "tech"
-                  ? "bg-[#0C1E36] text-white font-bold shadow-sm"
-                  : "text-slate-600 hover:text-[#0C1E36] hover:bg-slate-50"
-              }`}
-            >
-              Web &amp; Software Dev
-            </button>
-            <button
-              onClick={() => setActiveTab("consultancy")}
-              className={`px-4 py-2.5 rounded-lg text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
-                activeTab === "consultancy"
-                  ? "bg-[#0C1E36] text-white font-bold shadow-sm"
-                  : "text-slate-600 hover:text-[#0C1E36] hover:bg-slate-50"
-              }`}
-            >
-              Proposals &amp; Writing
-            </button>
-            <button
-              onClick={() => setActiveTab("design")}
-              className={`px-4 py-2.5 rounded-lg text-xs uppercase font-mono tracking-wider transition-all cursor-pointer ${
-                activeTab === "design"
-                  ? "bg-[#0C1E36] text-white font-bold shadow-sm"
-                  : "text-slate-600 hover:text-[#0C1E36] hover:bg-slate-50"
-              }`}
-            >
-              Graphics &amp; PowerPoint
-            </button>
-          </div>
+    <div id="services" className="w-full bg-slate-50">
+      <PageHero
+        kicker="Software Engineering &"
+        titlePrefix="Our"
+        titleHighlight="Services"
+        description="From custom website development and grant proposals to executive PowerPoint pitch decks and logo identity packages. All deliveries are direct, high-yielding, and client-approved."
+      >
+        <div className="inline-flex flex-wrap gap-1.5 p-1.5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-xs">
+          <button
+            type="button"
+            onClick={() => setActiveTab("all")}
+            className={`px-4 py-2 rounded-lg text-xs uppercase font-mono tracking-wider transition-colors cursor-pointer whitespace-nowrap ${
+              activeTab === "all"
+                ? "bg-[#f80d05] text-white font-bold shadow-sm"
+                : "text-slate-200 hover:text-white hover:bg-white/10"
+            }`}
+          >
+            All Offerings ({SERVICES.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("tech")}
+            className={`px-4 py-2 rounded-lg text-xs uppercase font-mono tracking-wider transition-colors cursor-pointer whitespace-nowrap ${
+              activeTab === "tech"
+                ? "bg-[#f80d05] text-white font-bold shadow-sm"
+                : "text-slate-200 hover:text-white hover:bg-white/10"
+            }`}
+          >
+            Web &amp; Software Dev
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("consultancy")}
+            className={`px-4 py-2 rounded-lg text-xs uppercase font-mono tracking-wider transition-colors cursor-pointer whitespace-nowrap ${
+              activeTab === "consultancy"
+                ? "bg-[#f80d05] text-white font-bold shadow-sm"
+                : "text-slate-200 hover:text-white hover:bg-white/10"
+            }`}
+          >
+            Proposals &amp; Writing
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("design")}
+            className={`px-4 py-2 rounded-lg text-xs uppercase font-mono tracking-wider transition-colors cursor-pointer whitespace-nowrap ${
+              activeTab === "design"
+                ? "bg-[#f80d05] text-white font-bold shadow-sm"
+                : "text-slate-200 hover:text-white hover:bg-white/10"
+            }`}
+          >
+            Graphics &amp; PowerPoint
+          </button>
         </div>
+      </PageHero>
+
+      <section className="py-16 sm:py-20 relative bg-slate-50">
+        {/* Decorative radial gradients */}
+        <div className="absolute top-[30%] left-[5%] w-[25rem] h-[25rem] bg-red-100/30 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[60%] right-[5%] w-[30rem] h-[30rem] bg-rose-105/30 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6">
 
         {/* Services Cards Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -104,7 +107,8 @@ export default function Services() {
             Direct WhatsApp Chat <MessageSquare className="w-4 h-4" />
           </a>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 }

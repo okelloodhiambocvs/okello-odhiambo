@@ -4,6 +4,7 @@ import { useRenderDiagnostics } from "./hooks/useRenderDiagnostics";
 import BrandHeader from "./components/BrandHeader";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import SpotlightBanner from "./components/SpotlightBanner";
 import Services from "./components/Services";
 import Portfolio from "./components/Portfolio";
 import AtsBuilder from "./components/AtsBuilder";
@@ -69,7 +70,7 @@ export default function App() {
         href="https://wa.me/254728606684?text=Hi%20Okello,%20I%20am%20interested%20in%20your%20expert%20copywriting%20and%20tech%20services."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 p-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-full shadow-2xl hover:scale-110 transition-all duration-300 group flex items-center gap-2"
+        className="fixed bottom-5 right-5 z-50 p-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300 group flex items-center gap-2"
         title="Chat on WhatsApp"
         id="whatsapp-floater"
       >
@@ -77,7 +78,7 @@ export default function App() {
           Let's Chat
         </span>
         <svg
-          className="w-6 h-6 fill-slate-950"
+          className="w-5 h-5 fill-slate-950"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -89,7 +90,7 @@ export default function App() {
       <BrandHeader currentPage={currentPage} onNavigate={navigateToPage} />
 
       {/* Main 5-Page View Controller with Framer Motion Page Transitions */}
-      <main className="pt-20 min-h-[calc(100vh-80px)]">
+      <main className="pt-16 min-h-[calc(100vh-64px)]">
         <AnimatePresence mode="wait">
           {/* PAGE 1: About & Engineering */}
           {currentPage === "about" && (
@@ -105,6 +106,7 @@ export default function App() {
               <div id="about-story">
                 <About />
               </div>
+              <SpotlightBanner onNavigate={navigateToPage} />
               <Testimonials />
             </motion.div>
           )}

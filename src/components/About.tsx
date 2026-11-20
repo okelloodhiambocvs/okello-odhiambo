@@ -1,8 +1,9 @@
 import React from "react";
 import { User, ShieldCheck, Mail, Globe, BrainCircuit, Code, Terminal, Clock, Award, Linkedin, Github, Twitter } from "lucide-react";
-import communicationPortrait from "../assets/images/user/profile-communication.png";
-import technologyPortrait from "../assets/images/user/profile-technology.png";
 import FounderGallery, { SafeImage } from "./FounderGallery";
+
+const technologyPortrait = "/assets/aistudio/c08lP_2a24af41.jpg";
+const communicationPortrait = "/assets/aistudio/Thoughtful_Professional_Portrait_84cd5f48.png";
 
 export default function About() {
   const corporateAchievements = [
@@ -46,12 +47,12 @@ export default function About() {
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 pb-6 border-b border-slate-100">
               <div className="relative shrink-0 select-none">
-                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-200 shadow-md bg-white flex items-center justify-center">
+                <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-red-200 shadow-md bg-white flex items-center justify-center">
                   <SafeImage
                     primarySrc={technologyPortrait}
                     fallbackSrc={technologyPortrait}
                     alt="Okello Odhiambo - Full-Stack Software Engineer at Zone01"
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-[22%_20%]"
                   />
                 </div>
                 <div className="absolute -bottom-1 -right-1 p-1 bg-[#f80d05] rounded-lg text-white border border-white shadow-xs">
@@ -127,7 +128,7 @@ export default function About() {
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 pb-6 border-b border-slate-100">
               <div className="relative shrink-0 select-none">
-                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-red-100 shadow-md bg-white flex items-center justify-center">
+                <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-red-100 shadow-md bg-white flex items-center justify-center">
                   <SafeImage
                     primarySrc={communicationPortrait}
                     fallbackSrc={communicationPortrait}
@@ -191,53 +192,6 @@ export default function About() {
                   <span className="block text-[10px] uppercase font-mono tracking-wider text-slate-500 mt-0.5 font-bold">{ach.label}</span>
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Narrative Roadmap Timeline */}
-        <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm">
-          <h4 className="font-serif text-lg font-bold text-[#0C1E36] mb-8 text-center sm:text-left">
-            The Strategic Journey: Delivering Value Over Time
-          </h4>
-          <div className="relative border-l border-slate-200 pl-6 ml-4 space-y-8 max-w-5xl">
-            {/* Timeline Item 1 */}
-            <div className="relative">
-              <span className="absolute -left-10 top-0.5 w-8 h-8 rounded-full bg-white border-2 border-[#f80d05] flex items-center justify-center font-mono text-xs font-bold text-[#0C1E36] shadow-sm">
-                21
-              </span>
-              <div>
-                <span className="block text-sm font-bold text-[#0C1E36]">Launched House Ventures Consultancy</span>
-                <p className="text-xs text-slate-500 mt-1">
-                  Began structuring highly competitive, custom-engineered executive portfolios for corporate directors and mid-tier managers striving for international roles.
-                </p>
-              </div>
-            </div>
-
-            {/* Timeline Item 2 */}
-            <div className="relative">
-              <span className="absolute -left-10 top-0.5 w-8 h-8 rounded-full bg-white border-2 border-slate-300 flex items-center justify-center font-mono text-xs font-bold text-[#0C1E36] shadow-sm">
-                23
-              </span>
-              <div>
-                <span className="block text-sm font-bold text-[#0C1E36]">Strategic Partnerships (KEWOTA &amp; ENA Coach)</span>
-                <p className="text-xs text-slate-500 mt-1">
-                  Retained to restructure key grant proposals and modern board-room CV databases, securing regional educational assets and boosting organizational visibility.
-                </p>
-              </div>
-            </div>
-
-            {/* Timeline Item 3 */}
-            <div className="relative">
-              <span className="absolute -left-10 top-0.5 w-8 h-8 rounded-full bg-white border-2 border-[#f80d05] flex items-center justify-center font-mono text-xs font-bold text-[#f80d05] shadow-md">
-                25
-              </span>
-              <div>
-                <span className="block text-sm font-bold text-[#0C1E36]">Full-Stack Integration Labs at Zone01 Kisumu</span>
-                <p className="text-xs text-slate-500 mt-1">
-                  Began full-stack software development tracking, using Golang core backend models to merge technical application logic with elite copywriting.
-                </p>
-              </div>
             </div>
           </div>
         </div>

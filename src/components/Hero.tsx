@@ -1,104 +1,158 @@
 import React from "react";
-import { MessageSquare, Briefcase, ChevronDown, CheckCircle2, Terminal, Sparkles } from "lucide-react";
-import heroConsultantCouch from "../assets/images/user/hero-consultant-couch.jpg";
+import { MessageSquare, Briefcase, ChevronDown } from "lucide-react";
 import { SafeImage } from "./FounderGallery";
+
+const HERO_PORTRAIT_SRC =
+  "/assets/aistudio/WhatsApp_Image_2026-11-09_at_12.59.17_AM-removebg-preview_df34d606.png";
 
 interface HeroProps {
   onNavigate: (sectionId: string) => void;
 }
 
 export default function Hero({ onNavigate }: HeroProps) {
+  const scrollToStory = () => {
+    const storyEl = document.getElementById("about-story");
+    if (storyEl) {
+      storyEl.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center pt-28 pb-16 px-6 overflow-hidden">
-      {/* Background Animated Gradient Layer */}
-      <div className="absolute inset-0 z-0 bg-slate-50/40" />
-
-      {/* Subtly softened personal photo, kept recognizable behind the hero content */}
-      <div className="absolute inset-0 z-0 select-none pointer-events-none opacity-[0.38] sm:opacity-[0.48] transition-opacity duration-1000 overflow-hidden">
-        <SafeImage
-          primarySrc={heroConsultantCouch}
-          fallbackSrc={heroConsultantCouch}
-          alt="Okello Odhiambo seated in a consulting setting"
-          className="w-full h-full object-cover object-center scale-[1.03] blur-[1.5px]"
+    <div className="w-full">
+      {/* Dark Brand Navy Split Hero — matches reference composition with studio cutout on right */}
+      <section className="relative bg-[#0C1E36] text-white overflow-hidden">
+        {/* Atmospheric studio backdrop gradients in brand navy + subtle crimson depth */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle at 74% 48%, rgba(36, 69, 112, 0.78) 0%, rgba(12, 30, 54, 0.96) 54%, #071426 100%)",
+          }}
         />
-        {/* Soft elegant gradient overlays to blend beautifully with the slate-50 background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50/20 via-slate-50/60 to-slate-50" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-50 via-transparent to-slate-50" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,#f8fafc_95%)]" />
-      </div>
+        <div className="absolute -bottom-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-[#f80d05]/[0.07] blur-[110px] pointer-events-none" />
 
-      <div className="absolute top-1/4 left-1/4 w-[35rem] h-[35rem] rounded-full bg-red-100/25 blur-3xl mix-blend-multiply animate-pulse duration-10000 pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[25rem] h-[25rem] rounded-full bg-rose-50/35 blur-3xl mix-blend-multiply animate-pulse pointer-events-none" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-10 sm:pt-12 lg:pt-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-end">
+            {/* LEFT COLUMN: Editorial Headline, Subheadline, CTAs, Circular Scroll Down */}
+            <div className="lg:col-span-7 pb-10 lg:pb-16 flex flex-col justify-between">
+              <div>
+                {/* Intro Kicker */}
+                <p className="text-slate-200 text-lg sm:text-xl md:text-2xl font-sans font-normal tracking-normal mb-2">
+                  Engineering Scalable Software &amp;
+                </p>
 
-      {/* Decorative Grid Mesh */}
-      <div className="absolute inset-0 z-0 opacity-[0.04] bg-[linear-gradient(to_right,#f80d05_1px,transparent_1px),linear-gradient(to_bottom,#f80d05_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+                {/* Primary Display Headline */}
+                <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-[3.75rem] font-extrabold uppercase tracking-tight leading-[1.03] text-white mb-6 text-balance">
+                  Strategic <span className="text-[#f80d05]">Communication</span>
+                </h1>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
-        {/* Cinematic Headline */}
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#0C1E36] tracking-tight leading-[1.1] mb-6 max-w-4xl">
-          Engineering Scalable Software &amp; <span className="text-[#f80d05] font-sans tracking-normal transition-colors">Strategic Communication</span>
-        </h1>
+                {/* Dynamic Descriptive Subheadline */}
+                <p className="max-w-xl text-slate-300 text-sm sm:text-base tracking-wide font-sans font-normal leading-relaxed mb-8">
+                  Full-Stack Software Developer | Golang &amp; React Architect | Executive Communication Strategist | Founder of{" "}
+                  <span className="text-white font-semibold border-b-2 border-[#f80d05] pb-0.5">
+                    House Ventures Consultancy
+                  </span>
+                  . Building high-performance backend microservices, modern web applications, and C-Suite career assets.
+                </p>
 
-        {/* Dynamic Descriptive Subheadline */}
-        <p className="max-w-2xl text-slate-600 text-sm sm:text-base md:text-lg tracking-wide font-sans font-normal leading-relaxed mb-10">
-          Full-Stack Software Developer | Golang &amp; React Architect | Executive Communication Strategist | Founder of{' '}
-          <span className="text-[#0C1E36] font-bold border-b-2 border-[#f80d05] pb-0.5 hover:text-[#f80d05] transition-colors">
-            House Ventures Consultancy
-          </span>
-          . Building high-performance backend microservices, modern web applications, and C-Suite career assets.
-        </p>
+                {/* Action Blocks & Call To Actions */}
+                <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 mb-10">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate("contact")}
+                    className="w-full sm:w-auto px-5 py-3.5 rounded bg-[#f80d05] hover:bg-red-600 text-white font-sans font-bold tracking-wider text-xs uppercase shadow-md transition-colors cursor-pointer whitespace-nowrap shrink-0"
+                  >
+                    Hire Developer / Consultant
+                  </button>
 
-        {/* Action Blocks & Call To Actions */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-16">
-          <button
-            onClick={() => onNavigate("contact")}
-            className="w-full sm:w-auto px-8 py-4 rounded bg-[#0C1E36] hover:bg-[#f80d05] text-white font-sans font-bold tracking-wider text-xs uppercase shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
-          >
-            Hire Developer / Consultant
-          </button>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate("portfolio")}
+                    className="w-full sm:w-auto px-5 py-3.5 rounded bg-white/5 border border-white/30 hover:border-[#f80d05] hover:bg-white/10 text-white font-sans font-bold tracking-wider text-xs uppercase transition-colors cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
+                  >
+                    <Briefcase className="w-3.5 h-3.5 text-[#f80d05]" /> Software &amp; Case Studies
+                  </button>
 
-          <button
-            onClick={() => onNavigate("portfolio")}
-            className="w-full sm:w-auto px-8 py-4 rounded bg-white border-2 border-[#0C1E36] hover:border-[#f80d05] text-[#0C1E36] hover:text-[#f80d05] font-sans font-bold tracking-wider text-xs uppercase transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
-          >
-            <Briefcase className="w-3.5 h-3.5 text-[#f80d05]" /> Software &amp; Case Studies
-          </button>
+                  <a
+                    href="https://wa.me/254728606684?text=Hi%20Okello,%20I%20am%20visiting%20your%20website%20and%20would%20like%20to%20discuss%20a%20software%20development%20or%20consultancy%20project."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto px-4 py-3.5 rounded border border-emerald-400/35 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 font-sans font-bold tracking-wider text-xs uppercase transition-colors flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
+                  >
+                    <MessageSquare className="w-4 h-4 text-emerald-400" /> WhatsApp Chat
+                  </a>
+                </div>
+              </div>
 
-          <a
-            href="https://wa.me/254728606684?text=Hi%20Okello,%20I%20am%20visiting%20your%20website%20and%20would%20like%20to%20discuss%20a%20software%20development%20or%20consultancy%20project."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto px-6 py-4 rounded border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-sans font-bold tracking-wider text-xs uppercase transition-all duration-300 flex items-center justify-center gap-2"
-          >
-            <MessageSquare className="w-4 h-4 text-emerald-600 leading-none" /> WhatsApp Chat
-          </a>
+              {/* Circular Down Scroll Control */}
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={scrollToStory}
+                  aria-label="Scroll down to About Us section"
+                  className="w-11 h-11 rounded-full border border-white/35 hover:border-[#f80d05] hover:bg-[#f80d05]/15 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+                >
+                  <ChevronDown className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN: Transparent Cutout Portrait of Okello Odhiambo */}
+            <div className="lg:col-span-5 relative flex justify-center lg:justify-end self-end">
+              <div className="relative w-full max-w-[440px] lg:max-w-[520px] h-[420px] sm:h-[500px] lg:h-[600px] flex items-end justify-center">
+                <SafeImage
+                  primarySrc={HERO_PORTRAIT_SRC}
+                  fallbackSrc={HERO_PORTRAIT_SRC}
+                  alt="Okello Odhiambo — Full-Stack Software Developer and Executive Consultant"
+                  className="h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_18px_36px_rgba(0,0,0,0.45)]"
+                />
+                {/* Soft bottom baseline fade so suit edge melts into hero floor */}
+                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0C1E36] via-[#0C1E36]/60 to-transparent pointer-events-none" />
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* Micro stats banner for credibility proof */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-14 px-6 py-8 rounded-xl glass-panel glow-subtle max-w-4xl w-full border border-slate-200">
-          <div>
-            <span className="block font-serif text-2xl sm:text-3xl font-extrabold text-[#0C1E36]">Zone01</span>
-            <span className="block text-[10px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">Golang Software Labs</span>
-          </div>
-          <div>
-            <span className="block font-serif text-2xl sm:text-3xl font-extrabold text-[#0C1E36]">1,000+</span>
-            <span className="block text-[10px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">Executive Documents</span>
-          </div>
-          <div>
-            <span className="block font-serif text-2xl sm:text-3xl font-extrabold text-[#0C1E36]">Sub-12ms</span>
-            <span className="block text-[10px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">API Latency Speed</span>
-          </div>
-          <div>
-            <span className="block font-serif text-2xl sm:text-3xl font-extrabold text-[#0C1E36]">5+ Years</span>
-            <span className="block text-[10px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">Founding Authority</span>
+      {/* Full-Width Credibility Proof Bar below the hero split */}
+      <section className="bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+            <div className="pt-2 md:pt-0 md:pr-6">
+              <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
+                Zone01
+              </span>
+              <span className="block text-[11px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">
+                Golang Software Labs
+              </span>
+            </div>
+            <div className="pt-2 md:pt-0 md:px-6">
+              <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
+                1,000+
+              </span>
+              <span className="block text-[11px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">
+                Executive Documents
+              </span>
+            </div>
+            <div className="pt-4 md:pt-0 md:px-6">
+              <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
+                Sub-12ms
+              </span>
+              <span className="block text-[11px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">
+                API Latency Speed
+              </span>
+            </div>
+            <div className="pt-4 md:pt-0 md:pl-6">
+              <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
+                5+ Years
+              </span>
+              <span className="block text-[11px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">
+                Founding Authority
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Down arrow indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 cursor-pointer hover:text-[#f80d05] transition-colors animate-bounce" onClick={() => onNavigate("about")}>
-        <ChevronDown className="w-6 h-6 text-slate-500" />
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

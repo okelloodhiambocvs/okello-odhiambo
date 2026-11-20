@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Send, MapPin, Mail, CheckCircle, AlertTriangle, RefreshCw, PhoneCall, Building2 } from "lucide-react";
+import PageHero from "./PageHero";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -58,19 +59,20 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-slate-50 border-t border-slate-205">
-      {/* Design gradients overlay background */}
-      <div className="absolute top-[40%] right-[10%] w-[35rem] h-[35rem] bg-red-50/50 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[-10%] w-[25rem] h-[25rem] bg-rose-50/50 rounded-full blur-[100px] pointer-events-none" />
+    <div id="contact" className="w-full bg-slate-50">
+      <PageHero
+        kicker="Direct Channels &"
+        titlePrefix="Initiate Corporate"
+        titleHighlight="Consultations"
+        description="Direct channels for executive consultations, custom software contracts, ATS profile rewrites, and corporate proposals."
+      />
 
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="mb-16 max-w-2xl animate-in fade-in">
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0C1E36] tracking-tight">
-            Initiate Corporate Consultations
-          </h2>
-          <div className="h-1 w-20 bg-[#f80d05] mt-6" />
-        </div>
+      <section className="py-16 sm:py-20 relative overflow-hidden bg-slate-50">
+        {/* Design gradients overlay background */}
+        <div className="absolute top-[40%] right-[10%] w-[35rem] h-[35rem] bg-red-50/50 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-[10%] left-[-10%] w-[25rem] h-[25rem] bg-rose-50/50 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6">
 
         {/* Contact Split layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch mb-20">
@@ -231,7 +233,8 @@ export default function ContactForm() {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 }

@@ -53,8 +53,8 @@ export default function BrandFooter({ onNavigate }: BrandFooterProps) {
             System Operations Navigation
           </h4>
           <div className="grid grid-cols-2 gap-2 text-xs font-sans font-semibold">
-            <button onClick={() => handleNav("about")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">About &amp; Developer Bio</button>
-            <button onClick={() => handleNav("services")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">Core Services</button>
+            <button onClick={() => handleNav("about")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">About Us</button>
+            <button onClick={() => handleNav("services")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">Our Services</button>
             <button onClick={() => handleNav("portfolio")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">Software &amp; Case Studies</button>
             <button onClick={() => handleNav("ats-scanner")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">AI ATS Grader</button>
             <button onClick={() => handleNav("contact")} className="text-left text-slate-200 hover:text-red-400 hover:underline transition-colors cursor-pointer">Inquiry Port</button>

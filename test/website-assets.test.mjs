@@ -8,6 +8,7 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const galleryManifest = readFileSync(join(root, "src", "userImages.ts"), "utf8");
 const aboutComponent = readFileSync(join(root, "src", "components", "About.tsx"), "utf8");
 const heroComponent = readFileSync(join(root, "src", "components", "Hero.tsx"), "utf8");
+const portfolioComponent = readFileSync(join(root, "src", "components", "Portfolio.tsx"), "utf8");
 const portfolioData = readFileSync(join(root, "src", "data.ts"), "utf8");
 const galleryFiles = [...galleryManifest.matchAll(/filename: "([^"]+)"/g)].map((match) => match[1]);
 const galleryAssetImports = [...galleryManifest.matchAll(/from "\.\/assets\/images\/user\/([^"]+)"/g)].map((match) => match[1]);
@@ -48,16 +49,22 @@ test("the approved event and services cards remain in the gallery", () => {
 });
 
 test("the two Intersection profile cards use the supplied communication and tech images", () => {
-  assert.match(aboutComponent, /profile-communication\.png/);
-  assert.match(aboutComponent, /profile-technology\.png/);
-  assert.ok(existsSync(join(root, "src", "assets", "images", "user", "profile-communication.png")));
-  assert.ok(existsSync(join(root, "src", "assets", "images", "user", "profile-technology.png")));
+  assert.match(aboutComponent, /Thoughtful_Professional_Portrait_84cd5f48\.png/);
+  assert.match(aboutComponent, /c08lP_2a24af41\.jpg/);
+  assert.ok(existsSync(join(root, "public", "assets", "aistudio", "Thoughtful_Professional_Portrait_84cd5f48.png")));
+  assert.ok(existsSync(join(root, "public", "assets", "aistudio", "c08lP_2a24af41.jpg")));
 });
 
-test("the landing page uses the supplied softly blurred couch photo", () => {
-  assert.match(heroComponent, /hero-consultant-couch\.jpg/);
-  assert.match(heroComponent, /blur-\[1\.5px\]/);
-  assert.ok(existsSync(join(root, "src", "assets", "images", "user", "hero-consultant-couch.jpg")));
+test("the landing page hero uses the attached studio cutout portrait", () => {
+  assert.match(heroComponent, /WhatsApp_Image_2026-11-09_at_12\.59\.17_AM-removebg-preview_df34d606\.png/);
+  assert.match(heroComponent, /bg-\[#0C1E36\]/);
+  assert.ok(existsSync(join(root, "public", "assets", "aistudio", "WhatsApp_Image_2026-11-09_at_12.59.17_AM-removebg-preview_df34d606.png")));
+});
+
+test("the portfolio page hero matches the About Us landing split and uses the attached cutout portrait", () => {
+  assert.match(portfolioComponent, /Thoughtful_Professional_Portrait-removebg-preview_b0c510da\.png/);
+  assert.match(portfolioComponent, /bg-\[#0C1E36\]/);
+  assert.ok(existsSync(join(root, "public", "assets", "aistudio", "Thoughtful_Professional_Portrait-removebg-preview_b0c510da.png")));
 });
 
 test("the portfolio names Ni-Wera and includes the active Ujuzi360 LMS project", () => {

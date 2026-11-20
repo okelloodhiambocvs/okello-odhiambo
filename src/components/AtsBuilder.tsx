@@ -3,6 +3,7 @@ import { AtsResult } from "../types";
 import { useRenderDiagnostics } from "../hooks/useRenderDiagnostics";
 import AtsInputPanel from "./ats/AtsInputPanel";
 import AtsResultPanel from "./ats/AtsResultPanel";
+import PageHero from "./PageHero";
 
 const getFeedbackItemConfig = (item: string) => {
   const lowercase = item.toLowerCase();
@@ -253,20 +254,19 @@ ${result.contentFeedback.map(c => `* ${c}`).join("\n")}
   };
 
   return (
-    <section id="ats-scanner" className="py-24 relative overflow-hidden bg-slate-50 border-t border-slate-200">
-      <div className="absolute top-[20%] left-[-15%] w-[40rem] h-[40rem] bg-red-500/[0.04] rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-15%] w-[35rem] h-[35rem] bg-indigo-500/[0.04] rounded-full blur-[120px] pointer-events-none" />
+    <div id="ats-scanner" className="w-full bg-slate-50">
+      <PageHero
+        kicker="House Ventures Intelligence &"
+        titlePrefix="Advanced ATS CV"
+        titleHighlight="Audit & Optimizer"
+        description="Test our parsing parameters in real-time. Paste your operational CV data alongside your targeted job parameters below, and let our custom cognitive service calculate your conversion metric instantly."
+      />
 
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-3xl mb-16">
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0C1E36] tracking-tight leading-tight">
-            Advanced ATS CV Audit &amp; Optimizer
-          </h2>
-          <p className="text-slate-650 text-sm mt-4 leading-relaxed font-sans max-w-2xl">
-            Test our parsing parameters in real-time. Paste your operational CV data alongside your targeted job parameters below, and let our custom cognitive service calculate your conversion metric instantly.
-          </p>
-          <div className="h-1 w-20 bg-[#f80d05] mt-6" />
-        </div>
+      <section className="py-16 sm:py-20 relative overflow-hidden bg-slate-50">
+        <div className="absolute top-[20%] left-[-15%] w-[40rem] h-[40rem] bg-red-500/[0.04] rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-[20%] right-[-15%] w-[35rem] h-[35rem] bg-indigo-500/[0.04] rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           <AtsInputPanel
@@ -297,7 +297,8 @@ ${result.contentFeedback.map(c => `* ${c}`).join("\n")}
             getFeedbackItemConfig={getFeedbackItemConfig}
           />
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 }
