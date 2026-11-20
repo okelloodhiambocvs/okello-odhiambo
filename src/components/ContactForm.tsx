@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Send, MapPin, Mail, CheckCircle, AlertTriangle, RefreshCw, PhoneCall, Building2 } from "lucide-react";
 import PageHero from "./PageHero";
+import { ContactHeroVisual } from "./HeroEmblems";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -65,9 +66,12 @@ export default function ContactForm() {
         titlePrefix="Initiate Corporate"
         titleHighlight="Consultations"
         description="Direct channels for executive consultations, custom software contracts, ATS profile rewrites, and corporate proposals."
+        visual={<ContactHeroVisual />}
+        scrollTargetId="contact-workspace"
+        scrollLabel="Scroll down to contact inquiry form"
       />
 
-      <section className="py-16 sm:py-20 relative overflow-hidden bg-slate-50">
+      <section id="contact-workspace" className="py-16 sm:py-20 relative overflow-hidden bg-slate-50">
         {/* Design gradients overlay background */}
         <div className="absolute top-[40%] right-[10%] w-[35rem] h-[35rem] bg-red-50/50 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-[10%] left-[-10%] w-[25rem] h-[25rem] bg-rose-50/50 rounded-full blur-[100px] pointer-events-none" />
@@ -218,7 +222,7 @@ export default function ContactForm() {
                     </a>
                   </div>
                   <div className="flex gap-3 items-center p-3 rounded-xl bg-slate-50 border border-slate-100">
-                    <PhoneCall className="w-5 h-5 text-emerald-600 shrink-0 animate-pulse" />
+                    <PhoneCall className="w-5 h-5 text-emerald-600 shrink-0" />
                     <a href="https://wa.me/254728606684" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-700 transition-colors">
                       +254 728 606 684
                     </a>

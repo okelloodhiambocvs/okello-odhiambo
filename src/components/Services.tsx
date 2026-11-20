@@ -4,6 +4,7 @@ import { ServiceItem } from "../types";
 import { MessageSquare, Coffee, ShieldAlert } from "lucide-react";
 import ServiceCard from "./ServiceCard";
 import PageHero from "./PageHero";
+import { ServicesHeroVisual } from "./HeroEmblems";
 
 export default function Services() {
   const [activeTab, setActiveTab] = useState<"all" | "tech" | "consultancy" | "design">("all");
@@ -20,6 +21,9 @@ export default function Services() {
         titlePrefix="Our"
         titleHighlight="Services"
         description="From custom website development and grant proposals to executive PowerPoint pitch decks and logo identity packages. All deliveries are direct, high-yielding, and client-approved."
+        visual={<ServicesHeroVisual />}
+        scrollTargetId="services-catalog"
+        scrollLabel="Scroll down to Our Services offerings"
       >
         <div className="inline-flex flex-wrap gap-1.5 p-1.5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-xs">
           <button
@@ -69,7 +73,7 @@ export default function Services() {
         </div>
       </PageHero>
 
-      <section className="py-16 sm:py-20 relative bg-slate-50">
+      <section id="services-catalog" className="py-16 sm:py-20 relative bg-slate-50">
         {/* Decorative radial gradients */}
         <div className="absolute top-[30%] left-[5%] w-[25rem] h-[25rem] bg-red-100/30 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute top-[60%] right-[5%] w-[30rem] h-[30rem] bg-rose-105/30 rounded-full blur-[120px] pointer-events-none" />

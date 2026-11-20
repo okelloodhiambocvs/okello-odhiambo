@@ -4,6 +4,7 @@ import { useRenderDiagnostics } from "../hooks/useRenderDiagnostics";
 import AtsInputPanel from "./ats/AtsInputPanel";
 import AtsResultPanel from "./ats/AtsResultPanel";
 import PageHero from "./PageHero";
+import { AtsHeroVisual } from "./HeroEmblems";
 
 const getFeedbackItemConfig = (item: string) => {
   const lowercase = item.toLowerCase();
@@ -260,9 +261,12 @@ ${result.contentFeedback.map(c => `* ${c}`).join("\n")}
         titlePrefix="Advanced ATS CV"
         titleHighlight="Audit & Optimizer"
         description="Test our parsing parameters in real-time. Paste your operational CV data alongside your targeted job parameters below, and let our custom cognitive service calculate your conversion metric instantly."
+        visual={<AtsHeroVisual />}
+        scrollTargetId="ats-workspace"
+        scrollLabel="Scroll down to AI CV Grader workspace"
       />
 
-      <section className="py-16 sm:py-20 relative overflow-hidden bg-slate-50">
+      <section id="ats-workspace" className="py-16 sm:py-20 relative overflow-hidden bg-slate-50">
         <div className="absolute top-[20%] left-[-15%] w-[40rem] h-[40rem] bg-red-500/[0.04] rounded-full blur-[150px] pointer-events-none" />
         <div className="absolute bottom-[20%] right-[-15%] w-[35rem] h-[35rem] bg-indigo-500/[0.04] rounded-full blur-[120px] pointer-events-none" />
 

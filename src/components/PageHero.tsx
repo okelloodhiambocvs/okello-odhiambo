@@ -1,10 +1,14 @@
 import React from "react";
+import { ChevronDown } from "lucide-react";
 
 interface PageHeroProps {
   kicker: string;
   titlePrefix: string;
   titleHighlight: string;
   description: string;
+  visual?: React.ReactNode;
+  scrollTargetId?: string;
+  scrollLabel?: string;
   children?: React.ReactNode;
 }
 
@@ -13,31 +17,69 @@ export default function PageHero({
   titlePrefix,
   titleHighlight,
   description,
+  visual,
+  scrollTargetId,
+  scrollLabel = "Scroll down to content",
   children,
 }: PageHeroProps) {
+  const handleScrollDown = () => {
+    if (!scrollTargetId) return;
+    const el = document.getElementById(scrollTargetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative bg-[#0C1E36] text-white overflow-hidden border-b border-white/10">
+    <section className="relative bg-[#0C1E36] text-white overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 75% 35%, rgba(30, 58, 95, 0.72) 0%, rgba(12, 30, 54, 0.96) 55%, #071426 100%)",
+            "radial-gradient(circle at 74% 48%, rgba(36, 69, 112, 0.78) 0%, rgba(12, 30, 54, 0.96) 54%, #071426 100%)",
         }}
       />
-      <div className="absolute -bottom-24 -left-24 w-[24rem] h-[24rem] rounded-full bg-[#f80d05]/[0.08] blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-[#f80d05]/[0.07] blur-[110px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-14 sm:py-16">
-        <p className="text-slate-200 text-base sm:text-lg md:text-xl font-sans font-normal tracking-normal mb-2">
-          {kicker}
-        </p>
-        <h1 className="font-sans text-3xl sm:text-5xl md:text-[3.5rem] font-extrabold uppercase tracking-tight leading-[1.05] text-white mb-5 max-w-4xl text-balance">
-          {titlePrefix}{" "}
-          <span className="text-[#f80d05]">{titleHighlight}</span>
-        </h1>
-        <p className="max-w-2xl text-slate-300 text-sm sm:text-base tracking-wide font-sans font-normal leading-relaxed">
-          {description}
-        </p>
-        {children && <div className="mt-8">{children}</div>}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-10 sm:pt-12 lg:pt-14 pb-10 lg:pb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+          {/* LEFT COLUMN */}
+          <div className={`${visual ? "lg:col-span-7" : "lg:col-span-12"} flex flex-col justify-between`}>
+            <div>
+              <p className="text-slate-200 text-lg sm:text-xl md:text-2xl font-sans font-normal tracking-normal mb-2">
+                {kicker}
+              </p>
+              <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-[3.75rem] font-extrabold uppercase tracking-tight leading-[1.03] text-white mb-6 max-w-4xl text-balance">
+                {titlePrefix}{" "}
+                <span className="text-[#f80d05]">{titleHighlight}</span>
+              </h1>
+              <p className="max-w-xl text-slate-300 text-sm sm:text-base tracking-wide font-sans font-normal leading-relaxed">
+                {description}
+              </p>
+              {children && <div className="mt-8">{children}</div>}
+            </div>
+
+            {scrollTargetId && (
+              <div className="pt-8">
+                <button
+                  type="button"
+                  onClick={handleScrollDown}
+                  aria-label={scrollLabel}
+                  className="w-11 h-11 rounded-full border border-white/35 hover:border-[#f80d05] hover:bg-[#f80d05]/15 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+                >
+                  <ChevronDown className="w-5 h-5" />
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT COLUMN: Backgroundless Creative Icon Illustration */}
+          {visual && (
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+              {visual}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

@@ -104,51 +104,9 @@ export default function Hero({ onNavigate }: HeroProps) {
                   primarySrc={HERO_PORTRAIT_SRC}
                   fallbackSrc={HERO_PORTRAIT_SRC}
                   alt="Okello Odhiambo — Full-Stack Software Developer and Executive Consultant"
-                  className="h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_18px_36px_rgba(0,0,0,0.45)]"
+                  className="h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_18px_36px_rgba(0,0,0,0.45)] [mask-image:linear-gradient(to_top,transparent_0%,black_10%,black_100%)]"
                 />
-                {/* Soft bottom baseline fade so suit edge melts into hero floor */}
-                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0C1E36] via-[#0C1E36]/60 to-transparent pointer-events-none" />
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Full-Width Credibility Proof Bar below the hero split */}
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-            <div className="pt-2 md:pt-0 md:pr-6">
-              <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
-                Zone01
-              </span>
-              <span className="block text-[11px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">
-                Golang Software Labs
-              </span>
-            </div>
-            <div className="pt-2 md:pt-0 md:px-6">
-              <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
-                1,000+
-              </span>
-              <span className="block text-[11px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">
-                Executive Documents
-              </span>
-            </div>
-            <div className="pt-4 md:pt-0 md:px-6">
-              <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
-                Sub-12ms
-              </span>
-              <span className="block text-[11px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">
-                API Latency Speed
-              </span>
-            </div>
-            <div className="pt-4 md:pt-0 md:pl-6">
-              <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
-                5+ Years
-              </span>
-              <span className="block text-[11px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">
-                Founding Authority
-              </span>
             </div>
           </div>
         </div>

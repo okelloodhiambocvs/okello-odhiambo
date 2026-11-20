@@ -77,126 +77,139 @@ export default function FounderGallery() {
     : USER_ATTACHED_IMAGES.filter(img => img.category === activeFilter);
 
   return (
-    <div className="mt-20 pt-16 border-t border-slate-200">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
-        <div>
-          <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-[#0C1E36] tracking-tight">
-            Okello Odhiambo in Action
-          </h3>
-          <p className="text-slate-600 text-sm mt-2 max-w-2xl font-sans leading-relaxed">
-            A personal visual gallery capturing real-world software engineering sprints at Zone01 Kisumu, Google tech summits, live podcast broadcasts, and executive consulting milestones.
-          </p>
-        </div>
-
-        {/* Action button to manage / sync photos */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setShowUploader(!showUploader)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-xs font-mono font-bold text-[#0C1E36] transition-all cursor-pointer shadow-xs"
-          >
-            <Upload className="w-3.5 h-3.5 text-[#f80d05]" />
-            {showUploader ? "Hide Photo Sync" : "Sync Attached Photos"}
-          </button>
-        </div>
-      </div>
-
-      {/* Interactive Photo Sync Panel */}
-      {showUploader && (
-        <div className="mb-10 p-6 rounded-2xl bg-gradient-to-r from-red-50/40 via-white to-slate-50 border border-red-200/70 shadow-sm animate-in fade-in duration-300">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <h4 className="font-serif font-bold text-base text-[#0C1E36] flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#f80d05]" /> Synced Authentic Photos to Website Storage
-              </h4>
-              <p className="text-xs text-slate-600 max-w-2xl">
-                Upload or drop your attached files (<code className="bg-red-50 text-[#f80d05] px-1 py-0.5 rounded font-mono text-[11px]">.jpg</code>, <code className="bg-red-50 text-[#f80d05] px-1 py-0.5 rounded font-mono text-[11px]">.png</code>) to store them permanently into <code className="bg-slate-100 text-slate-700 px-1 py-0.5 rounded font-mono text-[11px]">/public/images/user/</code>.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3 w-full md:w-auto">
-              <input
-                type="file"
-                multiple
-                ref={fileInputRef}
-                className="hidden"
-                accept="image/jpeg,image/png,image/webp"
-                onChange={(e) => handleFilesUpload(e.target.files)}
-              />
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                disabled={uploading}
-                className="w-full md:w-auto px-5 py-2.5 rounded-lg bg-[#0C1E36] hover:bg-[#f80d05] text-white font-mono text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-              >
-                {uploading ? (
-                  <>
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Saving...
-                  </>
-                ) : (
-                  <>
-                    <Upload className="w-3.5 h-3.5" /> Select &amp; Sync Images
-                  </>
-                )}
-              </button>
-            </div>
+    <section className="py-20 sm:py-24 relative overflow-hidden bg-[#0C1E36] text-white border-t border-white/10">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at 80% 20%, rgba(36, 69, 112, 0.55) 0%, rgba(12, 30, 54, 0.96) 55%, #071426 100%)",
+        }}
+      />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+          <div>
+            <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">
+              Okello Odhiambo in Action
+            </h3>
+            <div className="h-1 w-16 bg-[#f80d05] mt-3 mb-3" />
+            <p className="text-slate-300 text-sm max-w-2xl font-sans leading-relaxed">
+              A personal visual gallery capturing real-world software engineering sprints at Zone01 Kisumu, Google tech summits, live podcast broadcasts, and executive consulting milestones.
+            </p>
           </div>
 
-          {uploadSuccess && (
-            <div className="mt-4 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-bold flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              {uploadSuccess}
-            </div>
-          )}
-
-          {/* Quick status checklist */}
-          <div className="mt-5 pt-4 border-t border-slate-200/80">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 font-bold block mb-2">
-              Attached Image Sync Registry
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              {USER_ATTACHED_IMAGES.map((img) => {
-                const isSynced = availableFiles.includes(img.filename);
-                return (
-                  <div key={img.id} className="flex items-center gap-2 text-[11px] font-mono p-1.5 rounded bg-white border border-slate-100">
-                    <span className={`w-2 h-2 rounded-full ${isSynced ? "bg-emerald-500" : "bg-amber-400"}`} />
-                    <span className="truncate flex-1 text-slate-700">{img.filename}</span>
-                    <span className={`text-[10px] uppercase font-bold ${isSynced ? "text-emerald-700" : "text-amber-600"}`}>
-                      {isSynced ? "Active" : "Ready"}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+          {/* Action button to manage / sync photos */}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setShowUploader(!showUploader)}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded border border-white/25 bg-white/10 hover:bg-white/20 text-xs font-mono font-bold text-white transition-all cursor-pointer whitespace-nowrap"
+            >
+              <Upload className="w-3.5 h-3.5 text-[#f80d05]" />
+              {showUploader ? "Hide Photo Sync" : "Sync Attached Photos"}
+            </button>
           </div>
         </div>
-      )}
 
-      {/* Filter Pills */}
-      <div className="flex flex-wrap gap-2 mb-8">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActiveFilter(cat)}
-            className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
-              activeFilter === cat
-                ? "bg-[#0C1E36] text-white shadow-sm"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+        {/* Interactive Photo Sync Panel */}
+        {showUploader && (
+          <div className="mb-10 p-6 rounded-2xl bg-white text-[#0C1E36] border border-slate-200 shadow-lg animate-in fade-in duration-300">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <h4 className="font-serif font-bold text-base text-[#0C1E36] flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#f80d05]" /> Synced Authentic Photos to Website Storage
+                </h4>
+                <p className="text-xs text-slate-600 max-w-2xl">
+                  Upload or drop your attached files (<code className="bg-red-50 text-[#f80d05] px-1 py-0.5 rounded font-mono text-[11px]">.jpg</code>, <code className="bg-red-50 text-[#f80d05] px-1 py-0.5 rounded font-mono text-[11px]">.png</code>) to store them permanently into <code className="bg-slate-100 text-slate-700 px-1 py-0.5 rounded font-mono text-[11px]">/public/images/user/</code>.
+                </p>
+              </div>
 
-      {/* Grid of Authentic Photos */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredImages.map((item) => (
-          <ImageCard
-            key={item.id}
-            item={item}
-            onExpand={() => setSelectedImage(item)}
-          />
-        ))}
+              <div className="flex items-center gap-3 w-full md:w-auto">
+                <input
+                  type="file"
+                  multiple
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/jpeg,image/png,image/webp"
+                  onChange={(e) => handleFilesUpload(e.target.files)}
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                  className="w-full md:w-auto px-5 py-2.5 rounded-lg bg-[#0C1E36] hover:bg-[#f80d05] text-white font-mono text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                >
+                  {uploading ? (
+                    <>
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="w-3.5 h-3.5" /> Select &amp; Sync Images
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {uploadSuccess && (
+              <div className="mt-4 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-bold flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                {uploadSuccess}
+              </div>
+            )}
+
+            {/* Quick status checklist */}
+            <div className="mt-5 pt-4 border-t border-slate-200/80">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 font-bold block mb-2">
+                Attached Image Sync Registry
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                {USER_ATTACHED_IMAGES.map((img) => {
+                  const isSynced = availableFiles.includes(img.filename);
+                  return (
+                    <div key={img.id} className="flex items-center gap-2 text-[11px] font-mono p-1.5 rounded bg-slate-50 border border-slate-100">
+                      <span className={`w-2 h-2 rounded-full ${isSynced ? "bg-emerald-500" : "bg-amber-400"}`} />
+                      <span className="truncate flex-1 text-slate-700">{img.filename}</span>
+                      <span className={`text-[10px] uppercase font-bold ${isSynced ? "text-emerald-700" : "text-amber-600"}`}>
+                        {isSynced ? "Active" : "Ready"}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Filter Controls */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {categories.map((cat) => (
+            <button
+              type="button"
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className={`px-3.5 py-2 rounded text-xs font-mono font-bold transition-all cursor-pointer whitespace-nowrap ${
+                activeFilter === cat
+                  ? "bg-[#f80d05] text-white shadow-sm"
+                  : "bg-white/10 text-slate-200 border border-white/15 hover:bg-white/20 hover:text-white"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Grid of Authentic Photos */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredImages.map((item) => (
+            <ImageCard
+              key={item.id}
+              item={item}
+              onExpand={() => setSelectedImage(item)}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Fullscreen Photo Modal */}
@@ -248,7 +261,7 @@ export default function FounderGallery() {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }
 
