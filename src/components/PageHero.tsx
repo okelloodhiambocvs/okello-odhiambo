@@ -53,7 +53,7 @@ export default function PageHero({
                 {titlePrefix}{" "}
                 <span className="text-[#f80d05]">{titleHighlight}</span>
               </h1>
-              <p className="max-w-xl text-slate-300 text-sm sm:text-base tracking-wide font-sans font-normal leading-relaxed">
+              <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] tracking-wide font-sans font-normal leading-relaxed">
                 {description}
               </p>
               {children && <div className="mt-8">{children}</div>}

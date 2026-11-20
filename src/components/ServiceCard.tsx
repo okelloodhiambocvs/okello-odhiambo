@@ -91,18 +91,18 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         <h3 className="font-serif text-xl font-bold text-[#0C1E36] mb-3 group-hover:text-[#f80d05] transition-colors">
           {service.title}
         </h3>
-        <p className="text-slate-600 text-xs sm:text-sm tracking-wide leading-relaxed mb-6 font-sans">
+        <p className="text-slate-600 text-sm sm:text-base tracking-wide leading-relaxed mb-6 font-sans">
           {service.description}
         </p>
 
-        <div className="bg-slate-50 border border-slate-150 rounded-xl p-4 mb-6 transition-colors duration-300 group-hover:bg-slate-50/50">
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6 transition-colors duration-300 group-hover:bg-slate-50/50">
           <span className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase mb-2 font-bold">
             Strategic Deliverables
           </span>
           <ul className="space-y-2">
             {service.features.map((feature, fIdx) => (
-              <li key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-600 font-sans">
-                <BadgeCheck className="w-3.5 h-3.5 text-[#f80d05] shrink-0 mt-0.5" />
+              <li key={fIdx} className="flex items-start gap-2.5 text-sm text-slate-600 font-sans">
+                <BadgeCheck className="w-4 h-4 text-[#f80d05] shrink-0 mt-0.5" />
                 <span>{feature}</span>
               </li>
             ))}
@@ -125,9 +125,9 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           href={service.ctaUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 px-3.5 py-2.5 rounded text-[11px] font-mono font-bold tracking-wider uppercase bg-[#0C1E36] hover:bg-[#f80d05] text-white transition-all duration-300 whitespace-nowrap cursor-pointer shadow-sm group-hover:shadow"
+          className="flex items-center gap-1.5 px-3.5 py-2.5 rounded text-xs font-mono font-bold tracking-wider uppercase bg-[#0C1E36] hover:bg-[#f80d05] text-white transition-all duration-300 whitespace-nowrap cursor-pointer shadow-sm group-hover:shadow"
         >
-          Order Service <ExternalLink className="w-3 h-3 text-red-200" />
+          Order Service <ExternalLink className="w-3.5 h-3.5 text-white" />
         </a>
       </div>
     </div>

@@ -52,7 +52,7 @@ export default function ActionDetailPage({
                 {item.title}
               </h1>
 
-              <p className="max-w-xl text-slate-300 text-sm sm:text-base font-sans leading-relaxed mb-6">
+              <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] font-sans leading-relaxed mb-6">
                 {item.description}
               </p>
 
@@ -70,7 +70,7 @@ export default function ActionDetailPage({
                 <button
                   type="button"
                   onClick={() => onNavigate(item.ctaTarget)}
-                  className="px-5 py-3.5 rounded bg-[#f80d05] hover:bg-red-600 text-white font-sans font-bold tracking-wider text-xs uppercase shadow-md transition-colors cursor-pointer inline-flex items-center gap-2 whitespace-nowrap shrink-0"
+                  className="px-5 py-3.5 rounded bg-[#f80d05] hover:bg-[#d40b04] text-white font-sans font-bold tracking-wider text-xs uppercase shadow-md transition-colors cursor-pointer inline-flex items-center gap-2 whitespace-nowrap shrink-0"
                 >
                   {item.ctaLabel} <ArrowRight className="w-4 h-4" />
                 </button>
@@ -110,7 +110,7 @@ export default function ActionDetailPage({
                 </h2>
                 <div className="h-1 w-16 bg-[#f80d05] mt-3 mb-6" />
 
-                <div className="space-y-5 text-slate-700 font-sans text-sm sm:text-base leading-relaxed">
+                <div className="space-y-5 text-slate-700 font-sans text-base sm:text-[1.15rem] leading-relaxed">
                   {item.overviewParagraphs.map((paragraph, idx) => (
                     <p key={idx}>{paragraph}</p>
                   ))}
@@ -133,7 +133,7 @@ export default function ActionDetailPage({
                           {hl.title}
                         </h4>
                       </div>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6">
+                      <p className="text-sm sm:text-base text-slate-600 leading-relaxed pl-6">
                         {hl.detail}
                       </p>
                     </div>
@@ -160,7 +160,7 @@ export default function ActionDetailPage({
                 <h3 className="font-serif font-bold text-lg text-[#0C1E36] mb-4">
                   Session Profile
                 </h3>
-                <dl className="space-y-4 text-xs font-sans">
+                <dl className="space-y-4 text-sm font-sans">
                   <div className="pb-3 border-b border-slate-200/80">
                     <dt className="font-mono uppercase tracking-wider text-slate-500 font-bold mb-1">
                       Category

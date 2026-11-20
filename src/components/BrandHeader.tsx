@@ -131,7 +131,7 @@ export default function BrandHeader({ currentPage, onNavigate }: BrandHeaderProp
             <button
               type="button"
               onClick={() => handleNavClick("contact")}
-              className="w-full text-center py-3 bg-[#f80d05] text-white font-mono font-bold uppercase tracking-widest text-xs rounded hover:bg-red-600 transition-colors shadow-lg cursor-pointer"
+              className="w-full text-center py-3 bg-[#f80d05] text-white font-mono font-bold uppercase tracking-widest text-xs rounded hover:bg-[#d40b04] transition-colors shadow-lg cursor-pointer"
             >
               Direct Inquiry
             </button>

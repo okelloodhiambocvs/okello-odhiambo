@@ -13,16 +13,14 @@ export default function BrandLogo({ variant = "header", onClick }: BrandLogoProp
       <span
         className={`block text-sm sm:text-base tracking-[0.18em] font-extrabold uppercase leading-tight font-sans whitespace-nowrap ${
           isFooter
-            ? "text-white group-hover:text-red-400 transition-colors"
+            ? "text-white group-hover:text-[#f80d05] transition-colors"
             : "text-white group-hover:text-[#f80d05] transition-colors"
         }`}
       >
         Okello Odhiambo
       </span>
       <span
-        className={`block text-[10px] tracking-[0.2em] uppercase font-mono font-bold leading-none mt-1 whitespace-nowrap ${
-          isFooter ? "text-red-400" : "text-red-400"
-        }`}
+        className="block text-[10px] tracking-[0.2em] uppercase font-mono font-bold leading-none mt-1 whitespace-nowrap text-[#f80d05]"
       >
         Software &amp; House Ventures
       </span>

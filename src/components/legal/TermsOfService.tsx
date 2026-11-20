@@ -5,11 +5,11 @@ export default function TermsOfService() {
   return (
     <div className="space-y-8">
       {/* Executive Summary Card */}
-      <div className="p-5 rounded-xl bg-slate-900/80 border border-red-500/20 text-slate-200 space-y-2">
-        <div className="flex items-center gap-2 text-red-400 font-mono text-xs font-bold uppercase tracking-wider">
+      <div className="p-5 rounded-xl bg-slate-900/80 border border-[#f80d05]/25 text-slate-200 space-y-2">
+        <div className="flex items-center gap-2 text-[#f80d05] font-mono text-xs font-bold uppercase tracking-wider">
           <Building2 className="w-4 h-4 text-[#f80d05]" /> Service Provider Identity &amp; Statutory Authority
         </div>
-        <p className="text-xs text-slate-300 leading-relaxed font-medium">
+        <p className="text-sm text-slate-300 leading-relaxed font-medium">
           These Terms and Conditions constitute a legally binding agreement between you (the &quot;Client&quot;, &quot;User&quot;, or &quot;Subscriber&quot;) and <strong>House Ventures Consultancy</strong> (&quot;Developer Zone01&quot;, &quot;Okello Odhiambo&quot;, &quot;We&quot;, &quot;Us&quot;, or &quot;Our&quot;), a consultancy and software development enterprise registered and operated in accordance with the laws of the <strong>Republic of Kenya</strong> (Nairobi &amp; Kisumu). By engaging our software engineering services, requesting executive CV rewrites, using our AI ATS CV Grader, or submitting inquiries, you explicitly assent to these Terms.
         </p>
       </div>
@@ -17,7 +17,7 @@ export default function TermsOfService() {
       {/* Section 1: Scope of Engagement */}
       <section className="space-y-3">
         <h4 className="font-serif text-lg font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-          <span className="text-red-400 font-mono text-xs">01.</span> Scope of Consultancy &amp; Engineering Services
+          <span className="text-[#f80d05] font-mono text-xs">01.</span> Scope of Consultancy &amp; Engineering Services
         </h4>
         <p className="text-slate-300">
           House Ventures Consultancy offers professional services structured into two primary operational branches:
@@ -35,27 +35,27 @@ export default function TermsOfService() {
       {/* Section 2: Governing Law & Jurisdiction */}
       <section className="space-y-3">
         <h4 className="font-serif text-lg font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-          <span className="text-red-400 font-mono text-xs">02.</span> Statutory Governing Law &amp; Legal Framework
+          <span className="text-[#f80d05] font-mono text-xs">02.</span> Statutory Governing Law &amp; Legal Framework
         </h4>
         <p className="text-slate-300">
           This Agreement and all non-contractual obligations arising out of or in connection with it shall be governed by and construed in accordance with the statutory laws of the <strong>Republic of Kenya</strong>, including but not limited to:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
           <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800 space-y-1">
-            <span className="font-mono text-xs text-red-400 font-bold block">Law of Contract Act (Cap 23)</span>
-            <span className="text-[11px] text-slate-400 block">Governs the enforceability of digital and written agreements entered into in Kenya.</span>
+            <span className="font-mono text-xs text-[#f80d05] font-bold block">Law of Contract Act (Cap 23)</span>
+            <span className="text-xs text-slate-400 block">Governs the enforceability of digital and written agreements entered into in Kenya.</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800 space-y-1">
-            <span className="font-mono text-xs text-red-400 font-bold block">Consumer Protection Act, 2012</span>
-            <span className="text-[11px] text-slate-400 block">Ensures fair trade, quality standards, transparent pricing, and consumer rights protection.</span>
+            <span className="font-mono text-xs text-[#f80d05] font-bold block">Consumer Protection Act, 2012</span>
+            <span className="text-xs text-slate-400 block">Ensures fair trade, quality standards, transparent pricing, and consumer rights protection.</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800 space-y-1">
-            <span className="font-mono text-xs text-red-400 font-bold block">Computer Misuse &amp; Cybercrimes Act, 2018</span>
-            <span className="text-[11px] text-slate-400 block">Regulates secure electronic transactions, authorization, and digital system safety.</span>
+            <span className="font-mono text-xs text-[#f80d05] font-bold block">Computer Misuse &amp; Cybercrimes Act, 2018</span>
+            <span className="text-xs text-slate-400 block">Regulates secure electronic transactions, authorization, and digital system safety.</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800 space-y-1">
-            <span className="font-mono text-xs text-red-400 font-bold block">Copyright Act (Cap 130)</span>
-            <span className="text-[11px] text-slate-400 block">Defines intellectual property protections, software code ownership, and fair use guidelines.</span>
+            <span className="font-mono text-xs text-[#f80d05] font-bold block">Copyright Act (Cap 130)</span>
+            <span className="text-xs text-slate-400 block">Defines intellectual property protections, software code ownership, and fair use guidelines.</span>
           </div>
         </div>
       </section>
@@ -63,7 +63,7 @@ export default function TermsOfService() {
       {/* Section 3: Intellectual Property & Code Ownership */}
       <section className="space-y-3">
         <h4 className="font-serif text-lg font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-          <span className="text-red-400 font-mono text-xs">03.</span> Intellectual Property &amp; Proprietary Rights
+          <span className="text-[#f80d05] font-mono text-xs">03.</span> Intellectual Property &amp; Proprietary Rights
         </h4>
         <p className="text-slate-300">
           <strong>Custom Deliverables:</strong> Upon receipt of 100% full cleared payment for bespoke software development or executive CV assets, full intellectual property rights, copyrights, and source code ownership for custom client work products transfer to the Client.
@@ -76,7 +76,7 @@ export default function TermsOfService() {
       {/* Section 4: Payment Terms & Remittance */}
       <section className="space-y-3">
         <h4 className="font-serif text-lg font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-          <span className="text-red-400 font-mono text-xs">04.</span> Payment Terms, Mobilization Deposits &amp; Refunds
+          <span className="text-[#f80d05] font-mono text-xs">04.</span> Payment Terms, Mobilization Deposits &amp; Refunds
         </h4>
         <ul className="list-disc pl-5 space-y-2 text-slate-300">
           <li>
@@ -97,7 +97,7 @@ export default function TermsOfService() {
       {/* Section 5: Limitation of Liability */}
       <section className="space-y-3">
         <h4 className="font-serif text-lg font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-          <span className="text-red-400 font-mono text-xs">05.</span> Warranties &amp; Limitation of Liability
+          <span className="text-[#f80d05] font-mono text-xs">05.</span> Warranties &amp; Limitation of Liability
         </h4>
         <p className="text-slate-300">
           <strong>No Guarantee of Third-Party Hiring:</strong> While our AI ATS CV Grader and C-suite documentation services strictly optimize applications to pass automated algorithms and executive standards, House Ventures Consultancy does not guarantee job offers or interview callbacks, which remain at the sole discretion of third-party hiring committees.
@@ -110,7 +110,7 @@ export default function TermsOfService() {
       {/* Section 6: Dispute Resolution & Arbitration */}
       <section className="space-y-3">
         <h4 className="font-serif text-lg font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-          <span className="text-red-400 font-mono text-xs">06.</span> Dispute Resolution &amp; NCIA Arbitration
+          <span className="text-[#f80d05] font-mono text-xs">06.</span> Dispute Resolution &amp; NCIA Arbitration
         </h4>
         <p className="text-slate-300">
           In the event of any controversy, claim, or dispute arising out of or relating to this Agreement, the parties shall first attempt in good faith to resolve the matter through amicable bilateral negotiation within thirty (30) days.

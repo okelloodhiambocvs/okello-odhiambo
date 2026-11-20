@@ -96,7 +96,7 @@ export default function FounderGallery({ onSelectAction }: FounderGalleryProps) 
               Okello Odhiambo in Action
             </h3>
             <div className="h-1 w-16 bg-[#f80d05] mt-3 mb-3" />
-            <p className="text-slate-300 text-sm max-w-2xl font-sans leading-relaxed">
+            <p className="text-slate-300 text-base max-w-2xl font-sans leading-relaxed">
               A personal visual gallery capturing real-world software engineering sprints at Zone01 Kisumu, Google tech summits, live podcast broadcasts, and executive consulting milestones.
             </p>
           </div>
@@ -122,8 +122,8 @@ export default function FounderGallery({ onSelectAction }: FounderGalleryProps) 
                 <h4 className="font-serif font-bold text-base text-[#0C1E36] flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#f80d05]" /> Synced Authentic Photos to Website Storage
                 </h4>
-                <p className="text-xs text-slate-600 max-w-2xl">
-                  Upload or drop your attached files (<code className="bg-red-50 text-[#f80d05] px-1 py-0.5 rounded font-mono text-[11px]">.jpg</code>, <code className="bg-red-50 text-[#f80d05] px-1 py-0.5 rounded font-mono text-[11px]">.png</code>) to store them permanently into <code className="bg-slate-100 text-slate-700 px-1 py-0.5 rounded font-mono text-[11px]">/public/images/user/</code>.
+                <p className="text-sm text-slate-600 max-w-2xl">
+                  Upload or drop your attached files (<code className="bg-[#f80d05]/10 text-[#f80d05] px-1 py-0.5 rounded font-mono text-xs">.jpg</code>, <code className="bg-[#f80d05]/10 text-[#f80d05] px-1 py-0.5 rounded font-mono text-xs">.png</code>) to store them permanently into <code className="bg-slate-100 text-slate-700 px-1 py-0.5 rounded font-mono text-xs">/public/images/user/</code>.
                 </p>
               </div>
 
@@ -250,10 +250,10 @@ function ImageCard({ item, onExpand }: ImageCardProps) {
           <h4 className="font-serif font-bold text-lg text-white group-hover:text-[#f80d05] transition-colors leading-snug">
             {item.title}
           </h4>
-          <p className="text-xs text-slate-300 font-mono mt-1 mb-2 line-clamp-1">
+          <p className="text-sm text-slate-300 font-mono mt-1 mb-2 line-clamp-1">
             {item.context}
           </p>
-          <p className="text-xs text-slate-300/90 font-sans line-clamp-2 leading-relaxed">
+          <p className="text-sm text-slate-300/90 font-sans line-clamp-2 leading-relaxed">
             {item.description}
           </p>
         </div>

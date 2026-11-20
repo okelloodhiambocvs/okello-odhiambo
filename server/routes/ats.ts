@@ -1,151 +1,419 @@
 import { Router, Request, Response } from "express";
+import { Type } from "@google/genai";
 import { getGeminiAI } from "../services/gemini";
 import { sanitizeInput } from "../utils/sanitize";
-import { generateHighQualityMockATS } from "../utils/atsMock";
+import {
+  extractReadableTextFromPdfBuffer,
+  generateHighQualityMockATS,
+  parseTargetKeywords,
+} from "../utils/atsMock";
 
 const router = Router();
+const GEMINI_ATS_MODEL = "gemini-4-hydrogen";
+const GEMINI_FALLBACK_MODEL = "gemini-3.1-flash-lite";
+
+function parseCleanGeminiMessage(rawMessage: string): string {
+  const trimmed = (rawMessage || "").trim();
+  if (trimmed.startsWith("{")) {
+    try {
+      const parsed = JSON.parse(trimmed);
+      if (parsed?.error?.message) return String(parsed.error.message);
+      if (parsed?.message) return String(parsed.message);
+    } catch {
+      // fall through to raw message
+    }
+  }
+  return trimmed || "Gemini service request failed.";
+}
+
+function isTransientAiError(error: any): boolean {
+  const statusCode =
+    typeof error?.status === "number"
+      ? error.status
+      : typeof error?.statusCode === "number"
+        ? error.statusCode
+        : 0;
+  const rawMessage = typeof error?.message === "string" ? error.message.toUpperCase() : "";
+  return (
+    statusCode === 429 ||
+    statusCode === 500 ||
+    statusCode === 502 ||
+    statusCode === 503 ||
+    statusCode === 504 ||
+    rawMessage.includes("UNAVAILABLE") ||
+    rawMessage.includes("HIGH DEMAND") ||
+    rawMessage.includes("RESOURCE_EXHAUSTED") ||
+    rawMessage.includes("TIMEOUT") ||
+    rawMessage.includes("ECONNRESET")
+  );
+}
+
+function extractGeminiErrorDetails(error: any): { status: number; message: string } {
+  const statusCode =
+    typeof error?.status === "number"
+      ? error.status
+      : typeof error?.statusCode === "number"
+        ? error.statusCode
+        : 502;
+
+  const cleanMessage = parseCleanGeminiMessage(typeof error?.message === "string" ? error.message : "");
+
+  if (statusCode === 400 || cleanMessage.includes("API_KEY_INVALID")) {
+    return {
+      status: 400,
+      message: "Invalid Gemini API key configuration. Please verify GEMINI_API_KEY in Settings > Secrets.",
+    };
+  }
+  if (statusCode === 403 || cleanMessage.includes("PERMISSION_DENIED")) {
+    return {
+      status: 403,
+      message: "Gemini API permission denied. Please verify your GEMINI_API_KEY access in Settings > Secrets.",
+    };
+  }
+  if (statusCode === 429 || cleanMessage.includes("RESOURCE_EXHAUSTED")) {
+    return {
+      status: 429,
+      message: "Gemini API quota exceeded. Please wait briefly or verify billing tier in Settings > Secrets.",
+    };
+  }
+  if (statusCode === 404 || cleanMessage.includes("NOT_FOUND")) {
+    return {
+      status: 404,
+      message: `Requested Gemini model (${GEMINI_ATS_MODEL}) was not found or is unavailable for this key.`,
+    };
+  }
+
+  return {
+    status: statusCode >= 400 && statusCode < 600 ? statusCode : 502,
+    message: cleanMessage,
+  };
+}
 
 // POST /api/ats/parse-file
 router.post("/parse-file", async (req: Request, res: Response) => {
   try {
-    const { fileDataBase64, mimeType } = req.body;
-    
+    const { fileDataBase64, mimeType, fileName } = req.body || {};
+
     if (!fileDataBase64 || typeof fileDataBase64 !== "string") {
       return res.status(400).json({ error: "Missing valid base64 file string payload." });
+    }
+
+    if (fileDataBase64.length > 20 * 1024 * 1024) {
+      return res.status(413).json({ error: "Uploaded document exceeds the 15MB limit." });
+    }
+
+    const normalizedMime = typeof mimeType === "string" && mimeType.trim() ? mimeType.trim() : "application/pdf";
+
+    // Plain text / markdown payload decoded directly on server too
+    if (normalizedMime === "text/plain" || normalizedMime === "text/markdown") {
+      const decodedText = sanitizeInput(Buffer.from(fileDataBase64, "base64").toString("utf8"), 40000);
+      if (!decodedText) {
+        return res.status(422).json({ error: "No readable text found in uploaded document." });
+      }
+      return res.json({
+        text: decodedText,
+        demoMode: false,
+        engine: "plain-text-decoder",
+      });
     }
 
     const ai = getGeminiAI();
 
     if (!ai) {
-      console.warn("GEMINI_API_KEY is not defined. Falling back to native PDF decoder mock mode.");
-      return res.json({
-        text: `[DECODED PDF DOCUMENT CONTENT]
-BRAYAN OKELLO ODHIAMBO
-Mobile: +254 728 606 684 | Email: okelloodhiambocvs@gmail.com
-Address: P.O. Box 1178, Kisumu, Kenya | Nairobi, Kenya
+      const extractedText = sanitizeInput(
+        extractReadableTextFromPdfBuffer(Buffer.from(fileDataBase64, "base64")),
+        40000
+      );
 
-PROFESSIONAL PROFILE
-Results-Driven Full-Stack Developer and Executive Communication Consultant combining software engineering expertise with product leadership, digital strategy, and business communication. Developer Zone Zero One (Zone01 Kisumu) software architect. Founder of House Ventures Consultancy with 5+ years of experience delivering over 1,000+ ATS-optimized executive CVs.
+      if (extractedText.length >= 60) {
+        return res.json({
+          text: extractedText,
+          demoMode: true,
+          engine: "pdf-stream-parser",
+        });
+      }
 
-TECHNICAL SKILLS:
-Languages: Golang (Go), TypeScript, JavaScript, SQL, HTML5, CSS3, C/C++
-Frameworks & Databases: React, Node.js, Express, PostgreSQL, MySQL, Redis, REST APIs, gRPC, M-Pesa API
-Tools: Git, GitHub, Docker, Linux, Postman, Figma, CI/CD pipelines
-
-PROFESSIONAL EXPERIENCE:
-Junior Full-Stack Developer | Zone01 Kisumu (March 2026 - Present)
-- Architecting microservices and web apps in Go, JavaScript, TypeScript, and React.
-- Engineered Ni-Wera service marketplace with M-Pesa escrow verification.
-- Leading 8-member multidisciplinary team as Project Manager for Ujuzi360 LMS.
-
-Founder & Lead Strategist | House Ventures Consultancy (2024 - Present)
-- Formulated 1,000+ ATS CVs, cover letters, and grant proposals for high-impact clients.
-- Boosted client funding readiness and social reach by +1,500 qualified metrics.`,
-        demoMode: true
+      return res.status(422).json({
+        error: `Could not extract selectable text from "${sanitizeInput(fileName || "PDF", 80)}" without an active AI document parser. Please paste your CV text directly, upload a .txt/.md file, or configure GEMINI_API_KEY in Settings > Secrets.`,
       });
     }
 
-    const prompt = `Extract all text content from this resume document accurately and cleanly. Preserve all names, dates, job titles, technical skills, companies, bullet points, and education details. Output plain text without commentary.`;
+    const prompt =
+      "Extract all text content from this resume/CV document accurately and cleanly. Preserve names, contact info, job titles, dates, technical skills, bullet achievements, and education details as clean plain text with no commentary.";
 
-    const response = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
-      contents: [
-        {
-          role: "user",
-          parts: [
-            {
-              inlineData: {
-                data: fileDataBase64,
-                mimeType: mimeType || "application/pdf"
-              }
-            },
-            { text: prompt }
-          ]
+    let parsedText = "";
+    let usedModel = GEMINI_ATS_MODEL;
+    let lastError: any = null;
+
+    for (const modelName of [GEMINI_ATS_MODEL, GEMINI_FALLBACK_MODEL]) {
+      try {
+        const response = await ai.models.generateContent({
+          model: modelName,
+          contents: {
+            parts: [
+              {
+                inlineData: {
+                  data: fileDataBase64,
+                  mimeType: normalizedMime,
+                },
+              },
+              { text: prompt },
+            ],
+          },
+        });
+        parsedText = sanitizeInput(response.text || "", 40000);
+        usedModel = modelName;
+        lastError = null;
+        break;
+      } catch (err: any) {
+        lastError = err;
+        if (!isTransientAiError(err)) {
+          throw err;
         }
-      ]
-    });
+      }
+    }
 
-    const parsedText = response.text || "";
-    res.json({ text: parsedText, demoMode: false });
+    if (lastError) {
+      const extractedText = sanitizeInput(
+        extractReadableTextFromPdfBuffer(Buffer.from(fileDataBase64, "base64")),
+        40000
+      );
+      if (extractedText.length >= 60) {
+        return res.json({
+          text: extractedText,
+          demoMode: false,
+          engine: "pdf-stream-parser",
+        });
+      }
+      throw lastError;
+    }
+
+    if (!parsedText) {
+      return res.status(422).json({ error: "Gemini returned empty text for this document." });
+    }
+
+    return res.json({
+      text: parsedText,
+      demoMode: false,
+      engine: usedModel,
+    });
   } catch (error: any) {
     console.error("Error parsing file with Gemini:", error);
-    res.status(500).json({ error: "Failed to parse document content on server." });
+    const { status, message } = extractGeminiErrorDetails(error);
+    return res.status(status).json({ error: message });
   }
 });
 
 // POST /api/ats/analyze
 router.post("/analyze", async (req: Request, res: Response) => {
   try {
-    const rawResumeText = req.body?.resumeText;
-    const rawJobDescription = req.body?.jobDescription;
+    const resumeText = sanitizeInput(req.body?.resumeText, 40000);
+    const jobDescription = sanitizeInput(req.body?.jobDescription, 12000);
+    const rawTargetKeywords = req.body?.targetKeywords;
+    const sanitizedKeywordString = Array.isArray(rawTargetKeywords)
+      ? rawTargetKeywords.map((k) => sanitizeInput(k, 80)).filter(Boolean)
+      : sanitizeInput(rawTargetKeywords, 2000);
 
-    const resumeText = sanitizeInput(rawResumeText, 40000);
-    const jobDescription = sanitizeInput(rawJobDescription, 10000);
-
-    if (!resumeText) {
-      return res.status(400).json({ error: "Resume text payload is required for ATS assessment." });
+    if (!resumeText || resumeText.length < 20) {
+      return res.status(400).json({
+        error: "Please provide at least 20 characters of resume/CV content before running ATS keyword analysis.",
+      });
     }
+
+    const explicitKeywords = parseTargetKeywords(sanitizedKeywordString);
+    const deterministicBaseline = generateHighQualityMockATS(
+      resumeText,
+      jobDescription,
+      explicitKeywords
+    );
 
     const ai = getGeminiAI();
 
     if (!ai) {
-      console.warn("GEMINI_API_KEY is missing. Operating in fallback mode.");
-      const mockResult = generateHighQualityMockATS(resumeText, jobDescription);
-      return res.json({ ...mockResult, demoMode: true });
+      return res.json({
+        ...deterministicBaseline,
+        engine: "keyword-engine",
+        analyzedAt: new Date().toISOString(),
+        demoMode: true,
+      });
     }
 
-    const prompt = `You are a high-tier Applicant Tracking System (ATS) audit algorithm and elite C-suite CV copywriting strategist.
-Evaluate the candidate's Resume/CV text against the optional target Job Description provided below.
+    const targetKeywordsBlock =
+      explicitKeywords.length > 0
+        ? explicitKeywords.join(", ")
+        : deterministicBaseline.targetKeywordsUsed.join(", ");
 
-Resume Text:
+    const prompt = `You are a senior Applicant Tracking System (ATS) parser and executive CV strategist.
+Analyze the candidate's CV strictly against the target job description and required ATS keywords.
+
+Resume / CV Content:
 """
 ${resumeText}
 """
 
-Target Job Description (or default target if blank):
+Target Job Description:
 """
-${jobDescription || "Software Engineering, Executive Leadership, Full-Stack Web Development, Go / TypeScript / React, Project Management, Strategic Communications, ATS CV Copywriting, Grant Proposals"}
+${jobDescription || "Evaluate against domain-appropriate senior software engineering or executive consultancy standards."}
 """
 
-Return a strictly valid JSON object conforming exactly to this structure (no markdown formatting wrappers outside JSON, no backticks, just raw JSON or standard json block):
-{
-  "score": <number between 0 and 100 representing overall ATS parsing match ratio>,
-  "matchingKeywords": [<array of top matched skills/keywords found in resume>],
-  "missingKeywords": [<array of key missing target skills/keywords that should be added>],
-  "formatFeedback": [<array of 3 to 4 specific feedback strings regarding formatting, bullet points, chronology, layout>],
-  "contentFeedback": [<array of 3 to 4 specific feedback strings regarding action verbs, quantitative metrics, copywriting improvements>],
-  "optimizedSummary": "<a 3 to 4 sentence re-architected executive profile summary incorporating top missing keywords and punchy active verbs>"
-}`;
+Priority Target Keywords to Audit:
+"""
+${targetKeywordsBlock}
+"""
 
-    const response = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      config: {
-        responseMimeType: "application/json"
-      }
-    });
+Instructions:
+1. Check every priority target keyword and important job-description keyword against the CV. List accurately matched keywords in "matchingKeywords" and missing high-impact keywords in "missingKeywords".
+2. Calculate "score" (0-100) and "keywordMatchRate" (0-100) honestly based on keyword coverage, quantified metrics, structure, and active phrasing.
+3. Provide 3-4 actionable "formatFeedback" bullets (prefix strong points with "Strong:" or "Clear use:" and issues with "Warning:" or "Action required:") and 3-4 "contentFeedback" bullets.
+4. Write a concise 3-4 sentence plain-text "optimizedSummary" (no markdown asterisks) weaving in top matched strengths and critical missing keywords cleanly.`;
 
-    const responseText = response.text || "{}";
+    let responseText = "";
+    let usedModel = GEMINI_ATS_MODEL;
+    let lastError: any = null;
 
-    try {
-      const parsedData = JSON.parse(responseText);
-      res.json({ ...parsedData, demoMode: false });
-    } catch (parseErr) {
-      console.error("JSON parse error from Gemini output:", parseErr, "Raw output:", responseText);
-      const cleaned = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
+    for (const modelName of [GEMINI_ATS_MODEL, GEMINI_FALLBACK_MODEL]) {
       try {
-        const retryParse = JSON.parse(cleaned);
-        return res.json({ ...retryParse, demoMode: false });
-      } catch (e) {
-        console.warn("Failed second attempt to parse Gemini ATS JSON. Returning mock fallback.");
-        const fallback = generateHighQualityMockATS(resumeText, jobDescription);
-        return res.json({ ...fallback, demoMode: true });
+        const response = await ai.models.generateContent({
+          model: modelName,
+          contents: prompt,
+          config: {
+            responseMimeType: "application/json",
+            responseSchema: {
+              type: Type.OBJECT,
+              properties: {
+                score: { type: Type.INTEGER, description: "Overall ATS compatibility score from 0 to 100." },
+                keywordMatchRate: { type: Type.INTEGER, description: "Percentage of target keywords matched (0 to 100)." },
+                matchingKeywords: {
+                  type: Type.ARRAY,
+                  items: { type: Type.STRING },
+                  description: "Target keywords present in the resume.",
+                },
+                missingKeywords: {
+                  type: Type.ARRAY,
+                  items: { type: Type.STRING },
+                  description: "Important target keywords missing from the resume.",
+                },
+                formatFeedback: {
+                  type: Type.ARRAY,
+                  items: { type: Type.STRING },
+                  description: "3 to 4 formatting and parser structure checks.",
+                },
+                contentFeedback: {
+                  type: Type.ARRAY,
+                  items: { type: Type.STRING },
+                  description: "3 to 4 phrasing, action-verb, and metric recommendations.",
+                },
+                optimizedSummary: {
+                  type: Type.STRING,
+                  description: "Plain-text 3-4 sentence executive profile summary integrating priority keywords.",
+                },
+              },
+              required: [
+                "score",
+                "keywordMatchRate",
+                "matchingKeywords",
+                "missingKeywords",
+                "formatFeedback",
+                "contentFeedback",
+                "optimizedSummary",
+              ],
+            },
+          },
+        });
+
+        responseText = (response.text || "").replace(/```json/gi, "").replace(/```/g, "").trim();
+        usedModel = modelName;
+        lastError = null;
+        break;
+      } catch (err: any) {
+        lastError = err;
+        if (!isTransientAiError(err)) {
+          throw err;
+        }
       }
     }
+
+    if (lastError) {
+      console.warn("Gemini AI transiently unavailable, serving deterministic ATS keyword engine:", lastError?.message || lastError);
+      return res.json({
+        ...deterministicBaseline,
+        engine: "keyword-engine",
+        analyzedAt: new Date().toISOString(),
+        demoMode: false,
+      });
+    }
+
+    if (!responseText) {
+      return res.json({
+        ...deterministicBaseline,
+        engine: "keyword-engine",
+        analyzedAt: new Date().toISOString(),
+        demoMode: false,
+      });
+    }
+
+    let parsedData: any;
+    try {
+      parsedData = JSON.parse(responseText);
+    } catch (parseErr) {
+      console.error("JSON parse error from Gemini output:", parseErr, "Raw output:", responseText);
+      return res.json({
+        ...deterministicBaseline,
+        engine: "keyword-engine",
+        analyzedAt: new Date().toISOString(),
+        demoMode: false,
+      });
+    }
+
+    const normalizedScore =
+      typeof parsedData.score === "number"
+        ? Math.min(100, Math.max(0, Math.round(parsedData.score)))
+        : deterministicBaseline.score;
+
+    const matchingKeywords = Array.isArray(parsedData.matchingKeywords)
+      ? parsedData.matchingKeywords.map(String).filter(Boolean)
+      : deterministicBaseline.matchingKeywords;
+
+    const missingKeywords = Array.isArray(parsedData.missingKeywords)
+      ? parsedData.missingKeywords.map(String).filter(Boolean)
+      : deterministicBaseline.missingKeywords;
+
+    const totalTracked = matchingKeywords.length + missingKeywords.length;
+    const keywordMatchRate =
+      typeof parsedData.keywordMatchRate === "number"
+        ? Math.min(100, Math.max(0, Math.round(parsedData.keywordMatchRate)))
+        : totalTracked > 0
+          ? Math.round((matchingKeywords.length / totalTracked) * 100)
+          : deterministicBaseline.keywordMatchRate;
+
+    return res.json({
+      score: normalizedScore,
+      keywordMatchRate,
+      targetKeywordsUsed:
+        explicitKeywords.length > 0
+          ? explicitKeywords
+          : Array.from(new Set([...matchingKeywords, ...missingKeywords])),
+      matchingKeywords,
+      missingKeywords,
+      formatFeedback: Array.isArray(parsedData.formatFeedback)
+        ? parsedData.formatFeedback.map(String).filter(Boolean)
+        : deterministicBaseline.formatFeedback,
+      contentFeedback: Array.isArray(parsedData.contentFeedback)
+        ? parsedData.contentFeedback.map(String).filter(Boolean)
+        : deterministicBaseline.contentFeedback,
+      optimizedSummary:
+        typeof parsedData.optimizedSummary === "string" && parsedData.optimizedSummary.trim()
+          ? parsedData.optimizedSummary.trim()
+          : deterministicBaseline.optimizedSummary,
+      sectionAudit: deterministicBaseline.sectionAudit,
+      engine: usedModel,
+      analyzedAt: new Date().toISOString(),
+      demoMode: false,
+    });
   } catch (error: any) {
     console.error("Error running ATS analysis via Gemini API:", error);
-    const mockResult = generateHighQualityMockATS(req.body?.resumeText || "", req.body?.jobDescription || "");
-    return res.json({ ...mockResult, demoMode: true });
+    const { status, message } = extractGeminiErrorDetails(error);
+    return res.status(status).json({ error: message });
   }
 });
 

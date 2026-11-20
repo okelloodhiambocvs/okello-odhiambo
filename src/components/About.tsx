@@ -28,8 +28,8 @@ export default function About({ onSelectAction }: AboutProps) {
     <>
       <section id="about" className="py-20 sm:py-24 relative overflow-hidden bg-white">
         {/* Visual background accents */}
-        <div className="absolute top-[20%] right-[-10%] w-[30rem] h-[30rem] bg-red-100/30 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[10%] left-[-10%] w-[25rem] h-[25rem] bg-rose-100/40 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[20%] right-[-10%] w-[30rem] h-[30rem] bg-[#f80d05]/[0.04] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[10%] left-[-10%] w-[25rem] h-[25rem] bg-[#f80d05]/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6">
           {/* Section Header */}
@@ -43,15 +43,15 @@ export default function About({ onSelectAction }: AboutProps) {
           {/* Narrative Split Layout: Developer Zone01 FIRST, Executive Consultant SECOND */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
             {/* LEFT / FIRST: SOFTWARE ENGINEER (ZONE01) */}
-            <div className="lg:col-span-6 p-8 rounded-2xl glass-panel relative group hover:border-[#f80d05]/30 transition-all duration-300 border border-slate-200 shadow-sm bg-gradient-to-b from-white to-red-50/20 flex flex-col justify-between">
+            <div className="lg:col-span-6 p-8 rounded-2xl glass-panel relative group hover:border-[#f80d05]/30 transition-all duration-300 border border-slate-200 shadow-sm bg-gradient-to-b from-white to-[#f80d05]/[0.03] flex flex-col justify-between">
               <div>
-                <div className="absolute top-4 right-4 text-red-400/30 group-hover:text-[#f80d05]/50 transition-colors">
+                <div className="absolute top-4 right-4 text-[#f80d05]/25 group-hover:text-[#f80d05]/50 transition-colors">
                   <Terminal className="w-16 h-16 stroke-[1]" />
                 </div>
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 pb-6 border-b border-slate-100">
                   <div className="relative shrink-0 select-none">
-                    <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-red-200 shadow-md bg-white flex items-center justify-center">
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-[#f80d05]/30 shadow-md bg-white flex items-center justify-center">
                       <SafeImage
                         primarySrc={technologyPortrait}
                         fallbackSrc={technologyPortrait}
@@ -92,7 +92,7 @@ export default function About({ onSelectAction }: AboutProps) {
                   </div>
                 </div>
 
-                <div className="space-y-4 text-slate-650 font-sans text-sm tracking-wide leading-relaxed">
+                <div className="space-y-4 text-slate-600 font-sans text-base tracking-wide leading-relaxed">
                   <p>
                     Presently developing as a full-stack software engineer at <strong className="text-[#0C1E36]">Developer Zone Zero One (Zone01 Kisumu)</strong>, my primary technical specialization centers on <strong className="text-[#f80d05]">Go (Golang)</strong> alongside modern web architectures.
                   </p>
@@ -110,22 +110,22 @@ export default function About({ onSelectAction }: AboutProps) {
                 {engineeringCapabilities.map((cap, idx) => (
                   <div key={idx} className="p-3 bg-white border border-slate-100 rounded-lg">
                     <span className="block font-serif text-lg sm:text-xl font-bold text-[#0C1E36]">{cap.metric}</span>
-                    <span className="block text-[10px] uppercase font-mono tracking-wider text-slate-500 mt-0.5 font-bold">{cap.label}</span>
+                    <span className="block text-[11px] uppercase font-mono tracking-wider text-slate-500 mt-0.5 font-bold">{cap.label}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* RIGHT / SECOND: EXECUTIVE BRAND CONSULTANT */}
-            <div className="lg:col-span-6 p-8 rounded-2xl glass-panel relative group hover:border-[#0C1E36]/20 transition-all duration-300 border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div className="lg:col-span-6 p-8 rounded-2xl glass-panel relative group hover:border-[#f80d05]/30 transition-all duration-300 border border-slate-200 shadow-sm flex flex-col justify-between">
               <div>
-                <div className="absolute top-4 right-4 text-red-400/30 group-hover:text-[#f80d05]/50 transition-colors">
+                <div className="absolute top-4 right-4 text-[#f80d05]/25 group-hover:text-[#f80d05]/50 transition-colors">
                   <Award className="w-16 h-16 stroke-[1]" />
                 </div>
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 pb-6 border-b border-slate-100">
                   <div className="relative shrink-0 select-none">
-                    <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-red-100 shadow-md bg-white flex items-center justify-center">
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-[#f80d05]/30 shadow-md bg-white flex items-center justify-center">
                       <SafeImage
                         primarySrc={communicationPortrait}
                         fallbackSrc={communicationPortrait}
@@ -166,7 +166,7 @@ export default function About({ onSelectAction }: AboutProps) {
                   </div>
                 </div>
 
-                <div className="space-y-4 text-slate-650 font-sans text-sm tracking-wide leading-relaxed">
+                <div className="space-y-4 text-slate-600 font-sans text-base tracking-wide leading-relaxed">
                   <p>
                     Following my software engineering focus, I am also the founder of <strong className="text-[#0C1E36]">House Ventures Consultancy</strong>, established in 2021. For over half a decade, I have formulated high-converting strategic career narratives for executive leaders and ambitious professionals.
                   </p>
@@ -184,7 +184,7 @@ export default function About({ onSelectAction }: AboutProps) {
                 {corporateAchievements.map((ach, idx) => (
                   <div key={idx} className="p-3 bg-slate-50 border border-slate-100 rounded-lg">
                     <span className="block font-serif text-xl font-bold text-[#f80d05]">{ach.metric}</span>
-                    <span className="block text-[10px] uppercase font-mono tracking-wider text-slate-500 mt-0.5 font-bold">{ach.label}</span>
+                    <span className="block text-[11px] uppercase font-mono tracking-wider text-slate-500 mt-0.5 font-bold">{ach.label}</span>
                   </div>
                 ))}
               </div>

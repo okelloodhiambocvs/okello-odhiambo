@@ -73,8 +73,8 @@ export default function ContactForm() {
 
       <section id="contact-workspace" className="py-16 sm:py-20 relative overflow-hidden bg-slate-50">
         {/* Design gradients overlay background */}
-        <div className="absolute top-[40%] right-[10%] w-[35rem] h-[35rem] bg-red-50/50 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-[10%] left-[-10%] w-[25rem] h-[25rem] bg-rose-50/50 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[40%] right-[10%] w-[35rem] h-[35rem] bg-[#f80d05]/[0.04] rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-[10%] left-[-10%] w-[25rem] h-[25rem] bg-[#f80d05]/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6">
 
@@ -99,13 +99,13 @@ export default function ContactForm() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter your name"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-xs font-sans text-slate-700 focus:outline-none focus:border-[#f80d05] focus:ring-0 placeholder:text-slate-400 transition-colors font-medium"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-sans text-slate-700 focus:outline-none focus:border-[#f80d05] focus:ring-0 placeholder:text-slate-400 transition-colors font-medium"
                   />
                 </div>
 
                 {/* Email input */}
                 <div>
-                  <label className="block text-[10px] font-mono uppercase tracking-widest text-[#0C1E36] mb-2 font-bold">
+                  <label className="block text-[11px] font-mono uppercase tracking-widest text-[#0C1E36] mb-2 font-bold">
                     Direct Email Endpoint *
                   </label>
                   <input
@@ -114,24 +114,24 @@ export default function ContactForm() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@company.com"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-xs font-sans text-slate-700 focus:outline-none focus:border-[#f80d05] focus:ring-0 placeholder:text-slate-400 transition-colors font-medium"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-sans text-slate-700 focus:outline-none focus:border-[#f80d05] focus:ring-0 placeholder:text-slate-400 transition-colors font-medium"
                   />
                 </div>
               </div>
 
               {/* Service list drop parameters */}
               <div>
-                <label className="block text-[10px] font-mono uppercase tracking-widest text-[#0C1E36] mb-2 font-bold">
+                <label className="block text-[11px] font-mono uppercase tracking-widest text-[#0C1E36] mb-2 font-bold">
                   Target Service Category
                 </label>
                 <select
                   value={service}
                   onChange={(e) => setService(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-xs font-sans text-slate-700 focus:outline-none focus:border-[#f80d05] focus:ring-0 transition-colors font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-sans text-slate-700 focus:outline-none focus:border-[#f80d05] focus:ring-0 transition-colors font-medium"
                 >
                   <option value="" className="text-slate-400">Choose Service Category...</option>
                   {servicesList.map((item, idx) => (
-                    <option key={idx} value={item} className="bg-white text-slate-750">
+                    <option key={idx} value={item} className="bg-white text-slate-700">
                       {item}
                     </option>
                   ))}
@@ -140,7 +140,7 @@ export default function ContactForm() {
 
               {/* Message box */}
               <div>
-                <label className="block text-[10px] font-mono uppercase tracking-widest text-[#0C1E36] mb-2 font-bold">
+                <label className="block text-[11px] font-mono uppercase tracking-widest text-[#0C1E36] mb-2 font-bold">
                   Project Outline / Transition goals (minimum 10 characters) *
                 </label>
                 <textarea
@@ -149,20 +149,20 @@ export default function ContactForm() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Outline your target goals, executive background, timeline limits, or software specs..."
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-xs font-sans text-slate-700 focus:outline-none focus:border-[#f80d05] focus:ring-0 placeholder:text-slate-400 transition-colors resize-none font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-sans text-slate-700 focus:outline-none focus:border-[#f80d05] focus:ring-0 placeholder:text-slate-400 transition-colors resize-none font-medium"
                 />
               </div>
 
               {successMsg && (
-                <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-250 text-emerald-800 text-xs flex items-start gap-2.5 font-sans font-semibold">
+                <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-start gap-2.5 font-sans font-semibold">
                   <CheckCircle className="w-4 h-4 shrink-0 mt-0.5 text-emerald-600" />
                   <span>{successMsg}</span>
                 </div>
               )}
 
               {errorMsg && (
-                <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-start gap-2.5 font-sans font-semibold">
-                  <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+                <div className="p-4 rounded-xl bg-[#f80d05]/10 border border-[#f80d05]/30 text-[#0C1E36] text-sm flex items-start gap-2.5 font-sans font-semibold">
+                  <AlertTriangle className="w-4 h-4 text-[#f80d05] shrink-0 mt-0.5" />
                   <span>{errorMsg}</span>
                 </div>
               )}
@@ -170,15 +170,15 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-4 rounded bg-[#0C1E36] hover:bg-[#f80d05] text-white font-mono font-bold text-xs uppercase tracking-widest transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 shadow-sm"
+                className="w-full py-4 rounded bg-[#f80d05] hover:bg-[#d40b04] text-white font-mono font-bold text-xs uppercase tracking-widest transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 shadow-sm"
               >
                 {submitting ? (
                   <>
-                    <RefreshCw className="w-4 h-4 animate-spin text-red-400" /> Sending Proposal Packet...
+                    <RefreshCw className="w-4 h-4 animate-spin text-white" /> Sending Proposal Packet...
                   </>
                 ) : (
                   <>
-                    Transmit Inquiry <Send className="w-3.5 h-3.5 text-red-400" />
+                    Transmit Inquiry <Send className="w-3.5 h-3.5 text-white" />
                   </>
                 )}
               </button>
@@ -189,29 +189,29 @@ export default function ContactForm() {
           <div className="lg:col-span-5 flex flex-col justify-between gap-8">
             <div className="p-8 rounded-2xl bg-white border border-slate-200 shadow-sm relative h-full flex flex-col justify-between">
               <div>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[#f80d05] font-bold block mb-2">
+                <span className="font-mono text-[11px] uppercase tracking-widest text-[#f80d05] font-bold block mb-2">
                   Direct Response Hub
                 </span>
                 <h4 className="font-serif font-bold text-[#0C1E36] text-2xl mb-4">
                   Corporate Headquarters
                 </h4>
-                <p className="text-slate-600 text-xs leading-relaxed mb-6">
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">
                   Direct channels for executive consultations, custom software contracts, ATS profile rewrites, and corporate proposals.
                 </p>
 
-                <div className="space-y-4 text-xs text-slate-700 font-sans leading-relaxed font-semibold">
+                <div className="space-y-4 text-sm text-slate-700 font-sans leading-relaxed font-semibold">
                   <div className="flex gap-3 items-start p-3 rounded-xl bg-slate-50 border border-slate-100">
                     <MapPin className="w-5 h-5 text-[#f80d05] shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-mono text-[10px] uppercase text-[#f80d05] font-bold">Physical Location</div>
+                      <div className="font-mono text-[11px] uppercase text-[#f80d05] font-bold">Physical Location</div>
                       <div className="text-slate-800">Varsity Plaza, Business Incubation Centre, Bank Street</div>
-                      <div className="text-slate-500 text-[11px]">Kisumu, Kenya</div>
+                      <div className="text-slate-500 text-xs">Kisumu, Kenya</div>
                     </div>
                   </div>
                   <div className="flex gap-3 items-start p-3 rounded-xl bg-slate-50 border border-slate-100">
                     <Building2 className="w-5 h-5 text-[#f80d05] shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-mono text-[10px] uppercase text-[#f80d05] font-bold">Postal Address</div>
+                      <div className="font-mono text-[11px] uppercase text-[#f80d05] font-bold">Postal Address</div>
                       <div className="text-slate-800">P.O. Box 1178-40100 Kisumu Kenya</div>
                     </div>
                   </div>
@@ -222,15 +222,15 @@ export default function ContactForm() {
                     </a>
                   </div>
                   <div className="flex gap-3 items-center p-3 rounded-xl bg-slate-50 border border-slate-100">
-                    <PhoneCall className="w-5 h-5 text-emerald-600 shrink-0" />
-                    <a href="https://wa.me/254728606684" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-700 transition-colors">
+                    <PhoneCall className="w-5 h-5 text-[#f80d05] shrink-0" />
+                    <a href="https://wa.me/254728606684" target="_blank" rel="noopener noreferrer" className="hover:text-[#f80d05] transition-colors">
                       +254 728 606 684
                     </a>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-slate-100 mt-6 text-[10px] font-mono text-slate-500 leading-relaxed flex items-center gap-2 font-bold">
+              <div className="pt-6 border-t border-slate-100 mt-6 text-xs font-mono text-slate-500 leading-relaxed flex items-center gap-2 font-bold">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
                 <span>Active communication channel for priority software &amp; brand consultations.</span>
               </div>

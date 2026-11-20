@@ -104,3 +104,22 @@ test("the portfolio names Ni-Wera and includes the active Ujuzi360 LMS project",
   assert.match(portfolioData, /"Spring Boot", "Java", "React"/);
   assert.match(portfolioData, /Project Manager, leading a team of eight developers/);
 });
+
+test("brand red #f80d05, body font scaling, and working ATS keyword integration are consistently wired", () => {
+  const brandLogo = readFileSync(join(root, "src", "components", "BrandLogo.tsx"), "utf8");
+  const indexCss = readFileSync(join(root, "src", "index.css"), "utf8");
+  const atsRoute = readFileSync(join(root, "server", "routes", "ats.ts"), "utf8");
+  const atsInputPanel = readFileSync(join(root, "src", "components", "ats", "AtsInputPanel.tsx"), "utf8");
+
+  assert.match(brandLogo, /#f80d05/);
+  assert.doesNotMatch(brandLogo, /text-red-400/);
+  assert.match(indexCss, /--color-brand-red:\s*#f80d05/);
+  assert.match(indexCss, /font-size:\s*16px/);
+
+  assert.match(atsRoute, /gemini-4-hydrogen/);
+  assert.doesNotMatch(atsRoute, /gemini-3\.8-flash/);
+  assert.match(atsRoute, /targetKeywords/);
+  assert.match(atsComponent, /targetKeywords/);
+  assert.match(atsInputPanel, /Priority Target Keywords/);
+});
+

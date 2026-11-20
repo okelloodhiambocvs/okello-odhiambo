@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AtsResult } from "../types";
 import { useRenderDiagnostics } from "../hooks/useRenderDiagnostics";
 import AtsInputPanel from "./ats/AtsInputPanel";
@@ -9,37 +9,40 @@ import { AtsHeroVisual } from "./HeroEmblems";
 const getFeedbackItemConfig = (item: string) => {
   const lowercase = item.toLowerCase();
   if (
-    lowercase.includes("warning") || 
-    lowercase.includes("action required") || 
-    lowercase.includes("no clear") || 
+    lowercase.includes("warning") ||
+    lowercase.includes("action required") ||
+    lowercase.includes("no clear") ||
     lowercase.includes("passive") ||
-    lowercase.includes("too brief")
+    lowercase.includes("too brief") ||
+    lowercase.includes("low numeric")
   ) {
     return {
       badgeText: "IMPROVE",
-      badgeClass: "bg-rose-50 text-rose-700 border-rose-100",
-      iconClass: "bg-rose-500",
-      rowClass: "border-rose-100 bg-rose-50/10 hover:bg-rose-50/20"
+      badgeClass: "bg-[#f80d05]/10 text-[#f80d05] border-[#f80d05]/25",
+      iconClass: "bg-[#f80d05]",
+      rowClass: "border-[#f80d05]/20 bg-[#f80d05]/[0.03] hover:bg-[#f80d05]/[0.06]",
     };
   }
   if (
-    lowercase.includes("good job") || 
-    lowercase.includes("strong") || 
-    lowercase.includes("optimal") || 
-    lowercase.includes("clear use")
+    lowercase.includes("good job") ||
+    lowercase.includes("strong") ||
+    lowercase.includes("optimal") ||
+    lowercase.includes("clear use") ||
+    lowercase.includes("verified") ||
+    lowercase.includes("well-calibrated")
   ) {
     return {
       badgeText: "STRENGTH",
-      badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-100",
-      iconClass: "bg-emerald-500",
-      rowClass: "border-emerald-100 bg-emerald-50/10 hover:bg-emerald-50/20"
+      badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      iconClass: "bg-emerald-600",
+      rowClass: "border-emerald-200 bg-emerald-50/20 hover:bg-emerald-50/40",
     };
   }
   return {
     badgeText: "RECOMMENDED",
-    badgeClass: "bg-red-50 text-[#f80d05] border-red-100",
+    badgeClass: "bg-[#f80d05]/10 text-[#f80d05] border-[#f80d05]/20",
     iconClass: "bg-[#f80d05]",
-    rowClass: "border-slate-150 bg-slate-50/30 hover:bg-slate-50/65"
+    rowClass: "border-slate-200 bg-slate-50/40 hover:bg-slate-50/80",
   };
 };
 
@@ -47,15 +50,39 @@ export default function AtsBuilder() {
   useRenderDiagnostics("AtsBuilder");
   const [resumeText, setResumeText] = useState("");
   const [jobDescription, setJobDescription] = useState("");
+  const [targetKeywords, setTargetKeywords] = useState("");
   const [analyzing, setAnalyzing] = useState(false);
   const [parsingFile, setParsingFile] = useState(false);
   const [result, setResult] = useState<AtsResult | null>(null);
   const [copied, setCopied] = useState(false);
   const [errorText, setErrorText] = useState("");
   const [isDragOver, setIsDragOver] = useState(false);
+  const [backendStatus, setBackendStatus] = useState<"checking" | "online" | "offline">("checking");
+  const [engineMode, setEngineMode] = useState<string>("keyword-engine");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    let active = true;
+    fetch("/api/health")
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error("Health check failed"))))
+      .then((data) => {
+        if (!active) return;
+        setBackendStatus("online");
+        if (data?.atsEngine?.mode) {
+          setEngineMode(data.atsEngine.mode);
+        }
+      })
+      .catch(() => {
+        if (!active) return;
+        setBackendStatus("offline");
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   const pasteSampleResume = () => {
+    setErrorText("");
     setResumeText(`BRAYAN OKELLO ODHIAMBO
 Mobile: +254 728 606 684 | +254 786 692 381 | Email: okelloodhiambocvs@gmail.com
 Address: P.O. Box 1178, Kisumu, Kenya | Nairobi, Kenya
@@ -84,49 +111,65 @@ EDUCATION & CERTIFICATIONS
 • Advanced Social Media Strategy — HubSpot Academy (2021)
 • Fundamentals of Digital Marketing — Grow with Google Africa (2018)
 • Brand Activation Certification — Safaricom Activ8 Academy (2016)`);
-    
+
     setJobDescription(`SENIOR FULL-STACK SOFTWARE ENGINEER & EXECUTIVE CONSULTANT
-Target Scope: Advanced web applications, TypeScript, Node.js, Go (Golang) microservices, React dashboards, REST APIs, M-Pesa payment gateways, and database management (PostgreSQL/MySQL). Requires expertise in ATS resume parsing, executive branding, corporate proposals, agile project leadership, and stakeholder communication.`);
+Target Scope: Advanced web applications, TypeScript, Node.js, Go (Golang) microservices, React dashboards, REST APIs, Docker containerization, Kubernetes, CI/CD, M-Pesa payment gateways, and database management (PostgreSQL/MySQL). Requires expertise in ATS optimization, executive branding, corporate proposals, agile project leadership, and stakeholder alignment.`);
+
+    setTargetKeywords(
+      "Golang (Go), TypeScript, React, Node.js, PostgreSQL, Docker, Kubernetes, CI/CD, M-Pesa API, Microservices, Agile / Scrum, Executive Branding, Grant Writing"
+    );
+  };
+
+  const applyKeywordPreset = (keywords: string, jdHint?: string) => {
+    setTargetKeywords(keywords);
+    if (!jobDescription.trim() && jdHint) {
+      setJobDescription(jdHint);
+    }
+  };
+
+  const clearInputs = () => {
+    setResumeText("");
+    setJobDescription("");
+    setTargetKeywords("");
+    setResult(null);
+    setErrorText("");
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     readTextFromFile(file);
+    e.target.value = "";
   };
 
   const readTextFromFile = (file: File) => {
     setErrorText("");
-    
-    if (file.type === "application/pdf" || file.name.endsWith(".pdf")) {
+
+    if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
       setParsingFile(true);
-      setErrorText("");
       const reader = new FileReader();
-      
+
       reader.onload = async (e) => {
         try {
           const resultUrl = e.target?.result as string;
           const base64Data = resultUrl.split(",")[1];
-          
+
           const response = await fetch("/api/ats/parse-file", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               fileDataBase64: base64Data,
-              mimeType: "application/pdf"
-            })
+              mimeType: "application/pdf",
+              fileName: file.name,
+            }),
           });
-          
+
+          const data = await response.json().catch(() => ({}));
           if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.error || "Failed to parse PDF file on server.");
+            throw new Error(data.error || "Failed to parse PDF file on server.");
           }
-          
-          const data = await response.json();
-          setResumeText(data.text);
-          if (data.demoMode) {
-            setErrorText("Note: Ran in CV Parsing Demonstration Mode. To parse your real PDF file, configure GEMINI_API_KEY in secrets.");
-          }
+
+          setResumeText(data.text || "");
         } catch (err: any) {
           console.error(err);
           setErrorText(err.message || "An error occurred while uploading and parsing your PDF resume.");
@@ -134,21 +177,25 @@ Target Scope: Advanced web applications, TypeScript, Node.js, Go (Golang) micros
           setParsingFile(false);
         }
       };
-      
+
       reader.onerror = () => {
         setErrorText("Failed to read the selected PDF file.");
         setParsingFile(false);
       };
-      
+
       reader.readAsDataURL(file);
       return;
     }
 
-    if (file.type === "text/plain" || file.name.endsWith(".txt") || file.name.endsWith(".md")) {
-      setErrorText("");
+    if (
+      file.type === "text/plain" ||
+      file.type === "text/markdown" ||
+      file.name.toLowerCase().endsWith(".txt") ||
+      file.name.toLowerCase().endsWith(".md")
+    ) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        const text = e.target?.result as string;
+        const text = (e.target?.result as string) || "";
         setResumeText(text);
       };
       reader.onerror = () => {
@@ -158,7 +205,7 @@ Target Scope: Advanced web applications, TypeScript, Node.js, Go (Golang) micros
       return;
     }
 
-    setErrorText("Unsupported document format. Please upload a plain text (.txt, .md) or standard Adobe PDF (.pdf) file.");
+    setErrorText("Unsupported document format. Please upload a plain text (.txt, .md) or Adobe PDF (.pdf) file.");
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -180,31 +227,35 @@ Target Scope: Advanced web applications, TypeScript, Node.js, Go (Golang) micros
   };
 
   const executeAnalysis = async () => {
-    if (!resumeText.trim()) {
-      setErrorText("Please paste or upload your current Resume/CV contents first.");
+    if (resumeText.trim().length < 20) {
+      setErrorText("Please paste or upload at least 20 characters of your Resume/CV contents first.");
       return;
     }
-    
+
     setErrorText("");
     setAnalyzing(true);
-    setResult(null);
 
     try {
       const response = await fetch("/api/ats/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ resumeText, jobDescription })
+        body: JSON.stringify({
+          resumeText,
+          jobDescription,
+          targetKeywords,
+        }),
       });
 
+      const data = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error("Analysis failed. Server returned an error code.");
+        throw new Error(data.error || `ATS analysis failed (HTTP ${response.status}).`);
       }
 
-      const data: AtsResult = await response.json();
-      setResult(data);
+      setResult(data as AtsResult);
+      setBackendStatus("online");
     } catch (err: any) {
       console.error(err);
-      setErrorText(err.message || "An unexpected error occurred. Please try again.");
+      setErrorText(err.message || "Unable to reach the ATS analysis backend. Please try again.");
     } finally {
       setAnalyzing(false);
     }
@@ -224,27 +275,32 @@ Target Scope: Advanced web applications, TypeScript, Node.js, Go (Golang) micros
 OKELLO ODHIAMBO'S SYSTEMIC ATS RESUME AUDIT
 ======================================================
 ATS SCORING RATIO: ${result.score}/100
+KEYWORD MATCH RATE: ${result.keywordMatchRate}%
+ENGINE: ${result.engine || "keyword-engine"}
+
+-- TARGET KEYWORDS TRACKED (${result.targetKeywordsUsed?.length || 0}):
+${(result.targetKeywordsUsed || []).join(", ")}
 
 -- MATCHING KEYWORDS DETECTED:
-${result.matchingKeywords.map(k => `+ ${k}`).join("\n")}
+${result.matchingKeywords.map((k) => `+ ${k}`).join("\n")}
 
 -- MISSING TARGET KEYWORDS TO INJECT:
-${result.missingKeywords.map(k => `- ${k}`).join("\n")}
+${result.missingKeywords.map((k) => `- ${k}`).join("\n")}
 
 ======================================================
-RE-ARCHITECTED SYSTEMIC SUMMARY PREPARATION:
+RE-ARCHITECTED EXECUTIVE SUMMARY:
 ======================================================
 ${result.optimizedSummary}
 
 ======================================================
-FORMAT STRUCTURE suggestions:
+FORMAT & STRUCTURE SUGGESTIONS:
 ======================================================
-${result.formatFeedback.map(f => `* ${f}`).join("\n")}
+${result.formatFeedback.map((f) => `* ${f}`).join("\n")}
 
 ======================================================
-PHRASING CONTENT CRITIQUES:
+PHRASING & METRIC RECOMMENDATIONS:
 ======================================================
-${result.contentFeedback.map(c => `* ${c}`).join("\n")}
+${result.contentFeedback.map((c) => `* ${c}`).join("\n")}
 `;
     const file = new Blob([fileContent], { type: "text/plain" });
     element.href = URL.createObjectURL(file);
@@ -260,47 +316,52 @@ ${result.contentFeedback.map(c => `* ${c}`).join("\n")}
         kicker="House Ventures Intelligence &"
         titlePrefix="Advanced ATS CV"
         titleHighlight="Audit & Optimizer"
-        description="Test our parsing parameters in real-time. Paste your operational CV data alongside your targeted job parameters below, and let our custom cognitive service calculate your conversion metric instantly."
+        description="Test your CV against real Applicant Tracking System keyword taxonomies in real time. Paste your CV, supply target job keywords, and let our backend scoring engine measure your match ratio instantly."
         visual={<AtsHeroVisual />}
         scrollTargetId="ats-workspace"
         scrollLabel="Scroll down to AI CV Grader workspace"
       />
 
       <section id="ats-workspace" className="py-16 sm:py-20 relative overflow-hidden bg-slate-50">
-        <div className="absolute top-[20%] left-[-15%] w-[40rem] h-[40rem] bg-red-500/[0.04] rounded-full blur-[150px] pointer-events-none" />
-        <div className="absolute bottom-[20%] right-[-15%] w-[35rem] h-[35rem] bg-indigo-500/[0.04] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-[20%] left-[-15%] w-[40rem] h-[40rem] bg-[#f80d05]/[0.04] rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-[20%] right-[-15%] w-[35rem] h-[35rem] bg-[#f80d05]/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+            <AtsInputPanel
+              resumeText={resumeText}
+              setResumeText={setResumeText}
+              jobDescription={jobDescription}
+              setJobDescription={setJobDescription}
+              targetKeywords={targetKeywords}
+              setTargetKeywords={setTargetKeywords}
+              parsingFile={parsingFile}
+              analyzing={analyzing}
+              errorText={errorText}
+              isDragOver={isDragOver}
+              backendStatus={backendStatus}
+              engineMode={engineMode}
+              fileInputRef={fileInputRef}
+              pasteSampleResume={pasteSampleResume}
+              applyKeywordPreset={applyKeywordPreset}
+              clearInputs={clearInputs}
+              handleFileUpload={handleFileUpload}
+              handleDragOver={handleDragOver}
+              handleDragLeave={handleDragLeave}
+              handleDrop={handleDrop}
+              executeAnalysis={executeAnalysis}
+            />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-          <AtsInputPanel
-            resumeText={resumeText}
-            setResumeText={setResumeText}
-            jobDescription={jobDescription}
-            setJobDescription={setJobDescription}
-            parsingFile={parsingFile}
-            analyzing={analyzing}
-            errorText={errorText}
-            isDragOver={isDragOver}
-            fileInputRef={fileInputRef}
-            pasteSampleResume={pasteSampleResume}
-            handleFileUpload={handleFileUpload}
-            handleDragOver={handleDragOver}
-            handleDragLeave={handleDragLeave}
-            handleDrop={handleDrop}
-            executeAnalysis={executeAnalysis}
-          />
-
-          <AtsResultPanel
-            result={result}
-            analyzing={analyzing}
-            copied={copied}
-            pasteSampleResume={pasteSampleResume}
-            downloadOptimizedText={downloadOptimizedText}
-            copyToClipboard={copyToClipboard}
-            getFeedbackItemConfig={getFeedbackItemConfig}
-          />
-        </div>
+            <AtsResultPanel
+              result={result}
+              analyzing={analyzing}
+              copied={copied}
+              pasteSampleResume={pasteSampleResume}
+              downloadOptimizedText={downloadOptimizedText}
+              copyToClipboard={copyToClipboard}
+              getFeedbackItemConfig={getFeedbackItemConfig}
+            />
+          </div>
         </div>
       </section>
     </div>

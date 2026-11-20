@@ -75,8 +75,8 @@ export default function Services() {
 
       <section id="services-catalog" className="py-16 sm:py-20 relative bg-slate-50">
         {/* Decorative radial gradients */}
-        <div className="absolute top-[30%] left-[5%] w-[25rem] h-[25rem] bg-red-100/30 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute top-[60%] right-[5%] w-[30rem] h-[30rem] bg-rose-105/30 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-[30%] left-[5%] w-[25rem] h-[25rem] bg-[#f80d05]/[0.04] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[60%] right-[5%] w-[30rem] h-[30rem] bg-[#f80d05]/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6">
 
@@ -97,7 +97,7 @@ export default function Services() {
             <h4 className="font-serif text-lg sm:text-xl font-bold text-[#0C1E36]">
               Unsure which corporate framework matches your transition threshold?
             </h4>
-            <p className="text-slate-600 text-xs sm:text-sm">
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
               Schedule a preliminary 15-minute diagnostic evaluation directly on WhatsApp or submit our quick contact matrix. We'll outline your career positioning path at zero immediate cost.
             </p>
           </div>
@@ -106,7 +106,7 @@ export default function Services() {
             href={`https://wa.me/254728606684?text=${encodeURIComponent("Hi Okello, I would like to book a 15-minute introductory diagnostics chat.")}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 rounded text-white font-mono font-bold text-xs uppercase transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 shrink-0 shadow-sm"
+            className="px-6 py-3.5 bg-[#f80d05] hover:bg-[#d40b04] rounded text-white font-mono font-bold text-xs uppercase transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 shrink-0 shadow-sm"
           >
             Direct WhatsApp Chat <MessageSquare className="w-4 h-4" />
           </a>

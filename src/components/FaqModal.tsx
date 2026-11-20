@@ -99,20 +99,20 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
   return (
     <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="w-full max-w-4xl max-h-[90vh] bg-[#0C1E36] border border-red-500/30 rounded-2xl overflow-hidden shadow-2xl flex flex-col relative text-white animate-in zoom-in-95 duration-200"
+        className="w-full max-w-4xl max-h-[90vh] bg-[#0C1E36] border border-[#f80d05]/30 rounded-2xl overflow-hidden shadow-2xl flex flex-col relative text-white animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Accent Bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-[#f80d05] via-red-500 to-[#0C1E36]" />
+        <div className="h-1.5 w-full bg-gradient-to-r from-[#f80d05] via-[#f80d05] to-[#0C1E36]" />
 
         {/* Modal Header */}
         <div className="p-6 border-b border-slate-800 flex items-center justify-between gap-4 bg-[#08182D]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-lg bg-[#f80d05]/10 border border-[#f80d05]/25 flex items-center justify-center shrink-0">
               <HelpCircle className="w-5 h-5 text-[#f80d05]" />
             </div>
             <div>
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-red-400 font-bold block">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#f80d05] font-bold block">
                 House Ventures Knowledge Base
               </span>
               <h3 className="font-serif text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -123,7 +123,7 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
 
           <button
             onClick={onClose}
-            className="p-2 rounded-lg bg-slate-800/80 hover:bg-[#f80d05] text-slate-300 hover:text-white transition-all border border-slate-700 hover:border-red-500 cursor-pointer"
+            className="p-2 rounded-lg bg-slate-800/80 hover:bg-[#f80d05] text-slate-300 hover:text-white transition-all border border-slate-700 hover:border-[#f80d05] cursor-pointer"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -139,7 +139,7 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions (e.g. Golang, ATS CV, M-Pesa, turnaround times, privacy)..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-red-500 focus:outline-none text-xs text-white placeholder:text-slate-400 font-sans"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-[#f80d05] focus:outline-none text-sm text-white placeholder:text-slate-400 font-sans"
             />
           </div>
 
@@ -179,22 +179,22 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
                     className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 hover:bg-slate-800/40 transition-colors cursor-pointer"
                   >
                     <div className="flex items-start gap-3">
-                      <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-red-500/10 border border-red-500/20 text-red-400 font-bold shrink-0 mt-0.5">
+                      <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[#f80d05]/15 border border-[#f80d05]/30 text-[#f80d05] font-bold shrink-0 mt-0.5">
                         {faq.category}
                       </span>
-                      <h4 className="font-serif text-sm sm:text-base font-bold text-slate-100 leading-snug">
+                      <h4 className="font-serif text-base sm:text-lg font-bold text-slate-100 leading-snug">
                         {faq.question}
                       </h4>
                     </div>
                     {isOpen ? (
-                      <ChevronUp className="w-4 h-4 text-red-400 shrink-0" />
+                      <ChevronUp className="w-4 h-4 text-[#f80d05] shrink-0" />
                     ) : (
                       <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
                     )}
                   </button>
 
                   {isOpen && (
-                    <div className="px-4 sm:px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/60 bg-[#08182D]">
+                    <div className="px-4 sm:px-5 pb-5 pt-2 text-sm sm:text-base text-slate-300 leading-relaxed border-t border-slate-800/60 bg-[#08182D]">
                       <p>{faq.answer}</p>
                     </div>
                   )}
@@ -206,8 +206,8 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
 
         {/* Modal Footer */}
         <div className="p-4 sm:p-6 bg-[#08182D] border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-slate-300 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-red-400 shrink-0" />
+          <div className="text-sm text-slate-300 flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-[#f80d05] shrink-0" />
             <span>Have a custom question not listed here?</span>
           </div>
 
@@ -216,7 +216,7 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
               href={`https://wa.me/254728606684?text=${encodeURIComponent("Hi Okello, I have a question regarding your services.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#f80d05] hover:bg-[#d40b04] text-white rounded-lg font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
             >
               <MessageSquare className="w-3.5 h-3.5" /> Ask on WhatsApp
             </a>

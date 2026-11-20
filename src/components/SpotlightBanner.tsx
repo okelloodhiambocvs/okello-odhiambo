@@ -34,7 +34,7 @@ export default function SpotlightBanner({ onNavigate }: SpotlightBannerProps) {
               </span>
             </div>
 
-            <p className="mt-6 max-w-xl mx-auto lg:mx-0 text-[#0C1E36]/85 text-sm sm:text-base font-sans leading-relaxed">
+            <p className="mt-6 max-w-xl mx-auto lg:mx-0 text-[#0C1E36]/85 text-base sm:text-[1.15rem] font-sans leading-relaxed">
               From production Golang microservices and M-Pesa marketplaces at Zone01 Kisumu to board-ready ATS resumes and institutional grants at House Ventures Consultancy.
             </p>
 
@@ -42,7 +42,7 @@ export default function SpotlightBanner({ onNavigate }: SpotlightBannerProps) {
               <button
                 type="button"
                 onClick={() => onNavigate("portfolio")}
-                className="px-7 py-3.5 rounded bg-[#f80d05] hover:bg-red-600 text-white font-sans font-bold uppercase tracking-wider text-xs shadow-md transition-colors cursor-pointer inline-flex items-center gap-2 whitespace-nowrap shrink-0"
+                className="px-7 py-3.5 rounded bg-[#f80d05] hover:bg-[#d40b04] text-white font-sans font-bold uppercase tracking-wider text-xs shadow-md transition-colors cursor-pointer inline-flex items-center gap-2 whitespace-nowrap shrink-0"
               >
                 Explore Case Studies <ArrowRight className="w-4 h-4" />
               </button>

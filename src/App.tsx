@@ -81,21 +81,21 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50 overflow-hidden text-[#0C1E36] font-sans selection:bg-red-200 selection:text-[#0C1E36]">
+    <div className="relative min-h-screen bg-slate-50 overflow-hidden text-[#0C1E36] font-sans selection:bg-[#f80d05]/20 selection:text-[#0C1E36]">
       {/* Floating direct quick WhatsApp contact bubble indicator - Always Visible */}
       <a
         href="https://wa.me/254728606684?text=Hi%20Okello,%20I%20am%20interested%20in%20your%20expert%20copywriting%20and%20tech%20services."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-50 p-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300 group flex items-center gap-2"
+        className="fixed bottom-5 right-5 z-50 p-3.5 bg-[#f80d05] hover:bg-[#d40b04] text-white font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300 group flex items-center gap-2"
         title="Chat on WhatsApp"
         id="whatsapp-floater"
       >
         <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-out whitespace-nowrap text-xs font-mono uppercase tracking-wider font-semibold">
-          Let's Chat
+          Let&apos;s Chat
         </span>
         <svg
-          className="w-5 h-5 fill-slate-950"
+          className="w-5 h-5 fill-white"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >

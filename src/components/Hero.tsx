@@ -47,7 +47,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                 </h1>
 
                 {/* Dynamic Descriptive Subheadline */}
-                <p className="max-w-xl text-slate-300 text-sm sm:text-base tracking-wide font-sans font-normal leading-relaxed mb-8">
+                <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] tracking-wide font-sans font-normal leading-relaxed mb-8">
                   Full-Stack Software Developer | Golang &amp; React Architect | Executive Communication Strategist | Founder of{" "}
                   <span className="text-white font-semibold border-b-2 border-[#f80d05] pb-0.5">
                     House Ventures Consultancy
@@ -60,7 +60,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                   <button
                     type="button"
                     onClick={() => onNavigate("contact")}
-                    className="w-full sm:w-auto px-5 py-3.5 rounded bg-[#f80d05] hover:bg-red-600 text-white font-sans font-bold tracking-wider text-xs uppercase shadow-md transition-colors cursor-pointer whitespace-nowrap shrink-0"
+                    className="w-full sm:w-auto px-5 py-3.5 rounded bg-[#f80d05] hover:bg-[#d40b04] text-white font-sans font-bold tracking-wider text-xs uppercase shadow-md transition-colors cursor-pointer whitespace-nowrap shrink-0"
                   >
                     Hire Developer / Consultant
                   </button>
@@ -77,9 +77,9 @@ export default function Hero({ onNavigate }: HeroProps) {
                     href="https://wa.me/254728606684?text=Hi%20Okello,%20I%20am%20visiting%20your%20website%20and%20would%20like%20to%20discuss%20a%20software%20development%20or%20consultancy%20project."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-4 py-3.5 rounded border border-emerald-400/35 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 font-sans font-bold tracking-wider text-xs uppercase transition-colors flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
+                    className="group w-full sm:w-auto px-4 py-3.5 rounded border border-[#f80d05]/45 bg-[#f80d05]/10 hover:bg-[#f80d05] text-white font-sans font-bold tracking-wider text-xs uppercase transition-colors flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
                   >
-                    <MessageSquare className="w-4 h-4 text-emerald-400" /> WhatsApp Chat
+                    <MessageSquare className="w-4 h-4 text-[#f80d05] group-hover:text-white" /> WhatsApp Chat
                   </a>
                 </div>
               </div>

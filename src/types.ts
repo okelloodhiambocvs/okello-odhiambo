@@ -42,13 +42,29 @@ export interface BlogItem {
   tags: string[];
 }
 
+export interface AtsSectionAudit {
+  hasContactInfo: boolean;
+  hasSummary: boolean;
+  hasExperience: boolean;
+  hasSkills: boolean;
+  hasEducation: boolean;
+  hasBulletStructure: boolean;
+  quantifiedMetricsCount: number;
+  wordCount: number;
+}
+
 export interface AtsResult {
   score: number;
+  keywordMatchRate: number;
+  targetKeywordsUsed: string[];
   matchingKeywords: string[];
   missingKeywords: string[];
   formatFeedback: string[];
   contentFeedback: string[];
   optimizedSummary: string;
+  sectionAudit?: AtsSectionAudit;
+  engine?: string;
+  analyzedAt?: string;
   demoMode?: boolean;
   isFallback?: boolean;
   errorMessage?: string;

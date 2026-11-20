@@ -26,7 +26,7 @@ export default function Testimonials() {
   return (
     <section className="py-24 relative overflow-hidden bg-white border-t border-slate-200">
       {/* Accent glow behind active elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35rem] h-[35rem] bg-indigo-50/50 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35rem] h-[35rem] bg-[#f80d05]/[0.04] rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
@@ -41,7 +41,7 @@ export default function Testimonials() {
         <div className="max-w-4xl mx-auto mb-20">
           <div className="rounded-2xl bg-white border border-slate-200 p-8 sm:p-12 relative overflow-hidden flex flex-col justify-between min-h-[22rem] shadow-sm">
             {/* Massive watermark Quote icon */}
-            <div className="absolute top-6 right-8 text-red-500/10 pointer-events-none">
+            <div className="absolute top-6 right-8 text-[#f80d05]/10 pointer-events-none">
               <Quote className="w-24 h-24 stroke-[1]" />
             </div>
 
@@ -54,7 +54,7 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <blockquote className="text-slate-650 text-sm sm:text-base md:text-lg tracking-wide leading-relaxed font-sans mb-8">
+              <blockquote className="text-slate-600 text-base sm:text-[1.15rem] md:text-[1.3rem] tracking-wide leading-relaxed font-sans mb-8">
                 "{current.content}"
               </blockquote>
             </div>
@@ -62,12 +62,12 @@ export default function Testimonials() {
             {/* Testimonials user details & sliding arrows controls */}
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-6 border-t border-slate-100">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-red-50 border border-red-100">
+                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-[#f80d05]/10 border border-[#f80d05]/20">
                   <Bookmark className="w-5 h-5 text-[#f80d05]" />
                 </div>
                 <div>
                   <span className="block font-serif text-base font-bold text-[#0C1E36]">{current.name}</span>
-                  <span className="block text-xs text-slate-500 font-mono mt-0.5 font-bold">
+                  <span className="block text-sm text-slate-500 font-mono mt-0.5 font-bold">
                     {current.company ? (
                       <>
                         {current.role} at <strong className="text-[#f80d05] font-bold">{current.company}</strong>
@@ -111,9 +111,9 @@ export default function Testimonials() {
                 key={idx}
                 className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center hover:bg-white hover:border-[#f80d05] shadow-sm transition-all duration-300"
               >
-                <Building className="w-5 h-5 text-[#f80d05]/60 mx-auto mb-2" />
-                <span className="block font-serif text-xs font-bold text-slate-700">{pt.name}</span>
-                <span className="block text-[8px] font-mono text-slate-505 mt-1 uppercase tracking-wide leading-snug font-bold">
+                <Building className="w-5 h-5 text-[#f80d05]/70 mx-auto mb-2" />
+                <span className="block font-serif text-sm font-bold text-slate-700">{pt.name}</span>
+                <span className="block text-[10px] font-mono text-slate-500 mt-1 uppercase tracking-wide leading-snug font-bold">
                   {pt.desc}
                 </span>
               </div>

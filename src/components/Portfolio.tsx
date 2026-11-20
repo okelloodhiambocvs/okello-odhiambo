@@ -79,7 +79,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                   <span className="text-[#f80d05]">Deliverables</span>
                 </h1>
 
-                <p className="max-w-xl text-slate-300 text-sm sm:text-base tracking-wide font-sans font-normal leading-relaxed mb-8">
+                <p className="max-w-xl text-slate-300 text-base sm:text-[1.15rem] tracking-wide font-sans font-normal leading-relaxed mb-8">
                   Production Golang and TypeScript platforms, corporate profiles, grant proposals, and executive career transformations delivered across East Africa via{" "}
                   <span className="text-white font-semibold border-b-2 border-[#f80d05] pb-0.5">
                     Zone01 &amp; House Ventures Consultancy
@@ -92,7 +92,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                   <button
                     type="button"
                     onClick={() => (onNavigate ? onNavigate("contact") : scrollToDeliverables())}
-                    className="w-full sm:w-auto px-5 py-3.5 rounded bg-[#f80d05] hover:bg-red-600 text-white font-sans font-bold tracking-wider text-xs uppercase shadow-md transition-colors cursor-pointer whitespace-nowrap shrink-0"
+                    className="w-full sm:w-auto px-5 py-3.5 rounded bg-[#f80d05] hover:bg-[#d40b04] text-white font-sans font-bold tracking-wider text-xs uppercase shadow-md transition-colors cursor-pointer whitespace-nowrap shrink-0"
                   >
                     Commission a Project
                   </button>
@@ -189,7 +189,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
 
       <section id="portfolio-deliverables" className="py-16 sm:py-20 relative bg-white">
         {/* Decorative gradient effects */}
-        <div className="absolute top-[40%] right-[10%] w-[25rem] h-[25rem] bg-red-50/50 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[40%] right-[10%] w-[25rem] h-[25rem] bg-[#f80d05]/[0.04] rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6">
           {/* Editorial Section Header & Category Filter Controls */}
@@ -233,7 +233,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                 <div>
                   {/* Aspect Ratio Balanced Image Cover */}
                   {item.image && (
-                    <div className="w-full h-48 rounded-xl overflow-hidden mb-5 border border-slate-150 relative select-none">
+                    <div className="w-full h-48 rounded-xl overflow-hidden mb-5 border border-slate-200 relative select-none">
                       <img
                         src={item.image}
                         alt={item.title}
@@ -245,7 +245,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
 
                   {/* Category Pin and Year */}
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] uppercase tracking-widest font-mono font-bold text-[#f80d05] px-2.5 py-1 rounded bg-red-50 border border-red-100 whitespace-nowrap">
+                    <span className="text-[11px] uppercase tracking-widest font-mono font-bold text-[#f80d05] px-2.5 py-1 rounded bg-[#f80d05]/10 border border-[#f80d05]/25 whitespace-nowrap">
                       {item.category}
                     </span>
                     <span className="text-xs font-mono text-slate-500">
@@ -261,7 +261,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                     <span className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">
                       Client: {item.client}
                     </span>
-                    <p className="text-slate-600 text-xs sm:text-sm tracking-wide leading-relaxed line-clamp-3 font-normal">
+                    <p className="text-slate-600 text-sm sm:text-base tracking-wide leading-relaxed line-clamp-3 font-normal">
                       {item.description}
                     </p>
                   </div>
@@ -270,11 +270,11 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                 <div>
                   {/* Direct High Impact Metrics Block */}
                   {item.metrics && (
-                    <div className="p-4 rounded-xl bg-red-50 border border-red-100 mb-6">
-                      <span className="block text-[8px] tracking-[0.2em] font-mono text-[#f80d05] uppercase mb-1 font-bold">
-                        Conversion Impact Accomplished 
+                    <div className="p-4 rounded-xl bg-[#f80d05]/[0.05] border border-[#f80d05]/20 mb-6">
+                      <span className="block text-[9px] tracking-[0.2em] font-mono text-[#f80d05] uppercase mb-1 font-bold">
+                        Conversion Impact Accomplished
                       </span>
-                      <span className="font-sans font-semibold text-slate-755 text-xs block leading-relaxed">
+                      <span className="font-sans font-semibold text-[#0C1E36] text-sm block leading-relaxed">
                         {item.metrics}
                       </span>
                     </div>
@@ -285,12 +285,12 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                     <div className="flex gap-1.5 flex-wrap">
                       {isTech && item.techStack
                         ? item.techStack.slice(0, 3).map((stack, idx) => (
-                            <span key={idx} className="text-[9px] font-mono text-indigo-700 font-bold px-2 py-0.5 rounded bg-indigo-50 border border-indigo-150">
+                            <span key={idx} className="text-[10px] font-mono text-[#0C1E36] font-bold px-2 py-0.5 rounded bg-slate-100 border border-slate-200">
                               {stack}
                             </span>
                           ))
                         : item.deliverables?.slice(0, 2).map((del, idx) => (
-                            <span key={idx} className="text-[9px] font-mono text-emerald-700 font-bold px-2 py-0.5 rounded bg-emerald-50 border border-emerald-150">
+                            <span key={idx} className="text-[10px] font-mono text-[#f80d05] font-bold px-2 py-0.5 rounded bg-[#f80d05]/10 border border-[#f80d05]/20">
                               {del}
                             </span>
                           ))}
@@ -342,7 +342,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
               <div className="p-6 sm:p-8 overflow-y-auto">
                 {/* Meta details */}
                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="text-[10px] font-mono uppercase tracking-widest font-bold text-[#f80d05] px-3 py-1 bg-red-50 rounded border border-red-100">
+                  <span className="text-[11px] font-mono uppercase tracking-widest font-bold text-[#f80d05] px-3 py-1 bg-[#f80d05]/10 rounded border border-[#f80d05]/25">
                     {selectedItem.category}
                   </span>
                   <span className="text-slate-500 text-xs font-mono flex items-center gap-1 font-semibold">
@@ -370,18 +370,18 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                 )}
 
                 {/* Long Description Narrative */}
-                <div className="space-y-4 mb-8 text-slate-600 font-sans text-xs sm:text-sm leading-relaxed max-h-[16rem] overflow-y-auto pr-2">
+                <div className="space-y-4 mb-8 text-slate-600 font-sans text-sm sm:text-base leading-relaxed max-h-[18rem] overflow-y-auto pr-2">
                   <p className="font-bold text-[#0C1E36]">Project Blueprint Overview:</p>
                   <p>{selectedItem.longDescription || selectedItem.description}</p>
 
                   {/* Quantitative success callout panel */}
                   {selectedItem.metrics && (
-                    <div className="p-4 rounded-xl border border-red-100 bg-red-50 shadow-sm">
-                      <span className="block text-[9px] font-mono tracking-widest text-[#f80d05] uppercase font-bold mb-1">
+                    <div className="p-4 rounded-xl border border-[#f80d05]/25 bg-[#f80d05]/[0.05] shadow-sm">
+                      <span className="block text-[10px] font-mono tracking-widest text-[#f80d05] uppercase font-bold mb-1">
                         Quantified Success Metric
                       </span>
-                      <p className="text-xs text-[#0C1E36] font-bold italic">
-                        "{selectedItem.metrics}"
+                      <p className="text-sm text-[#0C1E36] font-bold italic">
+                        &ldquo;{selectedItem.metrics}&rdquo;
                       </p>
                     </div>
                   )}
@@ -394,7 +394,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                       </p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {selectedItem.deliverables.map((del, idx) => (
-                          <div key={idx} className="flex items-center gap-2 text-xs text-slate-600 font-medium">
+                          <div key={idx} className="flex items-center gap-2 text-sm text-slate-600 font-medium">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#f80d05]" />
                             <span>{del}</span>
                           </div>
@@ -411,7 +411,7 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                       </p>
                       <div className="flex gap-2 flex-wrap">
                         {selectedItem.techStack.map((tech, idx) => (
-                          <span key={idx} className="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-50 border border-indigo-150 text-indigo-700 font-bold">
+                          <span key={idx} className="text-xs font-mono px-2.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-[#0C1E36] font-bold">
                             {tech}
                           </span>
                         ))}
@@ -442,9 +442,9 @@ export default function Portfolio({ onNavigate }: PortfolioProps) {
                       href={`https://wa.me/254728606684?text=${encodeURIComponent(`Hi Okello, I saw your case study "${selectedItem.title}" on your website and would like to discuss a similar project.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-auto px-5 py-2.5 bg-[#0C1E36] hover:bg-[#f80d05] text-white text-xs font-mono font-bold tracking-wider transition-all uppercase flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                      className="w-full sm:w-auto px-5 py-2.5 bg-[#f80d05] hover:bg-[#d40b04] text-white text-xs font-mono font-bold tracking-wider transition-all uppercase flex items-center justify-center gap-1.5 shadow-sm cursor-pointer rounded"
                     >
-                      Discuss This Scope <ExternalLink className="w-3.5 h-3.5 text-red-200" />
+                      Discuss This Scope <ExternalLink className="w-3.5 h-3.5 text-white" />
                     </a>
                   </div>
                 </div>

@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express, { Request, Response } from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
@@ -28,11 +29,16 @@ async function startServer() {
 
   // Health check endpoint
   app.get("/api/health", (req: Request, res: Response) => {
+    const aiConfigured = Boolean(process.env.GEMINI_API_KEY);
     res.json({
       status: "ok",
       timestamp: new Date().toISOString(),
       service: "House Ventures Consultancy / Developer Zone01 API",
-      environment: process.env.NODE_ENV || "development"
+      environment: process.env.NODE_ENV || "development",
+      atsEngine: {
+        aiConfigured,
+        mode: aiConfigured ? "gemini-4-hydrogen" : "keyword-engine",
+      },
     });
   });
 
