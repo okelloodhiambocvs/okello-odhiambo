@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Camera, ExternalLink, Sparkles, CheckCircle2, Maximize2, X, Upload, RefreshCw, Image as ImageIcon, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Maximize2, Upload, RefreshCw, ShieldCheck } from "lucide-react";
 import { USER_ATTACHED_IMAGES, AttachedUserImage } from "../userImages";
 
-export default function FounderGallery() {
-  const [selectedImage, setSelectedImage] = useState<AttachedUserImage | null>(null);
+interface FounderGalleryProps {
+  onSelectAction?: (actionId: string) => void;
+}
+
+export default function FounderGallery({ onSelectAction }: FounderGalleryProps) {
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [availableFiles, setAvailableFiles] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
@@ -206,61 +209,11 @@ export default function FounderGallery() {
             <ImageCard
               key={item.id}
               item={item}
-              onExpand={() => setSelectedImage(item)}
+              onExpand={() => onSelectAction?.(item.id)}
             />
           ))}
         </div>
       </div>
-
-      {/* Fullscreen Photo Modal */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div 
-            className="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl border border-slate-100 flex flex-col max-h-[90vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between">
-              <div>
-                <h4 className="font-serif text-lg font-bold text-[#0C1E36]">
-                  {selectedImage.title}
-                </h4>
-              </div>
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-full transition-colors"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="relative bg-slate-900 flex items-center justify-center min-h-[300px] max-h-[55vh] overflow-hidden">
-              <SafeImage
-                primarySrc={selectedImage.userPath}
-                fallbackSrc={selectedImage.fallbackAsset}
-                alt={selectedImage.title}
-                className="max-h-[55vh] w-auto max-w-full object-contain"
-              />
-            </div>
-
-            <div className="p-6 bg-slate-50 border-t border-slate-100">
-              <p className="text-xs font-mono font-bold text-slate-500 mb-1">
-                Context: {selectedImage.context}
-              </p>
-              <p className="text-sm text-slate-700 font-sans leading-relaxed">
-                {selectedImage.description}
-              </p>
-              <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500 font-mono">
-                <span>Asset: {selectedImage.filename}</span>
-                <span className="text-[#f80d05] font-bold">Verified Authentic Media</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
@@ -273,45 +226,46 @@ interface ImageCardProps {
 
 function ImageCard({ item, onExpand }: ImageCardProps) {
   return (
-    <div 
+    <button
+      type="button"
       onClick={onExpand}
-      className="group relative rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xs hover:shadow-md hover:border-[#f80d05]/40 transition-all duration-300 flex flex-col cursor-pointer"
+      className="group relative text-left flex flex-col w-full bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f80d05]"
     >
-      <div className="relative h-56 w-full bg-slate-100 overflow-hidden">
+      <div className="relative h-56 w-full overflow-hidden">
         <SafeImage
           primarySrc={item.userPath}
           fallbackSrc={item.fallbackAsset}
           alt={item.title}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
           <span className="text-white text-xs font-mono flex items-center gap-1.5 font-bold">
-            <Maximize2 className="w-3.5 h-3.5" /> View Photo Details
+            <Maximize2 className="w-3.5 h-3.5" /> Read Full Story
           </span>
         </div>
       </div>
 
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="pt-4 flex-1 flex flex-col justify-between w-full">
         <div>
-          <h4 className="font-serif font-bold text-base text-[#0C1E36] group-hover:text-[#f80d05] transition-colors leading-snug">
+          <h4 className="font-serif font-bold text-lg text-white group-hover:text-[#f80d05] transition-colors leading-snug">
             {item.title}
           </h4>
-          <p className="text-xs text-slate-500 font-mono mt-1 mb-2 line-clamp-1">
+          <p className="text-xs text-slate-300 font-mono mt-1 mb-2 line-clamp-1">
             {item.context}
           </p>
-          <p className="text-xs text-slate-650 font-sans line-clamp-2 leading-relaxed">
+          <p className="text-xs text-slate-300/90 font-sans line-clamp-2 leading-relaxed">
             {item.description}
           </p>
         </div>
 
-        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-400">
-          <span className="text-slate-500 font-bold">{item.category}</span>
+        <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between text-[11px] font-mono">
+          <span className="text-slate-300 font-bold">{item.category}</span>
           <span className="text-[#f80d05] group-hover:translate-x-0.5 transition-transform font-bold">
             Expand →
           </span>
         </div>
       </div>
-    </div>
+    </button>
   );
 }
 

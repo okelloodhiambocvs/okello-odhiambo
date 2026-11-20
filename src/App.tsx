@@ -11,6 +11,8 @@ import AtsBuilder from "./components/AtsBuilder";
 import Testimonials from "./components/Testimonials";
 import ContactForm from "./components/ContactForm";
 import BrandFooter from "./components/BrandFooter";
+import ActionDetailPage from "./components/ActionDetailPage";
+import { USER_ATTACHED_IMAGES } from "./userImages";
 
 export type PageId = "about" | "services" | "portfolio" | "ats-scanner" | "contact";
 
@@ -19,8 +21,10 @@ export default function App() {
   useRenderDiagnostics("App");
 
   const [currentPage, setCurrentPage] = useState<PageId>("about");
+  const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
 
   const navigateToPage = (pageId: string) => {
+    setSelectedActionId(null);
     const validPages: PageId[] = ["about", "services", "portfolio", "ats-scanner", "contact"];
     if (validPages.includes(pageId as PageId)) {
       setCurrentPage(pageId as PageId);
@@ -33,9 +37,22 @@ export default function App() {
     });
   };
 
+  const openActionDetail = (actionId: string) => {
+    setCurrentPage("about");
+    setSelectedActionId(actionId);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentPage]);
+  }, [currentPage, selectedActionId]);
+
+  const selectedActionItem = selectedActionId
+    ? USER_ATTACHED_IMAGES.find((item) => item.id === selectedActionId) || null
+    : null;
 
   const pageVariants = {
     initial: {
@@ -92,8 +109,26 @@ export default function App() {
       {/* Main 5-Page View Controller with Framer Motion Page Transitions */}
       <main className="pt-16 min-h-[calc(100vh-64px)]">
         <AnimatePresence mode="wait">
-          {/* PAGE 1: About & Engineering */}
-          {currentPage === "about" && (
+          {/* PAGE 1: About & Engineering (or dedicated Okello in Action story page) */}
+          {currentPage === "about" && selectedActionItem && (
+            <motion.div
+              key={`action-${selectedActionItem.id}`}
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full"
+            >
+              <ActionDetailPage
+                item={selectedActionItem}
+                onBack={() => setSelectedActionId(null)}
+                onSelectAction={openActionDetail}
+                onNavigate={navigateToPage}
+              />
+            </motion.div>
+          )}
+
+          {currentPage === "about" && !selectedActionItem && (
             <motion.div
               key="about"
               variants={pageVariants}
@@ -104,7 +139,7 @@ export default function App() {
             >
               <Hero onNavigate={navigateToPage} />
               <div id="about-story">
-                <About />
+                <About onSelectAction={openActionDetail} />
               </div>
               <SpotlightBanner onNavigate={navigateToPage} />
               <Testimonials />

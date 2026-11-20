@@ -13,14 +13,19 @@ const servicesComponent = readFileSync(join(root, "src", "components", "Services
 const atsComponent = readFileSync(join(root, "src", "components", "AtsBuilder.tsx"), "utf8");
 const contactComponent = readFileSync(join(root, "src", "components", "ContactForm.tsx"), "utf8");
 const founderGalleryComponent = readFileSync(join(root, "src", "components", "FounderGallery.tsx"), "utf8");
+const heroEmblemsComponent = readFileSync(join(root, "src", "components", "HeroEmblems.tsx"), "utf8");
+const actionDetailComponent = readFileSync(join(root, "src", "components", "ActionDetailPage.tsx"), "utf8");
 const portfolioData = readFileSync(join(root, "src", "data.ts"), "utf8");
 const galleryFiles = [...galleryManifest.matchAll(/filename: "([^"]+)"/g)].map((match) => match[1]);
 const galleryAssetImports = [...galleryManifest.matchAll(/from "\.\/assets\/images\/user\/([^"]+)"/g)].map((match) => match[1]);
 
-test("every gallery entry has a deployment-safe bundled image asset", () => {
+test("every gallery entry has a deployment-safe bundled image asset and thorough story content", () => {
   assert.equal(galleryFiles.length, 6, "The gallery should contain the six approved images");
   assert.equal(new Set(galleryFiles).size, galleryFiles.length, "Gallery filenames must be unique");
   assert.equal(galleryAssetImports.length, galleryFiles.length, "Each gallery card needs a bundled image import");
+  assert.match(galleryManifest, /overviewParagraphs:/);
+  assert.match(galleryManifest, /keyHighlights:/);
+  assert.match(actionDetailComponent, /In-Depth Overview/);
 
   for (const filename of galleryAssetImports) {
     assert.ok(
@@ -67,21 +72,30 @@ test("the landing page hero uses the attached studio cutout portrait and omits t
   assert.ok(existsSync(join(root, "public", "assets", "aistudio", "WhatsApp_Image_2026-11-09_at_12.59.17_AM-removebg-preview_df34d606.png")));
 });
 
-test("the About Full-Stack card removes cryptic go run commands and redundant bullets while gallery uses brand blue", () => {
+test("the About cards achieve narrative uniformity while gallery cards sit directly on brand blue without white boxes", () => {
   assert.doesNotMatch(aboutComponent, /go run main\.go/);
   assert.doesNotMatch(aboutComponent, /Zone01 Go & Full-Stack Labs/);
   assert.doesNotMatch(aboutComponent, /Ni-Wera Web App Project/);
   assert.doesNotMatch(aboutComponent, /Ujuzi360 LMS Project Management/);
+  assert.doesNotMatch(aboutComponent, /We design high-converting career assets/);
   assert.match(founderGalleryComponent, /bg-\[#0C1E36\]/);
+  assert.doesNotMatch(founderGalleryComponent, /rounded-xl overflow-hidden border border-slate-200 bg-white/);
 });
 
-test("the portfolio, services, AI CV grader, and contact heroes match the split layout with dedicated visuals", () => {
+test("the portfolio, services, AI CV grader, and contact heroes match the split layout with backgroundless cutout assets", () => {
   assert.match(portfolioComponent, /Thoughtful_Professional_Portrait-removebg-preview_b0c510da\.png/);
   assert.match(portfolioComponent, /bg-\[#0C1E36\]/);
   assert.ok(existsSync(join(root, "public", "assets", "aistudio", "Thoughtful_Professional_Portrait-removebg-preview_b0c510da.png")));
   assert.match(servicesComponent, /ServicesHeroVisual/);
   assert.match(atsComponent, /AtsHeroVisual/);
   assert.match(contactComponent, /ContactHeroVisual/);
+  assert.match(heroEmblemsComponent, /services_silver_cutout\.png/);
+  assert.match(heroEmblemsComponent, /ats_cv_cutout_clean\.png/);
+  assert.match(heroEmblemsComponent, /contact_office_cutout\.png/);
+  assert.doesNotMatch(heroEmblemsComponent, /rounded-2xl overflow-hidden border border-white\/15/);
+  assert.ok(existsSync(join(root, "src", "assets", "images", "services_silver_cutout.png")));
+  assert.ok(existsSync(join(root, "src", "assets", "images", "ats_cv_cutout_clean.png")));
+  assert.ok(existsSync(join(root, "src", "assets", "images", "contact_office_cutout.png")));
 });
 
 test("the portfolio names Ni-Wera and includes the active Ujuzi360 LMS project", () => {

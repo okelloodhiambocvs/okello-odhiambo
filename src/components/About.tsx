@@ -5,7 +5,11 @@ import FounderGallery, { SafeImage } from "./FounderGallery";
 const technologyPortrait = "/assets/aistudio/c08lP_2a24af41.jpg";
 const communicationPortrait = "/assets/aistudio/Thoughtful_Professional_Portrait_84cd5f48.png";
 
-export default function About() {
+interface AboutProps {
+  onSelectAction?: (actionId: string) => void;
+}
+
+export default function About({ onSelectAction }: AboutProps) {
   const corporateAchievements = [
     { metric: "1,000+", label: "Executive Documents Drafted" },
     { metric: "95%+", label: "Direct Referral Rate" },
@@ -169,9 +173,6 @@ export default function About() {
                   <p>
                     I act as an elite CV writer, cover letter architect, business proposal strategist, and grant writer. My methodology reconstructs candidate portfolios to satisfy digital ATS algorithms while presenting compelling C-suite storytelling that commands human review.
                   </p>
-                  <p className="border-l-2 border-[#f80d05] pl-4 py-1 italic bg-red-50 text-slate-750 font-medium">
-                    "We design high-converting career assets that position candidates for board-level callbacks and global growth."
-                  </p>
                   <p>
                     Trusted by elite Kenyan entities including <span className="text-[#f80d05] font-bold">KEWOTA, ENA Coach Foundation, Wamae &amp; Allen Advocates, Okullo Foundation</span>, and <span className="text-[#f80d05] font-bold">Chuny Onagi TV</span>.
                   </p>
@@ -193,7 +194,7 @@ export default function About() {
       </section>
 
       {/* Authentic Moments & Field Leadership Gallery on Brand Navy Section */}
-      <FounderGallery />
+      <FounderGallery onSelectAction={onSelectAction} />
     </>
   );
 }
