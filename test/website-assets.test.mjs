@@ -64,12 +64,12 @@ test("the two Intersection profile cards use the supplied communication and tech
   assert.ok(existsSync(join(root, "public", "assets", "aistudio", "c08lP_2a24af41.jpg")));
 });
 
-test("the landing page hero uses the attached studio cutout portrait and omits the redundant proof bar", () => {
-  assert.match(heroComponent, /WhatsApp_Image_2026-11-09_at_12\.59\.17_AM-removebg-preview_df34d606\.png/);
+test("the landing page hero uses the interchanged blue checkered portrait and omits the redundant proof bar", () => {
+  assert.match(heroComponent, /Thoughtful_Professional_Portrait-removebg-preview_b0c510da\.png/);
   assert.match(heroComponent, /bg-\[#0C1E36\]/);
   assert.doesNotMatch(heroComponent, /Golang Software Labs/);
   assert.doesNotMatch(heroComponent, /Founding Authority/);
-  assert.ok(existsSync(join(root, "public", "assets", "aistudio", "WhatsApp_Image_2026-11-09_at_12.59.17_AM-removebg-preview_df34d606.png")));
+  assert.ok(existsSync(join(root, "public", "assets", "aistudio", "Thoughtful_Professional_Portrait-removebg-preview_b0c510da.png")));
 });
 
 test("the About cards achieve narrative uniformity while gallery cards sit directly on brand blue without white boxes", () => {
@@ -83,10 +83,14 @@ test("the About cards achieve narrative uniformity while gallery cards sit direc
 });
 
 test("the portfolio, services, AI CV grader, and contact heroes match the split layout with backgroundless cutout assets", () => {
-  assert.match(portfolioComponent, /Thoughtful_Professional_Portrait-removebg-preview_b0c510da\.png/);
+  assert.match(portfolioComponent, /WhatsApp_Image_2026-11-09_at_12\.59\.17_AM-removebg-preview_df34d606\.png/);
   assert.match(portfolioComponent, /bg-\[#0C1E36\]/);
-  assert.ok(existsSync(join(root, "public", "assets", "aistudio", "Thoughtful_Professional_Portrait-removebg-preview_b0c510da.png")));
+  assert.doesNotMatch(portfolioComponent, /Verified Case Studies/);
+  assert.doesNotMatch(portfolioComponent, /PORTFOLIO\.length/);
+  assert.ok(existsSync(join(root, "public", "assets", "aistudio", "WhatsApp_Image_2026-11-09_at_12.59.17_AM-removebg-preview_df34d606.png")));
   assert.match(servicesComponent, /ServicesHeroVisual/);
+  assert.match(servicesComponent, /WhatsApp_Image_2023-03-13_at_13\.48\.15-removebg-preview_4f2b7fbd\.png/);
+  assert.ok(existsSync(join(root, "public", "assets", "aistudio", "WhatsApp_Image_2023-03-13_at_13.48.15-removebg-preview_4f2b7fbd.png")));
   assert.match(atsComponent, /AtsHeroVisual/);
   assert.match(contactComponent, /ContactHeroVisual/);
   assert.match(heroEmblemsComponent, /services_silver_cutout\.png/);

@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { SERVICES } from "../data";
 import { ServiceItem } from "../types";
-import { MessageSquare, Coffee, ShieldAlert } from "lucide-react";
+import { MessageSquare, Coffee, ArrowRight } from "lucide-react";
 import ServiceCard from "./ServiceCard";
 import PageHero from "./PageHero";
 import { ServicesHeroVisual } from "./HeroEmblems";
+import { SafeImage } from "./FounderGallery";
 import { FadeInWriting } from "./MotionPrimitives";
+
+const SERVICES_FEATURE_PORTRAIT_SRC =
+  "/assets/aistudio/WhatsApp_Image_2023-03-13_at_13.48.15-removebg-preview_4f2b7fbd.png";
 
 export default function Services() {
   const [activeTab, setActiveTab] = useState<"all" | "tech" | "consultancy" | "design">("all");
@@ -99,10 +103,63 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.1 }}
                 transition={{ duration: 0.4, delay: Math.min((idx % 3) * 0.08, 0.24), ease: [0.22, 1, 0.36, 1] }}
+                className="h-full"
               >
                 <ServiceCard service={service} />
               </motion.div>
             ))}
+
+            {activeTab === "all" && (
+              <motion.div
+                id="services-studio-showcase"
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ duration: 0.45, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="md:col-span-2 lg:col-span-2 h-full rounded-2xl bg-[#0C1E36] text-white border border-[#0C1E36] shadow-sm overflow-hidden relative flex flex-col sm:flex-row items-stretch justify-between"
+              >
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 75% 45%, rgba(36, 69, 112, 0.78) 0%, rgba(12, 30, 54, 0.96) 58%, #071426 100%)",
+                  }}
+                />
+                <div className="relative z-10 p-6 sm:p-8 flex flex-col justify-between sm:w-[46%] shrink-0">
+                  <div>
+                    <span className="block text-xs font-mono uppercase tracking-widest text-[#f80d05] font-bold mb-2">
+                      Integrated Retainers &amp; Custom Builds
+                    </span>
+                    <h3 className="font-serif text-2xl sm:text-[1.7rem] font-bold text-white leading-snug mb-3">
+                      Software Architecture &amp; Executive Brand Direction
+                    </h3>
+                    <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-sans mb-6">
+                      Need engineering delivery paired with strategic corporate profiles, grant bids, or visual brand systems? Engage Okello Odhiambo directly for unified execution.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-white/15 flex flex-wrap items-center gap-3">
+                    <a
+                      href={`https://wa.me/254728606684?text=${encodeURIComponent("Hi Okello, I would like to discuss a custom software or executive consultancy package.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded bg-[#f80d05] hover:bg-[#d40b04] text-white font-mono font-bold text-xs uppercase tracking-wider transition-colors shadow-sm whitespace-nowrap"
+                    >
+                      Book Custom Sprint <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="relative z-10 sm:w-[54%] flex items-end justify-end pt-2 sm:pt-4 pl-2 sm:pl-0 pr-0 overflow-hidden self-end">
+                  <SafeImage
+                    primarySrc={SERVICES_FEATURE_PORTRAIT_SRC}
+                    fallbackSrc={SERVICES_FEATURE_PORTRAIT_SRC}
+                    alt="Okello Odhiambo — Executive Software Consultant & Brand Strategist"
+                    className="w-full max-w-[520px] max-h-[360px] sm:max-h-[430px] object-contain object-right-bottom drop-shadow-[0_14px_28px_rgba(0,0,0,0.45)]"
+                  />
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </AnimatePresence>
 

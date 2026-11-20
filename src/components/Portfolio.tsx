@@ -6,7 +6,7 @@ import { SafeImage } from "./FounderGallery";
 import { AnimatedWords, FadeInWriting } from "./MotionPrimitives";
 
 const PORTFOLIO_HERO_PORTRAIT_SRC =
-  "/assets/aistudio/Thoughtful_Professional_Portrait-removebg-preview_b0c510da.png";
+  "/assets/aistudio/WhatsApp_Image_2026-11-09_at_12.59.17_AM-removebg-preview_df34d606.png";
 
 interface PortfolioProps {
   onNavigate?: (pageId: string) => void;
@@ -139,16 +139,8 @@ export default function Portfolio({ onNavigate, onSelectProject }: PortfolioProp
       {/* Full-Width Portfolio Proof Bar matching About Us landing page */}
       <section className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-8">
-          <FadeInWriting mode="view" delay={0.05} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+          <FadeInWriting mode="view" delay={0.05} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-200">
             <div className="pt-2 md:pt-0 md:pr-6">
-              <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
-                {PORTFOLIO.length}+
-              </span>
-              <span className="block text-[11px] font-mono uppercase tracking-widest text-[#f80d05] mt-1 font-bold">
-                Verified Case Studies
-              </span>
-            </div>
-            <div className="pt-2 md:pt-0 md:px-6">
               <span className="block font-sans text-2xl sm:text-3xl font-extrabold text-[#0C1E36] tabular-nums">
                 Ni-Wera
               </span>

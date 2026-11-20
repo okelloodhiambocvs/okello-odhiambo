@@ -4,7 +4,7 @@ import { SafeImage } from "./FounderGallery";
 import { AnimatedWords, FadeInWriting } from "./MotionPrimitives";
 
 const HERO_PORTRAIT_SRC =
-  "/assets/aistudio/WhatsApp_Image_2026-11-09_at_12.59.17_AM-removebg-preview_df34d606.png";
+  "/assets/aistudio/Thoughtful_Professional_Portrait-removebg-preview_b0c510da.png";
 
 interface HeroProps {
   onNavigate: (sectionId: string) => void;

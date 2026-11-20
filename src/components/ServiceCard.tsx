@@ -77,7 +77,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={tiltStyle}
-      className="rounded-2xl bg-white border border-slate-200 p-6 flex flex-col justify-between transition-all relative group shadow-sm will-change-transform overflow-hidden cursor-default"
+      className="h-full rounded-2xl bg-white border border-slate-200 p-6 flex flex-col justify-between transition-all relative group shadow-sm will-change-transform overflow-hidden cursor-default"
       id={service.id}
     >
       {/* 3D Reflection Shine Beam Container */}
